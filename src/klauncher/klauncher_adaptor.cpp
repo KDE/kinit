@@ -39,7 +39,7 @@
  */
 
 KLauncherAdaptor::KLauncherAdaptor(QObject *parent)
-   : QDBusAbstractAdaptor(parent)
+    : QDBusAbstractAdaptor(parent)
 {
     // constructor
     setAutoRelaySignals(true);
@@ -68,21 +68,21 @@ void KLauncherAdaptor::exec_blind(const QString &name, const QStringList &arg_li
     static_cast<KLauncher *>(parent())->exec_blind(name, arg_list, envs, startup_id);
 }
 
-int KLauncherAdaptor::kdeinit_exec(const QString &app, const QStringList &args, const QStringList &env, const QString& startup_id, const QDBusMessage &msg, QString &, QString &, int &)
+int KLauncherAdaptor::kdeinit_exec(const QString &app, const QStringList &args, const QStringList &env, const QString &startup_id, const QDBusMessage &msg, QString &, QString &, int &)
 {
     // handle method call org.kde.KLauncher.kdeinit_exec
     static_cast<KLauncher *>(parent())->kdeinit_exec(app, args, QString(), env, startup_id, false, msg);
     return 0;                   // delayed reply
 }
 
-int KLauncherAdaptor::kdeinit_exec_wait(const QString &app, const QStringList &args, const QStringList &env, const QString& startup_id, const QDBusMessage &msg, QString &, QString &, int &)
+int KLauncherAdaptor::kdeinit_exec_wait(const QString &app, const QStringList &args, const QStringList &env, const QString &startup_id, const QDBusMessage &msg, QString &, QString &, int &)
 {
     // handle method call org.kde.KLauncher.kdeinit_exec_wait
     static_cast<KLauncher *>(parent())->kdeinit_exec(app, args, QString(), env, startup_id, true, msg);
     return 0;                   // delayed reply
 }
 
-int KLauncherAdaptor::kdeinit_exec_with_workdir(const QString &app, const QStringList &args, const QString& workdir, const QStringList &env, const QString& startup_id, const QDBusMessage &msg, QString &, QString &, int &)
+int KLauncherAdaptor::kdeinit_exec_with_workdir(const QString &app, const QStringList &args, const QString &workdir, const QStringList &env, const QString &startup_id, const QDBusMessage &msg, QString &, QString &, int &)
 {
     // handle method call org.kde.KLauncher.kdeinit_exec_with_workdir
     static_cast<KLauncher *>(parent())->kdeinit_exec(app, args, workdir, env, startup_id, false, msg);
@@ -107,7 +107,7 @@ int KLauncherAdaptor::requestSlave(const QString &protocol, const QString &host,
     return static_cast<KLauncher *>(parent())->requestSlave(protocol, host, app_socket, error);
 }
 
-bool KLauncherAdaptor::checkForHeldSlave (const QString &url)
+bool KLauncherAdaptor::checkForHeldSlave(const QString &url)
 {
     return static_cast<KLauncher *>(parent())->checkForHeldSlave(url);
 }

@@ -87,12 +87,13 @@ static char *cleanUpTo = NULL;
 /**
  * Set up the memory space for setting the proctitle
  */
-void proctitle_init(int argc, char *argv[], char *envp[]) {
+void proctitle_init(int argc, char *argv[], char *envp[])
+{
     register int i, envpsize;
     char **p;
 
     /* Move the environment so proctitle_set can use the space. */
-    for ( i = envpsize = 0; envp[i] != NULL; i++ ) {
+    for (i = envpsize = 0; envp[i] != NULL; i++) {
         envpsize += strlen(envp[i]) + 1;
     }
 
@@ -120,8 +121,9 @@ void proctitle_init(int argc, char *argv[], char *envp[]) {
 
     for (i = 0; envp[i] != NULL; i++) {
         /* must not overwrite XDG_SESSION_COOKIE */
-        if (!strncmp(envp[i], "XDG_", 4))
+        if (!strncmp(envp[i], "XDG_", 4)) {
             break;
+        }
         if ((LastArgv + 1) == envp[i]) {
             LastArgv = envp[i] + strlen(envp[i]);
         }
@@ -140,7 +142,8 @@ void proctitle_init(int argc, char *argv[], char *envp[]) {
 # endif /* HAVE___PROGNAME_FULL */
 }
 
-void proctitle_set(const char *fmt, ...) {
+void proctitle_set(const char *fmt, ...)
+{
     va_list msg;
     static char statbuf[BUFSIZ];
 
@@ -152,7 +155,7 @@ void proctitle_set(const char *fmt, ...) {
     int i;
 #endif /* HAVE_SETPROCTITLE */
 
-    if ( !fmt ) {
+    if (!fmt) {
         return;
     }
 
@@ -169,9 +172,9 @@ void proctitle_set(const char *fmt, ...) {
     /* Manually append the process name for non-FreeBSD platforms. */
     qsnprintf(statbuf, sizeof(statbuf), "%s", "kdeinit5: ");
     qvsnprintf(statbuf + strlen(statbuf),
-              sizeof(statbuf) - strlen(statbuf),
-              fmt,
-              msg);
+               sizeof(statbuf) - strlen(statbuf),
+               fmt,
+               msg);
 
 # endif /* FREEBSD4 */
     setproctitle("%s", statbuf);
@@ -180,9 +183,9 @@ void proctitle_set(const char *fmt, ...) {
     /* Manually append the process name for non-setproctitle() platforms. */
     qsnprintf(statbuf, sizeof(statbuf), "%s", "kdeinit5: ");
     qvsnprintf(statbuf + strlen(statbuf),
-              sizeof(statbuf) - strlen(statbuf),
-              fmt,
-              msg);
+               sizeof(statbuf) - strlen(statbuf),
+               fmt,
+               msg);
 
 #endif /* HAVE_SETPROCTITLE */
 
@@ -210,8 +213,9 @@ void proctitle_set(const char *fmt, ...) {
        environment (more exact, the XDG_SESSION_COOKIE variable stored there).
        If this code causes another side effect, we have to specifically
        always append those variables to our environment. */
-    while (p < cleanUpTo)
+    while (p < cleanUpTo) {
         *p++ = '\0';
+    }
 
     Argv[1] = NULL;
 # endif /* PF_ARGV_WRITEABLE */

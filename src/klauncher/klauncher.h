@@ -56,82 +56,81 @@ using KIO::IdleSlave;
 class SlaveWaitRequest
 {
 public:
-   pid_t pid;
-   QDBusMessage transaction;
+    pid_t pid;
+    QDBusMessage transaction;
 };
 
 class KLaunchRequest
 {
 public:
-   QString name;
-   QStringList arg_list;
-   QString dbus_name;
-   QString tolerant_dbus_name;
-   enum status_t { Init = 0, Launching, Running, Error, Done };
-   pid_t pid;
-   status_t status;
-   QDBusMessage transaction;
-   KService::DBusStartupType dbus_startup_type;
-   bool autoStart;
-   QString errorMsg;
+    QString name;
+    QStringList arg_list;
+    QString dbus_name;
+    QString tolerant_dbus_name;
+    enum status_t { Init = 0, Launching, Running, Error, Done };
+    pid_t pid;
+    status_t status;
+    QDBusMessage transaction;
+    KService::DBusStartupType dbus_startup_type;
+    bool autoStart;
+    QString errorMsg;
 #if HAVE_X11
-   QByteArray startup_id; // "" is the default, "0" for none
-   QByteArray startup_dpy; // Display to send startup notification to.
+    QByteArray startup_id; // "" is the default, "0" for none
+    QByteArray startup_dpy; // Display to send startup notification to.
 #endif
-   QStringList envs; // env. variables to be app's environment
-   QString cwd;
+    QStringList envs; // env. variables to be app's environment
+    QString cwd;
 #ifdef USE_KPROCESS_FOR_KIOSLAVES
 protected:
-   QProcess *process;
-   friend class KLauncher;
+    QProcess *process;
+    friend class KLauncher;
 #endif
 };
 
-struct serviceResult
-{
-  int result;        // 0 means success. > 0 means error (-1 means pending)
-  QString dbusName; // Contains DBUS name on success
-  QString error;     // Contains error description on failure.
-  pid_t pid;
+struct serviceResult {
+    int result;        // 0 means success. > 0 means error (-1 means pending)
+    QString dbusName; // Contains DBUS name on success
+    QString error;     // Contains error description on failure.
+    pid_t pid;
 };
 
 class KLauncher : public QObject
 {
-   Q_OBJECT
+    Q_OBJECT
 
 public:
 #ifndef USE_KPROCESS_FOR_KIOSLAVES
-   KLauncher(int kdeinitSocket);
+    KLauncher(int kdeinitSocket);
 #else
-   KLauncher();
+    KLauncher();
 #endif
 
-   ~KLauncher();
+    ~KLauncher();
 
-   void close();
+    void close();
 
 public Q_SLOTS:
-   void destruct(); // exit!
+    void destruct(); // exit!
 
 protected:
-   void processDied(pid_t pid, long exitStatus);
+    void processDied(pid_t pid, long exitStatus);
 
-   void requestStart(KLaunchRequest *request);
-   void requestDone(KLaunchRequest *request);
+    void requestStart(KLaunchRequest *request);
+    void requestDone(KLaunchRequest *request);
 
-   bool start_service(KService::Ptr service, const QStringList &urls,
-       const QStringList &envs, const QByteArray &startup_id,
-       bool blind, bool autoStart, const QDBusMessage &msg );
+    bool start_service(KService::Ptr service, const QStringList &urls,
+                       const QStringList &envs, const QByteArray &startup_id,
+                       bool blind, bool autoStart, const QDBusMessage &msg);
 
-   void createArgs(KLaunchRequest *request, const KService::Ptr service,
-                   const QList<QUrl> &url);
+    void createArgs(KLaunchRequest *request, const KService::Ptr service,
+                    const QList<QUrl> &url);
 
-   void queueRequest(KLaunchRequest *);
+    void queueRequest(KLaunchRequest *);
 
-   void send_service_startup_info( KLaunchRequest *request, KService::Ptr service, const QByteArray &startup_id,
-       const QStringList &envs );
-   void cancel_service_startup_info( KLaunchRequest *request, const QByteArray& startup_id,
-       const QStringList &envs );
+    void send_service_startup_info(KLaunchRequest *request, KService::Ptr service, const QByteArray &startup_id,
+                                   const QStringList &envs);
+    void cancel_service_startup_info(KLaunchRequest *request, const QByteArray &startup_id,
+                                     const QStringList &envs);
 
 Q_SIGNALS:
     void autoStart0Done();
@@ -150,10 +149,12 @@ public: // remote methods, called by KLauncherAdaptor
      */
     void exec_blind(const QString &name, const QStringList &arg_list, const QStringList &envs, const QString &startup_id);
     inline void exec_blind(const QString &name, const QStringList &arg_list)
-    { exec_blind(name, arg_list, QStringList(), QLatin1String("0")); }
+    {
+        exec_blind(name, arg_list, QStringList(), QLatin1String("0"));
+    }
 
     bool kdeinit_exec(const QString &app, const QStringList &args,
-                      const QString& workdir, const QStringList &envs,
+                      const QString &workdir, const QStringList &envs,
                       const QString &startup_id, bool wait, const QDBusMessage &msg);
 
     void reparseConfiguration();
@@ -232,40 +233,40 @@ public: // remote methods, called by KLauncherAdaptor
     void terminate_kdeinit();
 
 public Q_SLOTS:
-   void slotAutoStart();
-   void slotDequeue();
-   void slotKDEInitData(int);
-   void slotNameOwnerChanged(const QString &name, const QString &oldOnwer, const QString &newOwner);
-   void slotSlaveStatus(IdleSlave *);
-   void acceptSlave();
-   void slotSlaveGone();
-   void idleTimeout();
+    void slotAutoStart();
+    void slotDequeue();
+    void slotKDEInitData(int);
+    void slotNameOwnerChanged(const QString &name, const QString &oldOnwer, const QString &newOwner);
+    void slotSlaveStatus(IdleSlave *);
+    void acceptSlave();
+    void slotSlaveGone();
+    void idleTimeout();
 
 public:
-   serviceResult requestResult; // accessed by the adaptor
+    serviceResult requestResult; // accessed by the adaptor
 protected:
-   QList<KLaunchRequest*> requestList; // Requests being handled
-   QList<KLaunchRequest*> requestQueue; // Requests waiting to being handled
-   KLaunchRequest *lastRequest;
-   QList<SlaveWaitRequest*> mSlaveWaitRequest;
+    QList<KLaunchRequest *> requestList; // Requests being handled
+    QList<KLaunchRequest *> requestQueue; // Requests waiting to being handled
+    KLaunchRequest *lastRequest;
+    QList<SlaveWaitRequest *> mSlaveWaitRequest;
 #ifndef USE_KPROCESS_FOR_KIOSLAVES
-   int kdeinitSocket;
-   QSocketNotifier *kdeinitNotifier;
+    int kdeinitSocket;
+    QSocketNotifier *kdeinitNotifier;
 #endif
-   KIO::ConnectionServer mConnectionServer;
-   QList<IdleSlave*> mSlaveList;
-   QTimer mTimer;
-   QTimer mAutoTimer;
-   bool bProcessingQueue;
-   AutoStart mAutoStart;
-   QString mSlaveDebug;
-   QString mSlaveValgrind;
-   QString mSlaveValgrindSkin;
-   bool dontBlockReading;
+    KIO::ConnectionServer mConnectionServer;
+    QList<IdleSlave *> mSlaveList;
+    QTimer mTimer;
+    QTimer mAutoTimer;
+    bool bProcessingQueue;
+    AutoStart mAutoStart;
+    QString mSlaveDebug;
+    QString mSlaveValgrind;
+    QString mSlaveValgrindSkin;
+    bool dontBlockReading;
 #if HAVE_X11
-   Display *mCached_dpy;
+    Display *mCached_dpy;
 #endif
-   void processRequestReturn(int status, const QByteArray &requestData);
+    void processRequestReturn(int status, const QByteArray &requestData);
 
 protected Q_SLOTS:
     void slotGotOutput();

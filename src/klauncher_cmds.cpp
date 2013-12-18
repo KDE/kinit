@@ -20,7 +20,7 @@
 
 #include "klauncher_cmds.h"
 
-const char* commandToString(int command)
+const char *commandToString(int command)
 {
     switch (command) {
     case LAUNCHER_EXEC:

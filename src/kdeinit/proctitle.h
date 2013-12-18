@@ -41,7 +41,7 @@ void proctitle_init(int argc, char *argv[], char *envp[]);
  */
 void proctitle_set(const char *fmt, ...)
 #ifdef __GNUC__
-    __attribute__ (( format ( printf, 1, 2 ) ) )
+__attribute__((format(printf, 1, 2)))
 #endif
 ;
 
