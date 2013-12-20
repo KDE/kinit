@@ -1,23 +1,20 @@
-README
+# KInit
+
+## Introduction
 
 kdeinit is a process launcher somewhat similar to the 
 famous init used for booting UNIX.
 
 It launches processes by forking and then loading a
 dynamic library which should contain a 'kdemain(...)'
-function. 
-
-Executive summary
-=================
+function.
 
 Using kdeinit to launch KDE applications makes starting
 a typical KDE applications 2.5 times faster (100ms 
 instead of 250ms on a P-III 500) It reduces memory 
 consumption by approx. 350Kb per application.
 
-
-How it works
-============
+## How it works
 
 kdeinit is linked against all libraries a standard KDE
 application needs. With this technique starting an
@@ -26,8 +23,7 @@ the application itself needs to be linked whereas
 otherwise both the application as well as all the libaries
 it uses need to be linked.
 
-Startup Speed
-=============
+## Startup Speed
 
 Starting an application linked against libqt, libkdecore and libkdeui
 in the conventional way takes approx. 150ms on a Pentium III - 500Mhz. 
@@ -36,8 +32,7 @@ Starting the same application via kdeinit takes less than 10ms.
 (application without KApplication constructor, the KApplication 
 constructor requires an extra 100ms in both cases)
 
-Memory Usage
-============
+## Memory Usage
 
 An application linked against libqt, libkdecore and libkdeui started
 in the conventional way requires about 498Kb memory. 
@@ -55,8 +50,7 @@ started with this option on, kdeinit is back to its full efficiency, an
 application with a KApplication constructor now uses 338Kb of memory.
 A difference of 341Kb with the normal case.
 
-Adapting programs to use kdeinit.
-===============================
+## Adapting programs to use kdeinit.
 
 The sourcecode of a program does not require any change to take advantage
 of kdeinit. Only the makefile requires an adaption, if the Makefile.am of 
@@ -73,8 +67,7 @@ lib_LTLIBRARIES = kicker.la
 libkicker_la_LIBADD = $(top_builddir)/libkonq/libkonq.la
 libkicker_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) -module                    
 
-Disadvantages
-=============
+## Disadvantages
 
 The process name of applications started via kdeinit is "kdeinit". This problem
 can be corrected to a degree by changing the application name as shown
@@ -82,3 +75,8 @@ by 'ps'. However, applications like "killall" will only see "kdeinit" as
 process name. To workaround this, use "kdekillall", from kdesdk/scripts,
 for applications started via kdeinit.
 
+## Links
+
+- Mailing list: <https://mail.kde.org/mailman/listinfo/kde-frameworks-devel>
+- IRC channel: #kde-devel on Freenode
+- Git repository: <https://projects.kde.org/projects/frameworks/kinit/repository>
