@@ -140,17 +140,6 @@ int KLauncherAdaptor::start_service_by_desktop_path(const QString &serviceName, 
     return p->requestResult.result;
 }
 
-int KLauncherAdaptor::start_service_by_name(const QString &serviceName, const QStringList &urls, const QStringList &envs, const QString &startup_id, bool blind, const QDBusMessage &msg, QString &dbusServiceName, QString &error, int &pid)
-{
-    // handle method call org.kde.KLauncher.start_service_by_name
-    KLauncher *p = static_cast<KLauncher *>(parent());
-    p->start_service_by_name(serviceName, urls, envs, startup_id, blind, msg);
-    dbusServiceName = p->requestResult.dbusName;
-    error = p->requestResult.error;
-    pid = p->requestResult.pid;
-    return p->requestResult.result;
-}
-
 void KLauncherAdaptor::waitForSlave(int pid, const QDBusMessage &msg)
 {
     // handle method call org.kde.KLauncher.waitForSlave

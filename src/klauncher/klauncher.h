@@ -201,25 +201,6 @@ public: // remote methods, called by KLauncherAdaptor
      */
     bool start_service_by_desktop_path(const QString &serviceName, const QStringList &urls, const QStringList &envs, const QString &startup_id, bool blind, const QDBusMessage &msg);
 
-    /**
-     * Start a service by (translated) name - deprecated
-     *
-     * 'serviceName' refers to the service name as given by·
-     * the Name field in the desktop file describing the service.
-     *
-     * 'url', if not empty, will be passed to the service as
-     * argument.
-     *
-     * 'envs' are environment variables that will be added
-     *   to this program's environment before starting it
-     *
-     * 'startup_id' is for application startup notification,
-     * "" is the default, "0" for none
-     *
-     * @deprecated use start_service_by_desktop_path
-     */
-    bool start_service_by_name(const QString &serviceName, const QStringList &urls, const QStringList &envs, const QString &startup_id, bool blind, const QDBusMessage &msg); // KDE5: remove
-
     pid_t requestHoldSlave(const QUrl &url, const QString &app_socket);
 
     pid_t requestSlave(const QString &protocol, const QString &host,

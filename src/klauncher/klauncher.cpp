@@ -625,25 +625,6 @@ void KLauncher::exec_blind(const QString &name, const QStringList &arg_list, con
     requestDone(request);
 }
 
-// KDE5: remove
-bool
-KLauncher::start_service_by_name(const QString &serviceName, const QStringList &urls,
-                                 const QStringList &envs, const QString &startup_id, bool blind, const QDBusMessage &msg)
-{
-    KService::Ptr service;
-    // Find service
-#ifndef KDE_NO_DEPRECATED
-    service = KService::serviceByName(serviceName);
-#endif
-    if (!service) {
-        requestResult.result = ENOENT;
-        requestResult.error = i18n("Could not find service '%1'.", serviceName);
-        cancel_service_startup_info(NULL, startup_id.toLocal8Bit(), envs);   // cancel it if any
-        return false;
-    }
-    return start_service(service, urls, envs, startup_id.toLocal8Bit(), blind, false, msg);
-}
-
 bool
 KLauncher::start_service_by_desktop_path(const QString &serviceName, const QStringList &urls,
         const QStringList &envs, const QString &startup_id, bool blind, const QDBusMessage &msg)
