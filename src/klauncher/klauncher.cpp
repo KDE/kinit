@@ -24,6 +24,7 @@
 #include "klauncher.h"
 #include "klauncher_cmds.h"
 #include "klauncher_adaptor.h"
+#include "kslavelauncheradaptor.h"
 
 #include <stdio.h>
 #include <unistd.h>
@@ -100,6 +101,7 @@ KLauncher::KLauncher()
 
     mAutoTimer.setSingleShot(true);
     new KLauncherAdaptor(this);
+    mSlaveLauncherAdaptor = new KSlaveLauncherAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/KLauncher"), this); // same as ktoolinvocation.cpp
 
     connect(&mAutoTimer, SIGNAL(timeout()), this, SLOT(slotAutoStart()));
@@ -946,8 +948,9 @@ KLauncher::createArgs(KLaunchRequest *request, const KService::Ptr service,
 ///// IO-Slave functions
 
 pid_t
-KLauncher::requestHoldSlave(const QUrl &url, const QString &app_socket)
+KLauncher::requestHoldSlave(const QString &urlStr, const QString &app_socket)
 {
+    const QUrl url(urlStr);
     IdleSlave *slave = 0;
     foreach (IdleSlave *p, mSlaveList) {
         if (p->onHold(url)) {
@@ -1084,16 +1087,17 @@ bool KLauncher::checkForHeldSlave(const QString &urlStr)
 }
 
 void
-KLauncher::waitForSlave(int pid, const QDBusMessage &msg)
+KLauncher::waitForSlave(int pid)
 {
+    Q_ASSERT(calledFromDBus());
     foreach (IdleSlave *slave, mSlaveList) {
         if (slave->pid() == static_cast<pid_t>(pid)) {
             return;    // Already here.
         }
     }
     SlaveWaitRequest *waitRequest = new SlaveWaitRequest;
-    msg.setDelayedReply(true);
-    waitRequest->transaction = msg;
+    setDelayedReply(true);
+    waitRequest->transaction = message(); // from QDBusContext
     waitRequest->pid = static_cast<pid_t>(pid);
     mSlaveWaitRequest.append(waitRequest);
 }

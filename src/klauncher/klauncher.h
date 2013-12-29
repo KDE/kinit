@@ -46,12 +46,15 @@
 #include <QUrl>
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QDBusContext>
 
 #include <kservice.h>
 #include <kio/idleslave.h>
 #include <kio/connectionserver.h>
 
 using KIO::IdleSlave;
+
+class KSlaveLauncherAdaptor;
 
 class SlaveWaitRequest
 {
@@ -94,7 +97,7 @@ struct serviceResult {
     pid_t pid;
 };
 
-class KLauncher : public QObject
+class KLauncher : public QObject, protected QDBusContext
 {
     Q_OBJECT
 
@@ -201,7 +204,7 @@ public: // remote methods, called by KLauncherAdaptor
      */
     bool start_service_by_desktop_path(const QString &serviceName, const QStringList &urls, const QStringList &envs, const QString &startup_id, bool blind, const QDBusMessage &msg);
 
-    pid_t requestHoldSlave(const QUrl &url, const QString &app_socket);
+    pid_t requestHoldSlave(const QString &url, const QString &app_socket);
 
     pid_t requestSlave(const QString &protocol, const QString &host,
                        const QString &app_socket, QString &error);
@@ -210,7 +213,7 @@ public: // remote methods, called by KLauncherAdaptor
      * @since 4.7
      */
     bool checkForHeldSlave(const QString &url);
-    void waitForSlave(int pid, const QDBusMessage &msg);
+    void waitForSlave(int pid);
     void terminate_kdeinit();
 
 public Q_SLOTS:
@@ -243,6 +246,7 @@ protected:
     QString mSlaveDebug;
     QString mSlaveValgrind;
     QString mSlaveValgrindSkin;
+    KSlaveLauncherAdaptor *mSlaveLauncherAdaptor;
     bool dontBlockReading;
 #if HAVE_X11
     Display *mCached_dpy;

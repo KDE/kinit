@@ -95,23 +95,6 @@ void KLauncherAdaptor::reparseConfiguration()
     static_cast<KLauncher *>(parent())->reparseConfiguration();
 }
 
-int KLauncherAdaptor::requestHoldSlave(const QString &url, const QString &app_socket)
-{
-    // handle method call org.kde.KLauncher.requestHoldSlave
-    return static_cast<KLauncher *>(parent())->requestHoldSlave(QUrl(url), app_socket);
-}
-
-int KLauncherAdaptor::requestSlave(const QString &protocol, const QString &host, const QString &app_socket, QString &error)
-{
-    // handle method call org.kde.KLauncher.requestSlave
-    return static_cast<KLauncher *>(parent())->requestSlave(protocol, host, app_socket, error);
-}
-
-bool KLauncherAdaptor::checkForHeldSlave(const QString &url)
-{
-    return static_cast<KLauncher *>(parent())->checkForHeldSlave(url);
-}
-
 void KLauncherAdaptor::setLaunchEnv(const QString &name, const QString &value)
 {
     // handle method call org.kde.KLauncher.setLaunchEnv
@@ -138,12 +121,6 @@ int KLauncherAdaptor::start_service_by_desktop_path(const QString &serviceName, 
     error = p->requestResult.error;
     pid = p->requestResult.pid;
     return p->requestResult.result;
-}
-
-void KLauncherAdaptor::waitForSlave(int pid, const QDBusMessage &msg)
-{
-    // handle method call org.kde.KLauncher.waitForSlave
-    static_cast<KLauncher *>(parent())->waitForSlave(pid, msg);
 }
 
 void KLauncherAdaptor::terminate_kdeinit()
