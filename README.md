@@ -1,5 +1,7 @@
 # KInit
 
+Helper library to speed up start of applications on KDE work spaces
+
 ## Introduction
 
 kdeinit is a process launcher somewhat similar to the 
@@ -77,6 +79,7 @@ for applications started via kdeinit.
 
 ## Links
 
+- Home page: <https://projects.kde.org/projects/frameworks/kinit>
 - Mailing list: <https://mail.kde.org/mailman/listinfo/kde-frameworks-devel>
 - IRC channel: #kde-devel on Freenode
 - Git repository: <https://projects.kde.org/projects/frameworks/kinit/repository>
