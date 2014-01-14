@@ -358,7 +358,8 @@ const char *get_env_var(const char *var, int envc, const char *envs)
 static void init_startup_info(KStartupInfoId &id, const QByteArray &bin,
                               int envc, const char *envs)
 {
-    const char *dpy = get_env_var((displayEnvVarName() + "=").constData(), envc, envs);
+    QByteArray envname = displayEnvVarName() + "=";
+    const char *dpy = get_env_var(envname.constData(), envc, envs);
     // this may be called in a child, so it can't use display open using X11display
     // also needed for multihead
     X11_startup_notify_display = XOpenDisplay(dpy);
