@@ -64,7 +64,7 @@ int main(int argc, char **argv)
     QStringList envPath; /// pathes for using in environment of started process
     QStringList searchPath; /// pathes for using to find executable
     QString exeToStart;
-    QString myAppName = "kwrapper5:";
+    QString myAppName = QStringLiteral("kwrapper5:");
     QStringList exeParams;
     int firstParam = 1;
 
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    if (QCoreApplication::arguments().at(1) == "--verbose") {
+    if (QCoreApplication::arguments().at(1) == QStringLiteral("--verbose")) {
         verbose = 1;
         firstParam = 2;
     }
@@ -84,13 +84,14 @@ int main(int argc, char **argv)
         exeParams << QCoreApplication::arguments().at(i);
     }
 
-    QString path = QString::fromLocal8Bit(qgetenv("PATH")).toLower().replace('\\', '/');
+    QString path = QString::fromLocal8Bit(qgetenv("PATH")).toLower()
+        .replace(QLatin1Char('\\'), QLatin1Char('/'));
 
     /** add pathes from PATH environment
         - all to client path environment
         - pathes not ending with lib to application search path
     */
-    foreach (const QString &a, path.split(';')) {
+    foreach (const QString &a, path.split(QLatin1Char(';'))) {
         if (!envPath.contains(a)) {
             envPath << a;
         }
@@ -100,14 +101,14 @@ int main(int argc, char **argv)
     }
 
     // add current install path
-    path = QCoreApplication::applicationDirPath().toLower().replace('\\', '/');
+    path = QCoreApplication::applicationDirPath().toLower().replace(QLatin1Char('\\'), QLatin1Char('/'));
     if (!envPath.contains(path)) {
         envPath << path;
     }
 
     // detect directory where kdedirs.cache lives
     // this is not complete, KDEDIRS path should be used as base too
-    QFileInfo fi(path + "/../..");
+    QFileInfo fi(path + QStringLiteral("/../.."));
     QString rootPath = fi.canonicalPath();
 
     if (verbose) {
@@ -115,7 +116,7 @@ int main(int argc, char **argv)
     }
 
     // add current lib path to client path environment
-    path = path.replace("bin", "lib");
+    path = path.replace(QStringLiteral("bin"), QStringLiteral("lib"));
     if (!envPath.contains(path)) {
         envPath << path;
     }
@@ -125,11 +126,11 @@ int main(int argc, char **argv)
         - bin/lib to client path environment
         - bin to application search path
     */
-    path = QString::fromLocal8Bit(qgetenv("KDEDIRS")).toLower().replace('\\', '/');
+    path = QString::fromLocal8Bit(qgetenv("KDEDIRS")).toLower().replace(QLatin1Char('\\'), QLatin1Char('/'));
     QStringList kdedirs;
 
     if (path.size() > 0) {
-        kdedirs = path.split(';');
+        kdedirs = path.split(QLatin1Char(';'));
     }
 
     bool changedKDEDIRS = 0;
@@ -137,9 +138,9 @@ int main(int argc, char **argv)
     if (kdedirs.size() == 0) {
         QStringList kdedirsCacheList;
 #ifdef Q_CC_MSVC
-        kdedirsCacheList << rootPath + "/kdedirs.cache.msvc";
+        kdedirsCacheList << rootPath + QStringLiteral("/kdedirs.cache.msvc");
 #endif
-        kdedirsCacheList << rootPath + "/kdedirs.cache";
+        kdedirsCacheList << rootPath + QStringLiteral("/kdedirs.cache");
 
         bool found = false;
         foreach (const QString &kdedirsCachePath, kdedirsCacheList) {
@@ -148,7 +149,7 @@ int main(int argc, char **argv)
                 f.open(QIODevice::ReadOnly);
                 QByteArray data = f.readAll();
                 f.close();
-                kdedirs = QString(data).split(';');
+                kdedirs = QString::fromLocal8Bit(data).split(QLatin1Char(';'));
                 if (verbose) {
                     qDebug() << "load kdedirs cache from " << kdedirsCachePath <<  "values=" << kdedirs;
                 }
@@ -168,18 +169,18 @@ int main(int argc, char **argv)
         changedKDEDIRS = 1;
     }
     if (verbose) {
-        qDebug() << "found KDEDIRS\n\t" << kdedirs.join("\n\t");
+        qDebug() << "found KDEDIRS\n\t" << kdedirs.join(QStringLiteral("\n\t"));
     }
 
     foreach (const QString &a, kdedirs) {
-        if (!envPath.contains(a + "/bin")) {
-            envPath << a + "/bin";
+        if (!envPath.contains(a + QStringLiteral("/bin"))) {
+            envPath << a + QStringLiteral("/bin");
         }
-        if (!envPath.contains(a + "/lib")) {
-            envPath << a + "/lib";
+        if (!envPath.contains(a + QStringLiteral("/lib"))) {
+            envPath << a + QStringLiteral("/lib");
         }
-        if (!searchPath.contains(a + "/bin")) {
-            searchPath << a + "/bin";
+        if (!searchPath.contains(a + QStringLiteral("/bin"))) {
+            searchPath << a + QStringLiteral("/bin");
         }
     }
 
@@ -216,14 +217,16 @@ int main(int argc, char **argv)
     }
 
     if (verbose) {
-        qDebug() << "run" << exeToStart << "with params" << exeParams << "and PATH environment\n\t" << envPath.join("\n\t");
+        qDebug() << "run" << exeToStart << "with params" << exeParams
+            << "and PATH environment\n\t" << envPath.join(QStringLiteral("\n\t"));
     }
 
     // setup client process envirionment
     QStringList env = QProcess::systemEnvironment();
-    env.replaceInStrings(QRegExp("^PATH=(.*)", Qt::CaseInsensitive), QLatin1String("PATH=") + envPath.join(";"));
+    env.replaceInStrings(QRegExp(QStringLiteral("^PATH=(.*)"), Qt::CaseInsensitive),
+        QLatin1String("PATH=") + envPath.join(QLatin1Char(';')));
     if (changedKDEDIRS) {
-        env << QLatin1String("KDEDIRS=") + kdedirs.join(";");
+        env << QStringLiteral("KDEDIRS=") + kdedirs.join(QLatin1Char(';'));
     }
 
     QProcess *process = new QProcess;

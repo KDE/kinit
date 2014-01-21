@@ -21,6 +21,9 @@
  * Boston, MA 02110-1301, USA.
  */
 
+// Get this to compile... TODO: fix properly
+#undef QT_NO_CAST_FROM_ASCII
+
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
