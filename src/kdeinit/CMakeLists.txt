@@ -28,6 +28,10 @@ target_link_libraries(kdeinit5 ${kdeinit_LIBS} ${KINIT_SOCKET_LIBRARY}
     KF5::I18n #i18n() used on some error messages
 )
 
+if(WIN32)
+    target_compile_definitions(kdeinit5 PRIVATE CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
+endif()
+
 if (X11_FOUND)
   target_link_libraries(kdeinit5 ${X11_X11_LIB})
 endif()

@@ -39,7 +39,6 @@
 #undef interface
 #include <QDBusConnection>
 
-#include <kstandarddirs.h> // TODO REMOVE
 #include <kinit_version.h>
 
 //#define ENABLE_SUICIDE
@@ -342,9 +341,9 @@ ProcessListEntry *ProcessList::find(const QString &name)
             continue;
         }
 
-        if (!ple->path.isEmpty() && !ple->path.toLower().startsWith(KStandardDirs::installPath("kdedir").toLower())) {
+        if (!ple->path.isEmpty() && !ple->path.toLower().startsWith(QString(QStringLiteral(CMAKE_INSTALL_PREFIX)).toLower())) {
             // process is outside of installation directory
-            qDebug() << "path of the process" << name << "seems to be outside of the installPath:" << ple->path << KStandardDirs::installPath("kdedir");
+            qDebug() << "path of the process" << name << "seems to be outside of the installPath:" << ple->path << QStringLiteral(CMAKE_INSTALL_PREFIX);
             continue;
         }
         return ple;
@@ -424,7 +423,7 @@ bool checkIfRegisteredInDBus(const QString &name, int _timeout = 10)
 
 void listAllRunningKDEProcesses(ProcessList &processList)
 {
-    QString installPrefix = KStandardDirs::installPath("kdedir");
+    QString installPrefix = QStringLiteral(CMAKE_INSTALL_PREFIX);
 
     foreach (const ProcessListEntry *ple, processList.list()) {
         if (!ple->path.isEmpty() && ple->path.toLower().startsWith(installPrefix.toLower())) {
@@ -435,7 +434,7 @@ void listAllRunningKDEProcesses(ProcessList &processList)
 
 void terminateAllRunningKDEProcesses(ProcessList &processList)
 {
-    QString installPrefix = KStandardDirs::installPath("kdedir");
+    QString installPrefix = QStringLiteral(CMAKE_INSTALL_PREFIX);
 
     foreach (const ProcessListEntry *ple, processList.list()) {
         if (!ple->path.isEmpty() && ple->path.toLower().startsWith(installPrefix.toLower())) {
