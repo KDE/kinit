@@ -27,9 +27,7 @@
 #include "kslavelauncheradaptor.h"
 
 #include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <errno.h>
+#include <qplatformdefs.h>
 #include <signal.h>
 
 #if HAVE_X11
@@ -55,6 +53,12 @@
 #include <kio/desktopexecparser.h>
 #include <kio/global.h>
 #include <kio/slaveinterface.h>
+
+#ifdef Q_OS_WIN
+#include <qt_windows.h>
+//windows.h feels like defining this...
+#undef interface
+#endif
 
 // Dispose slaves after being idle for SLAVE_MAX_IDLE seconds
 #define SLAVE_MAX_IDLE  30
@@ -495,7 +499,7 @@ KLauncher::requestDone(KLaunchRequest *request)
             requestResult.dbusName.clear();
         }
         Q_ASSERT(!requestResult.error.isNull());
-        Q_PID stream_pid = requestResult.pid;
+        quintptr stream_pid = requestResult.pid;
         QDBusConnection::sessionBus().send(request->transaction.createReply(QVariantList() << requestResult.result
                                            << requestResult.dbusName
                                            << requestResult.error
@@ -547,7 +551,11 @@ KLauncher::requestStart(KLaunchRequest *request)
     if (!process->waitForStarted()) {
         processRequestReturn(LAUNCHER_ERROR, "");
     } else {
+#ifndef Q_OS_WIN
         request->pid = process->pid();
+#else
+        request->pid = process->pid()->dwProcessId;
+#endif
         QByteArray data((char *)&request->pid, sizeof(int));
         processRequestReturn(LAUNCHER_OK, data);
     }

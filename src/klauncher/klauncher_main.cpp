@@ -19,8 +19,7 @@
 
 #include <config-kdeinit.h>
 
-#include <unistd.h>
-#include <fcntl.h>
+#include <qplatformdefs.h>
 
 #include "klauncher.h"
 #include "kcrash.h"
@@ -34,6 +33,7 @@
 #include <QtCore/QFile>
 #include <QDebug>
 #include <QDBusConnectionInterface>
+#include <QThread>
 
 #ifndef USE_KPROCESS_FOR_KIOSLAVES
 static int sigpipe[ 2 ];
@@ -180,7 +180,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 
         // Wait a bit...
         qWarning() << "Waiting for already running klauncher to exit.";
-        sleep(1);
+        QThread::sleep(1);
 
         // Try again...
     }

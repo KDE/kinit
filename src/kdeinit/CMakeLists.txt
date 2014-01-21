@@ -26,6 +26,7 @@ target_link_libraries(kdeinit5 ${kdeinit_LIBS} ${KINIT_SOCKET_LIBRARY}
     KF5::WindowSystem # KStartupInfo
     KF5::Crash # KCrash::loadedByKdeinit
     KF5::I18n #i18n() used on some error messages
+    Qt5::DBus
 )
 
 if(WIN32)

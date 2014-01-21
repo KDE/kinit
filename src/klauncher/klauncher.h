@@ -22,8 +22,7 @@
 
 #include "autostart.h"
 
-#include <sys/types.h>
-#include <unistd.h>
+#include <qplatformdefs.h>
 
 #include <config-kdeinit.h> // HAVE_X11
 
@@ -34,6 +33,9 @@
 
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
 #define USE_KPROCESS_FOR_KIOSLAVES
+#endif
+#ifdef Q_OS_WIN
+typedef unsigned int pid_t;
 #endif
 
 #include <QtCore/QString>

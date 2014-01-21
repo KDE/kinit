@@ -36,13 +36,19 @@
 #include <tlhelp32.h>
 #include <psapi.h>
 
-#include <QtCore/QProcess>
-#include <QtCore/QFileInfo>
+#include <QProcess>
+#include <QFileInfo>
+#include <QDebug>
+
 // Under wince interface is defined, so undef it otherwise it breaks it
 #undef interface
 #include <QDBusConnection>
+#include <QDBusInterface>
+#include <QDBusConnectionInterface>
 
 #include <kinit_version.h>
+
+typedef unsigned int pid_t;
 
 //#define ENABLE_SUICIDE
 //#define ENABLE_EXIT
