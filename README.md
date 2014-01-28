@@ -1,6 +1,6 @@
 # KInit
 
-Helper library to speed up start of applications on KDE work spaces
+Helper library to speed up start of applications on KDE workspaces
 
 ## Introduction
 
@@ -23,7 +23,7 @@ kdeinit is linked against all libraries a standard KDE
 application needs. With this technique starting an
 application becomes much faster because now only
 the application itself needs to be linked whereas
-otherwise both the application as well as all the libaries
+otherwise both the application as well as all the libraries
 it uses need to be linked.
 
 
@@ -58,7 +58,7 @@ A difference of 341Kb with the normal case.
 
 ## Adapting programs to use kdeinit.
 
-The sourcecode of a program does not require any change to take advantage
+The source code of a program does not require any change to take advantage
 of kdeinit. Only the makefile requires an adaption, if the Makefile.am of
 a normal program looks like this:
 
@@ -66,7 +66,7 @@ a normal program looks like this:
     kicker_LDADD = $(top_builddir)/libkonq/libkonq.la
     kicker_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-The following lines need to be added to make a library version useable
+The following lines need to be added to make a library version usable
 by kdeinit:
 
     lib_LTLIBRARIES = kicker.la
