@@ -50,22 +50,27 @@ back to its full efficiency, an application with a KApplication constructor now
 uses 338Kb of memory.  A difference of 341Kb with the normal case.
 
 
-## Adapting programs to use kdeinit.
+## Adapting programs to use kdeinit
 
 The source code of a program does not require any change to take advantage of
-kdeinit. Only the makefile requires an adaption, if the Makefile.am of a normal
-program looks like this:
+kdeinit, only the build system needs to be adjusted:
 
-    bin_PROGRAMS = kicker
-    kicker_LDADD = $(top_builddir)/libkonq/libkonq.la
-    kicker_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+First you need to find the KF5Init package:
 
-The following lines need to be added to make a library version usable by
-kdeinit:
+    find_package(KF5Init 5.0.0 REQUIRED)
 
-    lib_LTLIBRARIES = kicker.la
-    libkicker_la_LIBADD = $(top_builddir)/libkonq/libkonq.la
-    libkicker_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) -module
+Then, instead of declaring your executable and the libraries it links to like this:
+
+    add_executable(myexe ${myexe_SRCS})
+
+    target_link_libraries(myexe ...)
+
+You must use:
+
+    kf5_add_kdeinit_executable(myexe ${myexe_SRCS})
+
+    # Note the different target name
+    target_link_libraries(kdeinit_myexe ...)
 
 
 ## Disadvantages
