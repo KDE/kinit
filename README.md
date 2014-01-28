@@ -77,10 +77,11 @@ You must use:
 
 The process name of applications started via kdeinit is "kdeinit". This problem
 can be corrected to a degree by changing the application name as shown by 'ps'.
-However, applications like "killall" will only see "kdeinit" as process name.
-To workaround this, use "kdekillall", from kdesdk/scripts, for applications
+However, applications like `killall` will only see "kdeinit" as process name.
+To workaround this, use `kdekillall`, from [kde-dev-scripts][], for applications
 started via kdeinit.
 
+[kde-dev-scripts]: https://projects.kde.org/projects/kde/kdesdk/kde-dev-scripts/
 
 ## Links
 
