@@ -50,7 +50,7 @@ if (NOT WIN32)
   target_link_libraries(kdeinit5_wrapper  ${KINIT_SOCKET_LIBRARY} Qt5::Core)
 
   if (NOT X11_FOUND)
-    target_compile_definitions(kdeinit5_wrapper -DNO_DISPLAY)
+    target_compile_definitions(kdeinit5_wrapper PRIVATE -DNO_DISPLAY)
   endif ()
 
   install(TARGETS kdeinit5_wrapper ${INSTALL_TARGETS_DEFAULT_ARGS} )
