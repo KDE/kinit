@@ -252,6 +252,7 @@ protected:
     bool dontBlockReading;
 #if HAVE_X11
     Display *mCached_dpy;
+    bool mIsX11;
 #endif
     void processRequestReturn(int status, const QByteArray &requestData);
 

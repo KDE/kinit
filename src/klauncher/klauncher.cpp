@@ -33,6 +33,7 @@
 
 #if HAVE_X11
 #include <kstartupinfo.h>
+#include <QGuiApplication>
 #endif
 
 #include <QDBusConnectionInterface>
@@ -100,6 +101,7 @@ KLauncher::KLauncher()
 {
 #if HAVE_X11
     mCached_dpy = NULL;
+    mIsX11 = QGuiApplication::platformName() == QStringLiteral("xcb");
 #endif
     Q_ASSERT(g_klauncher_self == NULL);
     g_klauncher_self = this;
@@ -469,7 +471,7 @@ KLauncher::requestDone(KLaunchRequest *request)
         requestResult.pid = 0;
 
 #if HAVE_X11
-        if (!request->startup_dpy.isEmpty()) {
+        if (!request->startup_dpy.isEmpty() && mIsX11) {
             Display *dpy = NULL;
             if ((mCached_dpy != NULL) &&
                     (request->startup_dpy == XDisplayString(mCached_dpy))) {
@@ -581,7 +583,7 @@ KLauncher::requestStart(KLaunchRequest *request)
     }
     appendLong(requestData, 0); // avoid_loops, always false here
 #if HAVE_X11
-    bool startup_notify = !request->startup_id.isNull() && request->startup_id != "0";
+    bool startup_notify = mIsX11 && !request->startup_id.isNull() && request->startup_id != "0";
     if (startup_notify) {
         requestData.append(request->startup_id).append('\0');
     }
@@ -784,6 +786,9 @@ KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr serv
                                      const QStringList &envs)
 {
 #if HAVE_X11
+    if (!mIsX11) {
+        return;
+    }
     request->startup_id = "0";// krazy:exclude=doublequote_chars
     if (startup_id == "0") {
         return;
@@ -847,7 +852,7 @@ KLauncher::cancel_service_startup_info(KLaunchRequest *request, const QByteArray
     if (request != NULL) {
         request->startup_id = "0";    // krazy:exclude=doublequote_chars
     }
-    if (!startup_id.isEmpty() && startup_id != "0") {
+    if (!startup_id.isEmpty() && startup_id != "0" && mIsX11) {
         QString dpy_str;
         foreach (const QString &env, envs) {
             if (env.startsWith(QLatin1String("DISPLAY="))) {
