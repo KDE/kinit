@@ -31,6 +31,7 @@
 
 #include "klauncher_cmds.h"
 #include <QtCore/QCoreApplication>
+#include <QtCore/QFile>
 #include <QDebug>
 #include <QDBusConnectionInterface>
 
@@ -72,6 +73,11 @@ bool mac_set_dbus_address(QString value)
 
 void mac_initialize_dbus()
 {
+    enum
+    {
+        timeout = 3000 // msec. Copied from old kdecore/kernel/kkernel_mac.cpp
+    };
+
     if (dbus_initialized) {
         return;
     }

@@ -69,6 +69,8 @@
 #include <CoreFoundation/CFBundle.h>
 #include <CoreFoundation/CFString.h>
 #include <CoreFoundation/CFURL.h>
+#include <crt_externs.h> // for _NSGetArgc and friends
+#include <mach-o/dyld.h> // for _NSGetExecutablePath
 #endif
 
 #include <kinit_version.h>
