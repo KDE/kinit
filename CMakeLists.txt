@@ -25,7 +25,9 @@ ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KINIT
 include(ConfigureChecks.cmake)
 
 #optional features
-find_package(X11)
+if (NOT APPLE)
+    find_package(X11)
+endif()
 set(HAVE_X11 ${X11_FOUND})
 
 # used by 4 executables in this module
