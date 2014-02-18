@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include <qplatformdefs.h>
 #include <signal.h>
+#include <errno.h>
 
 #if HAVE_X11
 #include <kstartupinfo.h>
