@@ -12,7 +12,7 @@ include(KDEFrameworkCompilerSettings)
 include(KDECMakeSettings)
 
 include(FeatureSummary)
-include(CMakePackageConfigHelpers)
+include(ECMPackageConfigHelpers)
 include(ECMSetupVersion)
 
 set(KF5_VERSION "4.96.0")
@@ -49,7 +49,7 @@ if("${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}")
 endif()
 
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Init")
-configure_package_config_file(
+ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KF5InitConfig.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/KF5InitConfig.cmake"
   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
