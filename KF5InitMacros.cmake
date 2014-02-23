@@ -38,18 +38,15 @@ function (KF5_ADD_KDEINIT_EXECUTABLE _target_NAME )
         add_library(kdeinit_${_target_NAME} STATIC ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_win32lib_dummy.cpp)
 
         add_executable(${_target_NAME} ${_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_dummy.cpp ${_resourcefile})
-    else(WIN32)
+    else()
 
         add_library(kdeinit_${_target_NAME} SHARED ${_SRCS})
 
-        if (Q_WS_MAC)
-            list(FIND _SRCS *.icns _icon_position)
-            if(NOT _res_position EQUAL -1)
-                list(GET _SRCS ${_icon_position} _resourcefile)
-            endif(NOT _res_position EQUAL -1)
-        endif (Q_WS_MAC)
+        if (APPLE)
+            set(_resourcefile ${MACOSX_BUNDLE_ICON_FILE})
+        endif()
         add_executable(${_target_NAME} ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_dummy.cpp ${_resourcefile})
-    endif(WIN32)
+    endif()
 
     target_link_libraries(${_target_NAME} kdeinit_${_target_NAME})
     set_target_properties(kdeinit_${_target_NAME} PROPERTIES OUTPUT_NAME kdeinit5_${_target_NAME})
