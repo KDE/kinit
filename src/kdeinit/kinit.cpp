@@ -88,10 +88,10 @@
 #ifdef Q_OS_UNIX
 //TODO: make sure what libraries we want here...
 static const char *extra_libs[] = {
-    "libKIOCore.so.5",
-    "libKParts.so.5",
+    "libKF5KIOCore.so.5",
+    "libKF5Parts.so.5",
 //#ifdef __KDE_HAVE_GCC_VISIBILITY // Removed for KF5, we'll see.
-    "libPlasma.so.5"
+    "libKF5Plasma.so.5"
 //#endif
 };
 #endif
