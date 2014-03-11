@@ -883,17 +883,6 @@ static void init_kdeinit_socket()
                 exit(255);
             }
         }
-#if 0 // obsolete in kde4. Should we check writing to another file instead?
-        path = qgetenv("ICEAUTHORITY");
-        if (path.isEmpty()) {
-            path = home_dir;
-            path += "/.ICEauthority";
-        }
-        if (access(path.data(), R_OK | W_OK) && (errno != ENOENT)) {
-            fprintf(stderr, "kdeinit5: Aborting. No write access to '%s'.\n", path.data());
-            exit(255);
-        }
-#endif
     }
 
     /** Test if socket file is already present
