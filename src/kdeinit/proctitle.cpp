@@ -1,234 +1,211 @@
+/* Based on setproctitle.c from OpenSSH 6.6p1 */
+
 /*
- * ProFTPD - FTP server daemon
- * Copyright (c) 2007 The ProFTPD Project team           //krazy:exclude=copyright
- * Copyright (c) 2007 Alex Merry <alex.merry@kdemail.net>
+ * Copyright 2014 Alex Merry <alex.merry@kde.org>
+ * Copyright 2003 Damien Miller
+ * Copyright (c) 1983, 1995-1997 Eric P. Allman
+ * Copyright (c) 1988, 1993
+ *    The Regents of the University of California.  All rights reserved.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the
- * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA  02110-1301  USA
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
  */
 
 #include "proctitle.h"
 #include <config-kdeinit.h>
 
-#include <QByteArray>
+#define PT_NONE         0    /* don't use it at all */
+#define PT_PSTAT        1    /* use pstat(PSTAT_SETCMD, ...) */
+#define PT_REUSEARGV    2    /* cover argv with title information */
+#define PT_SETPROCTITLE 3    /* forward onto the native setproctitle */
 
-#include <string.h>
-#include <stdio.h>
 #include <stdarg.h>
+#include <stdio.h>
 #include <stdlib.h>
-
-#define PF_ARGV_NONE      0
-#define PF_ARGV_NEW       1
-#define PF_ARGV_WRITEABLE 2
-#define PF_ARGV_PSTAT     3
-#define PF_ARGV_PSSTRINGS 4
+#include <sys/types.h>
+#include <unistd.h>
+#include <string.h>
 
 #if HAVE_SETPROCTITLE
-#  define PF_ARGV_TYPE PF_ARGV_NONE
-#  if HAVE_SYS_TYPES_H
-#    include <sys/types.h>
-#  endif /* HAVE_SYS_TYPES_H */
-#  if HAVE_UNISTD_H
-#    include <unistd.h>
-#  endif /* HAVE_UNISTD_H */
+#  define PT_TYPE    PT_SETPROCTITLE
+   // process title should get prepended automagically
+#  define ADD_PROCTITLE 0
+#elif HAVE_SYS_PSTAT_H && HAVE_PSTAT
+#  include <sys/pstat.h>
+#  define PT_TYPE    PT_PSTAT
+#elif CAN_CLOBBER_ARGV
+#  define PT_TYPE    PT_REUSEARGV
+#endif
 
-#else /* HAVE_SETPROCTITLE */
-#  ifdef __GNU_HURD__
-#    define PF_ARGV_TYPE PF_ARGV_NEW
-#  else /* __GNU_HURD__ */
-#    define PF_ARGV_TYPE PF_ARGV_WRITEABLE
+#ifndef PT_TYPE
+#  define PT_TYPE    PT_NONE
+#endif
+#ifndef ADD_PROCTITLE
+#  define ADD_PROCTITLE 1
+#endif
 
-#    if HAVE_SYS_PSTAT_H && HAVE_PSTAT
-#      include <sys/pstat.h>
-#      undef PF_ARGV_TYPE
-#      define PF_ARGV_TYPE PF_ARGV_PSTAT
-#    endif /* HAVE_SYS_PSTAT_H && HAVE_PSTAT */
-
-#    if HAVE_SYS_EXEC_H
-#      include <sys/exec.h>
-#      if PS_STRINGS
-#        include <machine/vmparam.h>
-#        undef PF_ARGV_TYPE
-#        define PF_ARGV_TYPE PF_ARGV_PSSTRINGS
-#      endif /* PS_STRINGS */
-#    endif /* HAVE_SYS_EXEC_H */
-
-#  endif /* !__GNU_HURD__ */
-
-#endif /* !HAVE_SETPROCTITLE */
+#if PT_TYPE == PT_REUSEARGV
+static char *argv_start = NULL;
+static size_t argv_env_len = 0;
+#endif
 
 #if HAVE___PROGNAME
 extern char *__progname;
-#endif /* HAVE___PROGNAME */
-#if HAVE___PROGNAME_FULL
-extern char *__progname_full;
-#endif /* HAVE___PROGNAME_FULL */
-extern char **environ;
-
-static char **Argv = NULL;
-
-#if PF_ARGV_TYPE == PF_ARGV_WRITEABLE   /* Only this mode uses LastArgv */
-static char *LastArgv = NULL;
-static char *cleanUpTo = NULL;
+#else
+char *__progname;
 #endif
 
-/**
- * Set up the memory space for setting the proctitle
- */
-void proctitle_init(int argc, char *argv[], char *envp[])
+void
+proctitle_init(int argc, char *argv[])
 {
-    register int i, envpsize;
-    char **p;
+#if HAVE___PROGNAME
+    // progname may be a reference to argv[0]
+    __progname = strdup(__progname);
+#else
+    if (argc == 0 || argv[0] == NULL) {
+        __progname = "unknown";    /* XXX */
+    } else {
+        char *p = strrchr(argv[0], '/');
+        if (p == NULL)
+            p = argv[0];
+        else
+            p++;
 
-    /* Move the environment so proctitle_set can use the space. */
-    for (i = envpsize = 0; envp[i] != NULL; i++) {
-        envpsize += strlen(envp[i]) + 1;
-    }
-
-    if ((p = (char **) malloc((i + 1) * sizeof(char *))) != NULL) {
-        environ = p;
-
-        for (i = 0; envp[i] != NULL; i++) {
-            if ((environ[i] = static_cast<char *>(malloc(strlen(envp[i]) + 1))) != NULL) {
-                strcpy(environ[i], envp[i]);
-            }
-        }
-
-        environ[i] = NULL;
-    }
-
-    Argv = argv;
-
-# if PF_ARGV_TYPE == PF_ARGV_WRITEABLE   /* Only this mode uses LastArgv */
-    for (i = 0; i < argc; i++) {
-        if (!i || (LastArgv + 1 == argv[i])) {
-            LastArgv = argv[i] + strlen(argv[i]);
-        }
-    }
-    cleanUpTo = LastArgv;
-
-    for (i = 0; envp[i] != NULL; i++) {
-        /* must not overwrite XDG_SESSION_COOKIE */
-        if (!strncmp(envp[i], "XDG_", 4)) {
-            break;
-        }
-        if ((LastArgv + 1) == envp[i]) {
-            LastArgv = envp[i] + strlen(envp[i]);
-        }
+        __progname = strdup(p);
     }
 #endif
 
-# if HAVE___PROGNAME
-    /* Set the __progname variable so glibc and company
-     * don't go nuts.
-     */
-    __progname = strdup("kdeinit5");
-# endif /* HAVE___PROGNAME */
-# if HAVE___PROGNAME_FULL
-    /* __progname_full too */
-    __progname_full = strdup(argv[0]);
-# endif /* HAVE___PROGNAME_FULL */
-}
+#if PT_TYPE == PT_REUSEARGV
+    if (argc == 0 || argv[0] == NULL)
+        return;
 
-void proctitle_set(const char *fmt, ...)
-{
-    va_list msg;
-    static char statbuf[BUFSIZ];
-
-#if ! HAVE_SETPROCTITLE
-# if PF_ARGV_TYPE == PF_ARGV_PSTAT
-    union pstun pst;
-# endif /* PF_ARGV_PSTAT */
-    char *p;
+    extern char **environ;
+    char *lastargv = NULL;
+    char **envp = environ;
     int i;
-#endif /* HAVE_SETPROCTITLE */
 
-    if (!fmt) {
+    /*
+     * NB: This assumes that argv has already been copied out of the
+     * way. This is true for kdeinit, but may not be true for other
+     * programs. Beware.
+     */
+
+    /* Fail if we can't allocate room for the new environment */
+    for (i = 0; envp[i] != NULL; i++)
+        ;
+    if ((environ = (char**)calloc(i + 1, sizeof(*environ))) == NULL) {
+        environ = envp;    /* put it back */
         return;
     }
 
-    va_start(msg, fmt);
-
-    memset(statbuf, 0, sizeof(statbuf));
-
-#if HAVE_SETPROCTITLE
-# if __FreeBSD__ >= 4 && !defined(FREEBSD4_0) && !defined(FREEBSD4_1)
-    /* FreeBSD's setproctitle() automatically prepends the process name. */
-    qvsnprintf(statbuf, sizeof(statbuf), fmt, msg);
-
-# else /* FREEBSD4 */
-    /* Manually append the process name for non-FreeBSD platforms. */
-    qsnprintf(statbuf, sizeof(statbuf), "%s", "kdeinit5: ");
-    qvsnprintf(statbuf + strlen(statbuf),
-               sizeof(statbuf) - strlen(statbuf),
-               fmt,
-               msg);
-
-# endif /* FREEBSD4 */
-    setproctitle("%s", statbuf);
-
-#else /* HAVE_SETPROCTITLE */
-    /* Manually append the process name for non-setproctitle() platforms. */
-    qsnprintf(statbuf, sizeof(statbuf), "%s", "kdeinit5: ");
-    qvsnprintf(statbuf + strlen(statbuf),
-               sizeof(statbuf) - strlen(statbuf),
-               fmt,
-               msg);
-
-#endif /* HAVE_SETPROCTITLE */
-
-    va_end(msg);
-
-#if HAVE_SETPROCTITLE
-    return;
-#else
-    i = strlen(statbuf);
-
-# if PF_ARGV_TYPE == PF_ARGV_NEW
-    /* We can just replace argv[] arguments.  Nice and easy. */
-    Argv[0] = statbuf;
-    Argv[1] = NULL;
-# endif /* PF_ARGV_NEW */
-
-# if PF_ARGV_TYPE == PF_ARGV_WRITEABLE
-    const int maxlen = (LastArgv - Argv[0]) - 1;
-    /* We can overwrite individual argv[] arguments.  Semi-nice. */
-    qsnprintf(Argv[0], maxlen, "%s", statbuf);
-    p = &Argv[0][i];
-    /* Clear the rest used by arguments, but don't clear the memory
-       that is usually used for environment variables. Some
-       tools, like ConsoleKit must have access to the process'es initial
-       environment (more exact, the XDG_SESSION_COOKIE variable stored there).
-       If this code causes another side effect, we have to specifically
-       always append those variables to our environment. */
-    while (p < cleanUpTo) {
-        *p++ = '\0';
+    /*
+     * Find the last argv string or environment variable within
+     * our process memory area.
+     */
+    for (i = 0; i < argc; i++) {
+        if (lastargv == NULL || lastargv + 1 == argv[i])
+            lastargv = argv[i] + strlen(argv[i]);
+    }
+    for (i = 0; envp[i] != NULL; i++) {
+        if (lastargv + 1 == envp[i])
+            lastargv = envp[i] + strlen(envp[i]);
     }
 
-    Argv[1] = NULL;
-# endif /* PF_ARGV_WRITEABLE */
+    argv[1] = NULL;
+    argv_start = argv[0];
+    argv_env_len = lastargv - argv[0] - 1;
 
-# if PF_ARGV_TYPE == PF_ARGV_PSTAT
-    pst.pst_command = statbuf;
-    pstat(PSTAT_SETCMD, pst, i, 0, 0);
-# endif /* PF_ARGV_PSTAT */
+    /*
+     * Copy environment
+     * XXX - will truncate env on strdup fail
+     */
+    for (i = 0; envp[i] != NULL; i++)
+        environ[i] = strdup(envp[i]);
+    environ[i] = NULL;
+#endif /* PT_REUSEARGV */
+}
 
-# if PF_ARGV_TYPE == PF_ARGV_PSSTRINGS
-    PS_STRINGS->ps_nargvstr = 1;
-    PS_STRINGS->ps_argvstr = statbuf;
-# endif /* PF_ARGV_PSSTRINGS */
+void
+proctitle_set(const char *fmt, ...)
+{
+#if PT_TYPE != PT_NONE
+#if PT_TYPE == PT_REUSEARGV
+    if (argv_env_len <= 0)
+        return;
+#endif
 
-#endif /* HAVE_SETPROCTITLE */
+    bool skip_proctitle = false;
+    if (fmt != NULL && fmt[0] == '-') {
+        skip_proctitle = true;
+        ++fmt;
+    }
+    char ptitle[1024];
+    memset(ptitle, '\0', sizeof(ptitle));
+    size_t len = 0;
+
+#if ADD_PROCTITLE
+    if (!skip_proctitle) {
+        strncpy(ptitle, __progname, sizeof(ptitle)-1);
+        len = strlen(ptitle);
+        if (fmt != NULL && sizeof(ptitle) - len > 2) {
+            strcpy(ptitle + len, ": ");
+            len += 2;
+        }
+    }
+#endif
+
+    if (fmt != NULL) {
+        int r = -1;
+        if (len < sizeof(ptitle) - 1) {
+            va_list ap;
+            va_start(ap, fmt);
+            r = vsnprintf(ptitle + len, sizeof(ptitle) - len , fmt, ap);
+            va_end(ap);
+        }
+        if (r == -1 || (size_t)r >= sizeof(ptitle) - len)
+            return;
+    }
+
+#if PT_TYPE == PT_PSTAT
+    union pstun pst;
+    pst.pst_command = ptitle;
+    pstat(PSTAT_SETCMD, pst, strlen(ptitle), 0, 0);
+#elif PT_TYPE == PT_REUSEARGV
+    strncpy(argv_start, ptitle, argv_env_len);
+    argv_start[argv_env_len-1] = '\0';
+#elif PT_TYPE == PT_SETPROCTITLE
+    if (fmt == NULL) {
+        setproctitle(NULL);
+#if defined(__FreeBSD__)
+    } else if (skip_proctitle) {
+        // setproctitle on FreeBSD allows skipping the process title
+        setproctitle("-%s", ptitle);
+#endif
+    } else {
+        setproctitle("%s", ptitle);
+    }
+#endif
+
+#endif /* !PT_NONE */
 }
