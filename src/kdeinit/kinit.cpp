@@ -1374,61 +1374,8 @@ static void handle_requests(pid_t waitForPid)
     }
 }
 
-static void kdeinit_library_path()
+static void generate_socket_name()
 {
-
-    const QStringList ltdl_library_path =
-        QFile::decodeName(qgetenv("LTDL_LIBRARY_PATH")).split(QLatin1Char(':'), QString::SkipEmptyParts);
-#ifdef Q_OS_DARWIN
-    const QByteArray ldlibpath = qgetenv("DYLD_LIBRARY_PATH");
-#else
-    const QByteArray ldlibpath = qgetenv("LD_LIBRARY_PATH");
-#endif
-    const QStringList ld_library_path =
-        QFile::decodeName(ldlibpath).split(QLatin1Char(':'), QString::SkipEmptyParts);
-
-#if 0 // unused
-
-    QByteArray extra_path;
-    const QStringList candidates = s_instance->dirs()->resourceDirs("lib");
-    for (QStringList::ConstIterator it = candidates.begin();
-            it != candidates.end();
-            ++it) {
-        QString d = *it;
-        if (ltdl_library_path.contains(d)) {
-            continue;
-        }
-        if (ld_library_path.contains(d)) {
-            continue;
-        }
-        if (d[d.length() - 1] == QLatin1Char('/')) {
-            d.truncate(d.length() - 1);
-            if (ltdl_library_path.contains(d)) {
-                continue;
-            }
-            if (ld_library_path.contains(d)) {
-                continue;
-            }
-        }
-        if ((d == QLatin1String("/lib")) || (d == QLatin1String("/usr/lib"))) {
-            continue;
-        }
-
-        QByteArray dir = QFile::encodeName(d);
-
-        if (access(dir, R_OK)) {
-            continue;
-        }
-
-        if (!extra_path.isEmpty()) {
-            extra_path += ':';
-        }
-        extra_path += dir;
-    }
-#endif
-
-//   if (!extra_path.isEmpty())
-//      lt_dlsetsearchpath(extra_path.data());
 
     QByteArray display = qgetenv(displayEnvVarName().constData());
     if (display.isEmpty()) {
@@ -1777,7 +1724,6 @@ int main(int argc, char **argv, char **envp)
     proctitle_init(argc, argv, envp);
 #endif
 
-    kdeinit_library_path();
     // don't change envvars before proctitle_init()
     unsetenv("LD_BIND_NOW");
     unsetenv("DYLD_BIND_AT_LAUNCH");
@@ -1796,6 +1742,7 @@ int main(int argc, char **argv, char **envp)
     setupX();
 #endif
 
+    generate_socket_name();
     if (keep_running) {
         /*
          * Create ~/.kde/tmp-<hostname>/kdeinit5-<display> socket for incoming wrapper
