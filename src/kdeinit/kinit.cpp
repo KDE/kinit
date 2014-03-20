@@ -52,7 +52,6 @@
 #include <QtCore/QRegExp>
 #include <QFont>
 #include <kcrash.h>
-#include <klibrary.h>
 #include <kconfig.h>
 #include <klocalizedstring.h>
 #include <QDebug>
@@ -472,32 +471,27 @@ static pid_t launch(int argc, const char *_name, const char *args,
 {
     QString lib;
     QByteArray name;
-    QByteArray exec;
     QString libpath;
     QByteArray execpath;
+    bool libpath_relative = false;
 
     if (_name[0] != '/') {
         name = _name;
         lib = QFile::decodeName(name);
-        exec = name;
-        KLibrary klib(QLatin1String("libkdeinit5_") + lib);
-        libpath = klib.fileName();
-        if (libpath.isEmpty()) {
-            KLibrary klib(lib);
-            libpath = klib.fileName(); // this is really just a way to call findLibraryInternal
-        }
-        execpath = execpath_avoid_loops(exec, envc, envs, avoid_loops);
-        if (libpath.isEmpty() && execpath.isEmpty()) {
-            fprintf(stderr, "Didn't find \"%s\", neither as an executable nor as a plugin. Please check $PATH and $QT_PLUGIN_PATH.\n", name.constData());
-        }
+        libpath = QLatin1String("libkdeinit5_") + lib;
+        libpath_relative = true;
+        execpath = execpath_avoid_loops(name, envc, envs, avoid_loops);
     } else {
         name = _name;
         lib = QFile::decodeName(name);
         name = name.mid(name.lastIndexOf('/') + 1);
-        exec = _name;
+
+        // FIXME: this .so extension stuff is very Linux-specific
         if (lib.endsWith(QLatin1String(".so"))) {
             libpath = lib;
         } else {
+            execpath = _name;
+
             // Try to match an absolute path to an executable binary (either in
             // bin/ or in libexec/) to a kdeinit module in the same prefix.
             //
@@ -516,7 +510,6 @@ static pid_t launch(int argc, const char *_name, const char *args,
             if (!QFile::exists(libpath)) {
                 libpath.clear();
             }
-            execpath = exec;
         }
     }
 #ifndef NDEBUG
@@ -657,7 +650,20 @@ static pid_t launch(int argc, const char *_name, const char *args,
         QLibrary l(libpath);
 
         if (!libpath.isEmpty()) {
-            if (!l.load() || !l.isLoaded()) {
+            if (!l.load()) {
+                if (libpath_relative) {
+                    // NB: Because Qt makes the actual dlopen() call, the
+                    //     RUNPATH of kdeinit is *not* respected - see
+                    //     https://sourceware.org/bugzilla/show_bug.cgi?id=13945
+                    //     - so we try hacking it in ourselves
+                    QString install_lib_dir = QFile::decodeName(
+                            CMAKE_INSTALL_PREFIX "/" LIB_INSTALL_DIR "/");
+                    libpath = install_lib_dir + libpath;
+                    l.setFileName(libpath);
+                    l.load();
+                }
+            }
+            if (!l.isLoaded()) {
                 QString ltdlError(l.errorString());
                 if (execpath.isEmpty()) {
                     // Error
@@ -665,7 +671,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
                     exitWithErrorMsg(errorMsg);
                 } else {
                     // Print warning
-                    fprintf(stderr, "Could not open library %s: %s\n", qPrintable(lib),
+                    fprintf(stderr, "Could not open %s using a library: %s\n", qPrintable(lib),
                             qPrintable(ltdlError));
                 }
             }

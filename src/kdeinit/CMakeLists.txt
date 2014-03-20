@@ -22,16 +22,17 @@ endif ()
 
 target_link_libraries(kdeinit5 ${kdeinit_LIBS} ${KINIT_SOCKET_LIBRARY}
     Qt5::Gui #QFont::initialize
-    KF5::Service #KLibrary
     KF5::WindowSystem # KStartupInfo
     KF5::Crash # KCrash::loadedByKdeinit
     KF5::I18n #i18n() used on some error messages
     Qt5::DBus
 )
 
-if(WIN32)
-    target_compile_definitions(kdeinit5 PRIVATE CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
-endif()
+target_compile_definitions(kdeinit5 PRIVATE
+    CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}"
+    LIB_INSTALL_DIR="${LIB_INSTALL_DIR}"
+    LIBEXEC_INSTALL_DIR="${LIBEXEC_INSTALL_DIR}"
+)
 
 if (X11_FOUND)
   target_link_libraries(kdeinit5 ${X11_X11_LIB})
