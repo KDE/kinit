@@ -1676,10 +1676,7 @@ int main(int argc, char **argv, char **envp)
     pid_t pid;
     bool do_fork = true;
     int launch_klauncher = 1;
-    // KDE5 TODO: make this 0 by default, so that a random kde app doesn't start kded5 upfront,
-    // but on demand when a service needs it. In startkde, however, use +kded5 or --kded.
-    // (+kded5 might not work because it doesn't fork on startup anymore)
-    int launch_kded = 1;
+    int launch_kded = 0;
     int keep_running = 1;
     d.suicide = false;
 
@@ -1690,8 +1687,8 @@ int main(int argc, char **argv, char **envp)
         if (strcmp(safe_argv[i], "--no-klauncher") == 0) {
             launch_klauncher = 0;
         }
-        if (strcmp(safe_argv[i], "--no-kded") == 0) {
-            launch_kded = 0;
+        if (strcmp(safe_argv[i], "--kded") == 0) {
+            launch_kded = 1;
         }
         // allow both nofork and no-fork for compatibility with
         // old versions (both of this and of KUniqueApplication)
@@ -1721,7 +1718,7 @@ int main(int argc, char **argv, char **envp)
             printf("Usage: kdeinit5 [options]\n");
             printf("    --no-fork         Do not fork\n");
             // printf("    --no-klauncher    Do not start klauncher\n");
-            printf("    --no-kded         Do not start kded\n");
+            printf("    --kded            Start kded\n");
             printf("    --suicide         Terminate when no KDE applications are left running\n");
             printf("    --version         Show version information\n");
             // printf("    --exit            Terminate when kded has run\n");
