@@ -498,8 +498,13 @@ static pid_t launch(int argc, const char *_name, const char *args,
         if (lib.endsWith(QLatin1String(".so"))) {
             libpath = lib;
         } else {
-            // try to match an absolute path to an executable binary (either in bin/ or in libexec/)
-            // to a kdeinit module in the same prefix
+            // Try to match an absolute path to an executable binary (either in
+            // bin/ or in libexec/) to a kdeinit module in the same prefix.
+            //
+            // Note that these *_INSTALL_DIR values should normally relative to
+            // the install prefix, although this may not be the case if the user
+            // has overridden them, and so this search is inherently fragile in
+            // the face of unusual installation layouts.
             if (lib.contains(QLatin1String(LIBEXEC_INSTALL_DIR))) {
                 libpath = QString(lib).replace(QLatin1String(LIBEXEC_INSTALL_DIR),
                                                QLatin1String(LIB_INSTALL_DIR "/libkdeinit5_")) + QLatin1String(".so");
