@@ -1693,13 +1693,14 @@ int main(int argc, char **argv, char **envp)
         if (strcmp(safe_argv[i], "--no-kded") == 0) {
             launch_kded = 0;
         }
-#ifdef Q_OS_MAC
-        // make it nofork to match KUniqueApplication, technically command-line incompatible
-        if (strcmp(safe_argv[i], "--nofork") == 0)
-#else
-        if (strcmp(safe_argv[i], "--no-fork") == 0)
-#endif
+        // allow both nofork and no-fork for compatibility with
+        // old versions (both of this and of KUniqueApplication)
+        if (strcmp(safe_argv[i], "--nofork") == 0) {
             do_fork = false;
+        }
+        if (strcmp(safe_argv[i], "--no-fork") == 0) {
+            do_fork = false;
+        }
         if (strcmp(safe_argv[i], "--suicide") == 0) {
             d.suicide = true;
         }
@@ -1718,11 +1719,7 @@ int main(int argc, char **argv, char **envp)
 #endif
         if (strcmp(safe_argv[i], "--help") == 0) {
             printf("Usage: kdeinit5 [options]\n");
-#ifdef Q_OS_MAC
-            printf("    --nofork          Do not fork\n");
-#else
             printf("    --no-fork         Do not fork\n");
-#endif
             // printf("    --no-klauncher    Do not start klauncher\n");
             printf("    --no-kded         Do not start kded\n");
             printf("    --suicide         Terminate when no KDE applications are left running\n");
