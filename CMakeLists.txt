@@ -44,6 +44,7 @@ if("${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}")
   find_package(KF5I18n ${KF5_VERSION} REQUIRED)
   find_package(KF5WindowSystem ${KF5_VERSION} REQUIRED)
   find_package(KF5Crash ${KF5_VERSION} REQUIRED)
+  find_package(KF5Config ${KF5_VERSION} REQUIRED)
 
   # Due to a CMake bug, we need to explicitly find private dependencies of our dependencies
   # Remove when we depend on CMake 3.0.0
