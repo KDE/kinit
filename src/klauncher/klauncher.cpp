@@ -45,9 +45,9 @@
 
 #include <kconfig.h>
 #include <QDebug>
-#include <klibrary.h>
 #include <klocalizedstring.h>
 #include <kdesktopfile.h>
+#include <kpluginloader.h> // to find kioslave modules
 #include <kprotocolmanager.h>
 #include <kprotocolinfo.h>
 #include <krun.h> // TODO port away from kiofilewidgets
@@ -143,7 +143,7 @@ KLauncher::KLauncher()
         // Slave debug mode causes kdeinit to suspend the process waiting
         // for the developer to attach gdb to the process; we do not have
         // a good way of doing a similar thing if we are using QProcess.
-        mSlaveDebug = QString();
+        mSlaveDebug.clear();
         qWarning("slave-debug mode is not available as Klauncher is not using kdeinit");
 #endif
     }
@@ -1023,19 +1023,25 @@ KLauncher::requestSlave(const QString &protocol,
         return slave->pid();
     }
 
-    QString name = KProtocolInfo::exec(protocol);
-    if (name.isEmpty()) {
+    QString slaveModule = KProtocolInfo::exec(protocol);
+    if (slaveModule.isEmpty()) {
         error = i18n("Unknown protocol '%1'.\n", protocol);
+        return 0;
+    }
+    KPluginLoader loader(slaveModule);
+    QString slaveModulePath = loader.fileName();
+    if (slaveModulePath.isEmpty()) {
+        error = i18n("Could not find the '%1' plugin.\n", slaveModule);
         return 0;
     }
 
     QStringList arg_list;
 #ifdef USE_KPROCESS_FOR_KIOSLAVES
-    arg_list << name;
+    arg_list << slaveModulePath;
     arg_list << protocol;
     arg_list << mConnectionServer.address().toString();
     arg_list << app_socket;
-    name = QFile::decodeName(CMAKE_INSTALL_PREFIX "/" LIBEXEC_INSTALL_DIR "/kioslave");
+    QString name = QFile::decodeName(CMAKE_INSTALL_PREFIX "/" LIBEXEC_INSTALL_DIR "/kioslave");
 #else
     QString arg1 = protocol;
     QString arg2 = mConnectionServer.address().toString();
@@ -1043,6 +1049,7 @@ KLauncher::requestSlave(const QString &protocol,
     arg_list.append(arg1);
     arg_list.append(arg2);
     arg_list.append(arg3);
+    QString name = slaveModulePath;
 #endif
 
     // qDebug() << "KLauncher: launching new slave " << name << " with protocol=" << protocol
@@ -1059,8 +1066,7 @@ KLauncher::requestSlave(const QString &protocol,
     }
 #endif
     if (mSlaveValgrind == protocol) {
-        KLibrary lib(name);
-        arg_list.prepend(lib.fileName());
+        arg_list.prepend(name);
 #ifndef USE_KPROCESS_FOR_KIOSLAVES // otherwise we've already done this
         arg_list.prepend(QFile::decodeName(CMAKE_INSTALL_PREFIX "/" LIBEXEC_INSTALL_DIR "/kioslave"));
 #endif
