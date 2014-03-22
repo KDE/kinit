@@ -34,6 +34,7 @@ function (KF5_ADD_KDEINIT_EXECUTABLE _target_NAME )
         endif(NOT _res_position EQUAL -1)
 
         _FIND_KDEINIT_FILE(_KDE5INIT_WIN32_DUMMY_FILEPATH "_win32lib")
+        set(_KDEINIT5_TARGET_NAME_ ${_target_NAME})
         configure_file(${_KDE5INIT_WIN32_DUMMY_FILEPATH} ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_win32lib_dummy.cpp)
         add_library(kdeinit_${_target_NAME} STATIC ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_win32lib_dummy.cpp)
 
