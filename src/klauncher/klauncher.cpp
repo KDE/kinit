@@ -137,7 +137,15 @@ KLauncher::KLauncher()
 
     mSlaveDebug = QString::fromLocal8Bit(qgetenv("KDE_SLAVE_DEBUG_WAIT"));
     if (!mSlaveDebug.isEmpty()) {
+#ifndef USE_KPROCESS_FOR_KIOSLAVES
         qWarning("Klauncher running in slave-debug mode for slaves of protocol '%s'", qPrintable(mSlaveDebug));
+#else
+        // Slave debug mode causes kdeinit to suspend the process waiting
+        // for the developer to attach gdb to the process; we do not have
+        // a good way of doing a similar thing if we are using QProcess.
+        mSlaveDebug = QString();
+        qWarning("slave-debug mode is not available as Klauncher is not using kdeinit");
+#endif
     }
     mSlaveValgrind = QString::fromLocal8Bit(qgetenv("KDE_SLAVE_VALGRIND"));
     if (!mSlaveValgrind.isEmpty()) {
@@ -1041,20 +1049,19 @@ KLauncher::requestSlave(const QString &protocol,
     // << " args=" << arg_list << endl;
 
 #ifdef Q_OS_UNIX
-    if (mSlaveDebug == protocol) {
 #ifndef USE_KPROCESS_FOR_KIOSLAVES
+    // see comments where mSlaveDebug is set in KLauncher::KLauncher
+    if (mSlaveDebug == protocol) {
         klauncher_header request_header;
         request_header.cmd = LAUNCHER_DEBUG_WAIT;
         request_header.arg_length = 0;
         kde_safe_write(kdeinitSocket, &request_header, sizeof(request_header));
-#else
-        name = QString::fromLatin1("gdb");
-#endif
     }
+#endif
     if (mSlaveValgrind == protocol) {
-#ifndef USE_KPROCESS_FOR_KIOSLAVES // otherwise we've already done this
         KLibrary lib(name);
         arg_list.prepend(lib.fileName());
+#ifndef USE_KPROCESS_FOR_KIOSLAVES // otherwise we've already done this
         arg_list.prepend(QFile::decodeName(CMAKE_INSTALL_PREFIX "/" LIBEXEC_INSTALL_DIR "/kioslave"));
 #endif
         name = QString::fromLatin1("valgrind");
