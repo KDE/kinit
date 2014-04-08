@@ -284,7 +284,11 @@ void KLauncher::processRequestReturn(int status, const QByteArray &requestData)
         // qDebug().nospace() << lastRequest->name << " (pid " << lastRequest->pid << ") up and running.";
         switch (lastRequest->dbus_startup_type) {
         case KService::DBusNone:
-            lastRequest->status = KLaunchRequest::Running;
+            if (lastRequest->wait) {
+                lastRequest->status = KLaunchRequest::Launching;
+            } else {
+                lastRequest->status = KLaunchRequest::Running;
+            }
             break;
         case KService::DBusUnique:
         case KService::DBusMulti:
@@ -326,6 +330,11 @@ KLauncher::processDied(pid_t pid, long exitStatus)
                 request->status = KLaunchRequest::Running;
 #ifdef KLAUNCHER_VERBOSE_OUTPUT
                 // qDebug() << pid << "running as a unique app";
+#endif
+            } else if(request->dbus_startup_type == KService::DBusNone && request->wait) {
+                request->status = KLaunchRequest::Running;
+#ifdef KLAUNCHER_VERBOSE_OUTPUT
+                // qDebug() << pid << "running as DBusNone with wait to true";
 #endif
             } else {
                 request->status = KLaunchRequest::Error;
@@ -633,6 +642,7 @@ void KLauncher::exec_blind(const QString &name, const QStringList &arg_list, con
     request->pid = 0;
     request->status = KLaunchRequest::Launching;
     request->envs = envs;
+    request->wait = false;
     // Find service, if any - strip path if needed
     KService::Ptr service = KService::serviceByDesktopName(name.mid(name.lastIndexOf(QLatin1Char('/')) + 1));
     if (service) {
@@ -777,6 +787,7 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
 #endif
 
     request->pid = 0;
+    request->wait = false;
     request->envs = envs;
     send_service_startup_info(request, service, startup_id, envs);
 
@@ -901,6 +912,7 @@ KLauncher::kdeinit_exec(const QString &app, const QStringList &args,
     request->name = app;
     request->dbus_startup_type = KService::DBusNone;
     request->pid = 0;
+    request->wait = wait;
 #if HAVE_X11
     request->startup_id = startup_id.toLocal8Bit();
 #endif
@@ -1085,6 +1097,7 @@ KLauncher::requestSlave(const QString &protocol,
     request->arg_list =  arg_list;
     request->dbus_startup_type = KService::DBusNone;
     request->pid = 0;
+    request->wait = false;
 #if HAVE_X11
     request->startup_id = "0"; // krazy:exclude=doublequote_chars
 #endif

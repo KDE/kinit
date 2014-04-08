@@ -78,6 +78,7 @@ public:
     QDBusMessage transaction;
     KService::DBusStartupType dbus_startup_type;
     bool autoStart;
+    bool wait; //wait until the process dies before finishing the request
     QString errorMsg;
 #if HAVE_X11
     QByteArray startup_id; // "" is the default, "0" for none
