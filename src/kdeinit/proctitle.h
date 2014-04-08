@@ -1,63 +1,48 @@
 /*
- * Copyright 2014 Alex Merry <alex.merry@kde.org>
- * Copyright 2003 Damien Miller
- * Copyright (c) 1983, 1995-1997 Eric P. Allman
- * Copyright (c) 1988, 1993
- *	The Regents of the University of California.  All rights reserved.
+ * ProFTPD - FTP server daemon
+ * Copyright (c) 2007 The ProFTPD Project team           //krazy:exclude=copyright
+ * Copyright (c) 2007 Alex Merry <alex.merry@kdemail.net>
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of the University nor the names of its contributors
- *    may be used to endorse or promote products derived from this software
- *    without specific prior written permission.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
- * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
- * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA  02110-1301  USA
  */
 
-#ifndef SETPROCTITLE_H
-#define SETPROCTITLE_H
+#ifndef PROCTITLE_H
+#define PROCTITLE_H
 
 /**
- * Set up the data structures for changing the process title.
+ * Initialises the program data variables to allow the
+ * changing of the process title.  This _must_ be called
+ * before proctitle_set, and must only be called once.
  *
- * This must be called before proctitle_set, and must not be called
- * multiple times.  Be warned that this function and proctitle_set may
- * alter the contents of argv, and so any argument parsing should be
- * done before calling this function.
- *
- * @param argc  argc, as passed to main()
- * @param argv  argv, as passed to main() (NB: this MUST NOT be a copy
- *              of argv!)
+ * @param argc argc, as passed to main()
+ * @param argv argv, as passed to main()
+ * @param envp envp, as passed to main()
  */
-void proctitle_init(int argc, char *argv[]);
+void proctitle_init(int argc, char *argv[], char *envp[]);
 
 /**
- * Set the process title that appears on the ps command.
- *
- * The title is set to the executable's name, followed by the result
- * of a printf-style expansion of the arguments as specified by the fmt
- * argument.  If fmt begins with a '-' character, the executable's name
- * is skipped (providing the platform implementation supports it;
- * OpenBSD and NetBSD do not).
- *
- * Note that proctitle_init must be called before using this function.
+ * Change the process title.  It accepts a variable number
+ * of arguments (a va_list) in the manner of the printf
+ * family of functions.  See the documentation for
+ * printf for a description of the format string.
  */
-void proctitle_set(const char *fmt, ...);
+void proctitle_set(const char *fmt, ...)
+#ifdef __GNUC__
+__attribute__((format(printf, 1, 2)))
+#endif
+;
 
-#endif // SETPROCTITLE_H
+#endif /* PROCTITLE_H */
