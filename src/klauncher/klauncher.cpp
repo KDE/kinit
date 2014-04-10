@@ -905,7 +905,6 @@ KLauncher::kdeinit_exec(const QString &app, const QStringList &args,
                         const QString &workdir, const QStringList &envs,
                         const QString &startup_id, bool wait, const QDBusMessage &msg)
 {
-    Q_UNUSED(wait)
     KLaunchRequest *request = new KLaunchRequest;
     request->autoStart = false;
     request->arg_list = args;
