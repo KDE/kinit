@@ -38,17 +38,13 @@ else()
   set(KINIT_SOCKET_LIBRARY)
 endif()
 
-if("${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}")
-  find_package(KF5Service ${KF5_VERSION} REQUIRED)
-  find_package(KF5KIO ${KF5_VERSION} REQUIRED)
-  find_package(KF5I18n ${KF5_VERSION} REQUIRED)
-  find_package(KF5WindowSystem ${KF5_VERSION} REQUIRED)
-  find_package(KF5Crash ${KF5_VERSION} REQUIRED)
-  find_package(KF5Config ${KF5_VERSION} REQUIRED)
-
-  # Due to a CMake bug, we need to explicitly find private dependencies of our dependencies
-  # Remove when we depend on CMake 3.0.0
-endif()
+find_package(KF5Service ${KF5_VERSION} REQUIRED)
+find_package(KF5KIO ${KF5_VERSION} REQUIRED)
+find_package(KF5I18n ${KF5_VERSION} REQUIRED)
+find_package(KF5WindowSystem ${KF5_VERSION} REQUIRED)
+find_package(KF5Crash ${KF5_VERSION} REQUIRED)
+find_package(KF5Config ${KF5_VERSION} REQUIRED)
+find_package(KF5DocTools ${KF5_VERSION} REQUIRED)
 
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Init")
 ecm_configure_package_config_file(
@@ -58,6 +54,7 @@ ecm_configure_package_config_file(
 )
 
 add_subdirectory(src)
+add_subdirectory(docs)
 
 install( FILES
 	"${CMAKE_CURRENT_BINARY_DIR}/KF5InitConfig.cmake"
