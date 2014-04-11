@@ -27,6 +27,9 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#if HAVE_CAPABILITIES
+#include <sys/capability.h>
+#endif
 
 #define EXECUTE CMAKE_INSTALL_PREFIX"/"BIN_INSTALL_DIR "/kdeinit5"
 
@@ -98,6 +101,9 @@ int main(int argc, char **argv)
     unsigned i;
     char **orig_environ = NULL;
     char header[ 7 ];
+#if HAVE_CAPABILITIES
+    cap_t caps;
+#endif
     if (pipe(pipes) < 0) {
         perror("pipe()");
         return 1;
@@ -111,6 +117,14 @@ int main(int argc, char **argv)
         perror("fork()");
         return 1;
     default: /* parent, drop privileges and exec */
+#if HAVE_CAPABILITIES
+        caps = cap_init();
+        if (cap_set_proc(caps) < 0) {
+            perror("cap_set_proc()");
+            return 1;
+        }
+        cap_free(caps);
+#endif
         if (setgid(getgid())) {
             perror("setgid()");
             return 1;

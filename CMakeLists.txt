@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(KInit)
 
 find_package(ECM 0.0.12 REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 set(REQUIRED_QT_VERSION "5.2")
 find_package(Qt5 "${REQUIRED_QT_VERSION}" CONFIG REQUIRED Core Gui DBus)
@@ -45,6 +45,15 @@ find_package(KF5WindowSystem ${KF5_VERSION} REQUIRED)
 find_package(KF5Crash ${KF5_VERSION} REQUIRED)
 find_package(KF5Config ${KF5_VERSION} REQUIRED)
 find_package(KF5DocTools ${KF5_VERSION} REQUIRED)
+
+if (NOT WIN32)
+find_package(Libcap)
+set_package_properties(Libcap PROPERTIES
+                       TYPE OPTIONAL
+                       PURPOSE "KInit needs setcap in order to install start_kdeinit with CAP_SYS_RESOURCE capabilities"
+                      )
+endif ()
+set(HAVE_CAPABILITIES ${Libcap_FOUND})
 
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Init")
 ecm_configure_package_config_file(

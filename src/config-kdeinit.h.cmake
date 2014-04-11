@@ -12,6 +12,7 @@
 #cmakedefine01 HAVE_PSTAT
 #cmakedefine01 HAVE_SETPROCTITLE
 #cmakedefine01 HAVE_X11
+#cmakedefine01 HAVE_CAPABILITIES
 #cmakedefine01 HAVE_SYS_SELECT_H
 #cmakedefine01 HAVE_SYS_EXEC_H
 
