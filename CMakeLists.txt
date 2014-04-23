@@ -53,6 +53,7 @@ ecm_configure_package_config_file(
   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
 )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"kinit5\")
 add_subdirectory(src)
 add_subdirectory(docs)
 
