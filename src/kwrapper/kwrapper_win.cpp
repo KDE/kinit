@@ -36,7 +36,7 @@
        application.
        The recent implementation expects a file name 'kdedirs.cache' two level
        above this executable which will be <ProgramFiles> in case kwrapper5 lives
-       in <Programfiles>/kde4/bin.
+       in <Programfiles>/kde5/bin.
        This works not in any case especially when running application inside the
        build directory.
 
