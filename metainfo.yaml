@@ -1,1 +1,11 @@
+maintainer: dfaure
+description: Process launcher to speed up launching KDE applications
 tier: 3
+type: solution
+platforms:
+    - name: Linux
+    - name: Windows
+    - name: MacOSX
+portingAid: false
+deprecated: false
+release: true
