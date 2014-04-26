@@ -39,7 +39,7 @@ if (X11_FOUND)
   target_link_libraries(kdeinit5 ${X11_X11_LIB})
 endif()
 
-install(TARGETS kdeinit5 ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kdeinit5 ${KF5_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 if (NOT WIN32)
   # kdeinit5_shutdown
@@ -48,7 +48,7 @@ if (NOT WIN32)
 
   target_link_libraries(kdeinit5_shutdown  ${KINIT_SOCKET_LIBRARY} Qt5::Core)
 
-  install(TARGETS kdeinit5_shutdown ${INSTALL_TARGETS_DEFAULT_ARGS} )
+  install(TARGETS kdeinit5_shutdown ${KF5_INSTALL_TARGETS_DEFAULT_ARGS} )
 
   # kdeinit5_wrapper
   add_executable(kdeinit5_wrapper ../wrapper.cpp)
@@ -60,5 +60,5 @@ if (NOT WIN32)
     target_compile_definitions(kdeinit5_wrapper PRIVATE -DNO_DISPLAY)
   endif ()
 
-  install(TARGETS kdeinit5_wrapper ${INSTALL_TARGETS_DEFAULT_ARGS} )
+  install(TARGETS kdeinit5_wrapper ${KF5_INSTALL_TARGETS_DEFAULT_ARGS} )
 endif ()
