@@ -1052,7 +1052,7 @@ KLauncher::requestSlave(const QString &protocol,
     arg_list << protocol;
     arg_list << mConnectionServer.address().toString();
     arg_list << app_socket;
-    QString name = QFile::decodeName(CMAKE_INSTALL_PREFIX "/" LIBEXEC_INSTALL_DIR "/kioslave");
+    QString name = QFile::decodeName(CMAKE_INSTALL_PREFIX "/" KF5_LIBEXEC_INSTALL_DIR "/kioslave");
 #else
     QString arg1 = protocol;
     QString arg2 = mConnectionServer.address().toString();
@@ -1079,7 +1079,7 @@ KLauncher::requestSlave(const QString &protocol,
     if (mSlaveValgrind == protocol) {
         arg_list.prepend(name);
 #ifndef USE_KPROCESS_FOR_KIOSLAVES // otherwise we've already done this
-        arg_list.prepend(QFile::decodeName(CMAKE_INSTALL_PREFIX "/" LIBEXEC_INSTALL_DIR "/kioslave"));
+        arg_list.prepend(QFile::decodeName(CMAKE_INSTALL_PREFIX "/" KF5_LIBEXEC_INSTALL_DIR "/kioslave"));
 #endif
         name = QString::fromLatin1("valgrind");
 

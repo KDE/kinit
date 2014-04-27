@@ -406,7 +406,7 @@ QByteArray execpath_avoid_loops(const QByteArray &exec, int envc, const char *en
         }
     } else {
         paths = QString::fromLocal8Bit(qgetenv("PATH")).split(pathSepRegExp, QString::KeepEmptyParts);
-        paths.prepend(QFile::decodeName(CMAKE_INSTALL_PREFIX "/" LIBEXEC_INSTALL_DIR));
+        paths.prepend(QFile::decodeName(CMAKE_INSTALL_PREFIX "/" KF5_LIBEXEC_INSTALL_DIR));
     }
     QString execpath = QStandardPaths::findExecutable(QFile::decodeName(exec), paths);
     if (avoid_loops && !execpath.isEmpty()) {
@@ -499,8 +499,8 @@ static pid_t launch(int argc, const char *_name, const char *args,
             // the install prefix, although this may not be the case if the user
             // has overridden them, and so this search is inherently fragile in
             // the face of unusual installation layouts.
-            if (lib.contains(QLatin1String(LIBEXEC_INSTALL_DIR))) {
-                libpath = QString(lib).replace(QLatin1String(LIBEXEC_INSTALL_DIR),
+            if (lib.contains(QLatin1String(KF5_LIBEXEC_INSTALL_DIR))) {
+                libpath = QString(lib).replace(QLatin1String(KF5_LIBEXEC_INSTALL_DIR),
                                                QLatin1String(LIB_INSTALL_DIR "/libkdeinit5_")) + QLatin1String(".so");
             } else if (lib.contains(QLatin1String("/bin/"))) {
                 libpath = QString(lib).replace(QLatin1String("/bin/"),
