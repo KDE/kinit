@@ -628,12 +628,12 @@ static pid_t launch(int argc, const char *_name, const char *args,
             /* set the process name, so that killall works like intended */
             r = prctl(PR_SET_NAME, (unsigned long) name.data(), 0, 0, 0);
             if (r == 0) {
-                proctitle_set("%s [kdeinit]%s", name.data(), procTitle.data() ? procTitle.data() : "");
+                proctitle_set("-%s [kdeinit5]%s", name.data(), procTitle.data() ? procTitle.data() : "");
             } else {
-                proctitle_set("kdeinit5: %s%s", name.data(), procTitle.data() ? procTitle.data() : "");
+                proctitle_set("%s%s", name.data(), procTitle.data() ? procTitle.data() : "");
             }
 #else
-            proctitle_set("kdeinit5: %s%s", name.data(), procTitle.data() ? procTitle.data() : "");
+            proctitle_set("%s%s", name.data(), procTitle.data() ? procTitle.data() : "");
 #endif
 #endif
         }
@@ -1624,7 +1624,7 @@ extern "C" {
 
 }
 
-int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv)
 {
 #ifndef _WIN32_WCE
     setlocale(LC_ALL, "");
@@ -1727,7 +1727,7 @@ int main(int argc, char **argv, char **envp)
 
     /** Prepare to change process name **/
 #ifndef SKIP_PROCTITLE
-    proctitle_init(argc, argv, envp);
+    proctitle_init(argc, argv);
 #endif
 
     // don't change envvars before proctitle_init()
@@ -1835,7 +1835,7 @@ int main(int argc, char **argv, char **envp)
     free(safe_argv);
 
 #ifndef SKIP_PROCTITLE
-    proctitle_set("kdeinit5 Running...");
+    proctitle_set("Running...");
 #endif
 
     if (!keep_running) {
