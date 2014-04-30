@@ -81,7 +81,7 @@ a substantial amount.</para>
 <para>kdeinit5 is linked against all libraries a standard &kde; application
 needs. With this technique, starting an application becomes much faster 
 because now only the application itself needs to be linked whereas otherwise
-both the application as well as all the libaries it uses need to be linked.
+both the application as well as all the libraries it uses need to be linked.
 </para>
 
 </refsect1>
