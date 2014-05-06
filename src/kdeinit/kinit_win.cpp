@@ -48,7 +48,9 @@
 
 #include <kinit_version.h>
 
+#ifdef Q_CC_MSVC
 typedef unsigned int pid_t;
+#endif 
 
 //#define ENABLE_SUICIDE
 //#define ENABLE_EXIT

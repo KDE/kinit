@@ -34,7 +34,7 @@
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
 #define USE_KPROCESS_FOR_KIOSLAVES
 #endif
-#ifdef Q_OS_WIN
+#ifdef Q_CC_MSVC
 typedef unsigned int pid_t;
 #endif
 
