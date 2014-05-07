@@ -57,6 +57,7 @@ ecm_configure_package_config_file(
 add_definitions(-DTRANSLATION_DOMAIN=\"kinit5\")
 if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
     ki18n_install(po)
+    kdoctools_install(po)
 endif()
 add_subdirectory(src)
 add_subdirectory(docs)
