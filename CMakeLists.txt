@@ -68,6 +68,5 @@ install( FILES
 
 install(FILES
         kde5init_dummy.cpp.in
-        kde5init_win32lib_dummy.cpp.in
 
         DESTINATION ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)

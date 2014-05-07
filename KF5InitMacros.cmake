@@ -18,10 +18,6 @@ function (KF5_ADD_KDEINIT_EXECUTABLE _target_NAME )
     _FIND_KDEINIT_FILE(_KDE5INIT_DUMMY_FILEPATH "")
     configure_file(${_KDE5INIT_DUMMY_FILEPATH} ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_dummy.cpp)
 
-    # under Windows, build a normal executable and additionally a dummy kdeinit5_foo.lib, whose only purpose on windows is to
-    # keep the linking logic from the CMakeLists.txt on UNIX working (under UNIX all necessary libs are linked against the kdeinit
-    # library instead against the executable, under windows we want to have everything in the executable, but for compatibility we have to
-    # keep the library there-
     if(WIN32)
         if (MINGW)
             list(FIND _SRCS ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_res.o _res_position)
@@ -33,22 +29,18 @@ function (KF5_ADD_KDEINIT_EXECUTABLE _target_NAME )
             list(REMOVE_AT _SRCS ${_res_position})
         endif(NOT _res_position EQUAL -1)
 
-        _FIND_KDEINIT_FILE(_KDE5INIT_WIN32_DUMMY_FILEPATH "_win32lib")
-        set(_KDEINIT5_TARGET_NAME_ ${_target_NAME})
-        configure_file(${_KDE5INIT_WIN32_DUMMY_FILEPATH} ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_win32lib_dummy.cpp)
-        add_library(kdeinit_${_target_NAME} STATIC ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_win32lib_dummy.cpp)
-
-        add_executable(${_target_NAME} ${_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_dummy.cpp ${_resourcefile})
+        # We don't need a shared library on Windows, use a static library that gets included in the executable.
+        # Since Windows doesn't use fork()+exec() there is no use for this library by kdeinit.
+        # Having the static library ensures that target_link_libraries(myexe kdeinit_foo) also works on Windows and not just on UNIX
+        add_library(kdeinit_${_target_NAME} STATIC ${_SRCS})
     else()
-
+        # Use a shared library on UNIX so that kdeinit can dlopen() it
         add_library(kdeinit_${_target_NAME} SHARED ${_SRCS})
-
-        if (APPLE)
-            set(_resourcefile ${MACOSX_BUNDLE_ICON_FILE})
-        endif()
-        add_executable(${_target_NAME} ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_dummy.cpp ${_resourcefile})
     endif()
-
+    if (APPLE)
+        set(_resourcefile ${MACOSX_BUNDLE_ICON_FILE})
+    endif()
+    add_executable(${_target_NAME} ${CMAKE_CURRENT_BINARY_DIR}/${_target_NAME}_dummy.cpp ${_resourcefile})
     target_link_libraries(${_target_NAME} kdeinit_${_target_NAME})
     set_target_properties(kdeinit_${_target_NAME} PROPERTIES OUTPUT_NAME kdeinit5_${_target_NAME})
 
