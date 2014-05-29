@@ -4,7 +4,11 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../KF5InitMacros.cmake)
 include(ECMMarkNonGuiExecutable)
 
 if (CMAKE_SYSTEM_NAME MATCHES Linux)
-    MESSAGE(STATUS "Using setuid root kdeinit wrapper in order to protect it from bad Linux OOM-killer")
+   if (Libcap_FOUND)
+    message(STATUS "Using capabilities kdeinit wrapper in order to protect it from bad Linux OOM-killer")
+      else()
+    message(STATUS "Using setuid root kdeinit wrapper in order to protect it from bad Linux OOM-killer")
+   endif()
     set(KDEINIT_OOM_PROTECT 1)
 endif ()
 
