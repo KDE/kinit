@@ -29,7 +29,7 @@
 #include <klocalizedstring.h>
 
 #include "klauncher_cmds.h"
-#include <QtCore/QCoreApplication>
+#include <QGuiApplication>
 #include <QtCore/QFile>
 #include <QDebug>
 #include <QDBusConnectionInterface>
@@ -152,8 +152,8 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     // WABA: Make sure not to enable session management.
     putenv(strdup("SESSION_MANAGER="));
 
-    // We need a QCoreApplication to get a DBus event loop
-    QCoreApplication app(argc, argv);
+    // We need a QGuiApplication as we use X11
+    QGuiApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("klauncher"));
 
     int maxTry = 3;
