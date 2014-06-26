@@ -70,6 +70,7 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
 endif()
 add_subdirectory(src)
 add_subdirectory(docs)
+add_subdirectory(tests)
 
 install( FILES
 	"${CMAKE_CURRENT_BINARY_DIR}/KF5InitConfig.cmake"
