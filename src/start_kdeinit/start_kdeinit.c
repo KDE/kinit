@@ -125,6 +125,7 @@ int main(int argc, char **argv)
         }
         cap_free(caps);
 #endif
+	setgroups(0, 0); // Remove any extraneous groups
         if (setgid(getgid())) {
             perror("setgid()");
             return 1;
