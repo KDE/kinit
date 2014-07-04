@@ -975,7 +975,16 @@ KLauncher::createArgs(KLaunchRequest *request, const KService::Ptr service,
     Q_FOREACH (const QString &arg, params) {
         request->arg_list.append(arg);
     }
-    request->cwd = service->path();
+
+    const QString& path = service->path();
+    if (!path.isEmpty()) {
+        request->cwd = path;
+    } else if (!urls.isEmpty()) {
+        const QUrl& url = urls.first();
+        if (url.isLocalFile()) {
+            request->cwd = url.adjusted(QUrl::RemoveFilename).toLocalFile();
+        }
+    }
 }
 
 ///// IO-Slave functions
