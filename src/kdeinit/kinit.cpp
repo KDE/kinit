@@ -406,7 +406,7 @@ QByteArray execpath_avoid_loops(const QByteArray &exec, int envc, const char *en
         }
     } else {
         paths = QString::fromLocal8Bit(qgetenv("PATH")).split(pathSepRegExp, QString::KeepEmptyParts);
-        paths.prepend(QFile::decodeName(CMAKE_INSTALL_PREFIX "/" KF5_LIBEXEC_INSTALL_DIR));
+        paths.prepend(QFile::decodeName(CMAKE_INSTALL_FULL_LIBEXECDIR_KF5));
     }
     QString execpath = QStandardPaths::findExecutable(QFile::decodeName(exec), paths);
     if (avoid_loops && !execpath.isEmpty()) {

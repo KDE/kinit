@@ -23,7 +23,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#define EXECUTE CMAKE_INSTALL_PREFIX"/"KF5_LIBEXEC_INSTALL_DIR "/start_kdeinit"
+#define EXECUTE CMAKE_INSTALL_FULL_LIBEXECDIR_KF5 "/start_kdeinit"
 
 #if KDEINIT_OOM_PROTECT
 

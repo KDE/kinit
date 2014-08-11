@@ -32,7 +32,7 @@
 #include <sys/capability.h>
 #endif
 
-#define EXECUTE CMAKE_INSTALL_PREFIX"/"BIN_INSTALL_DIR "/kdeinit5"
+#define EXECUTE CMAKE_INSTALL_FULL_BINDIR "/kdeinit5"
 
 #if KDEINIT_OOM_PROTECT
 
