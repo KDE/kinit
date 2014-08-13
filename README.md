@@ -83,9 +83,3 @@ started via kdeinit.
 
 [kde-dev-scripts]: https://projects.kde.org/projects/kde/kdesdk/kde-dev-scripts/
 
-## Links
-
-- Home page: <https://projects.kde.org/projects/frameworks/kinit>
-- Mailing list: <https://mail.kde.org/mailman/listinfo/kde-frameworks-devel>
-- IRC channel: #kde-devel on Freenode
-- Git repository: <https://projects.kde.org/projects/frameworks/kinit/repository>

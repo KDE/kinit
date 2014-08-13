@@ -9,3 +9,4 @@ platforms:
 portingAid: false
 deprecated: false
 release: true
+cmakename: KF5Init
