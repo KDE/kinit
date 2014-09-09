@@ -1,0 +1,117 @@
+# translation of kdelibs4.po to Kaszëbsczi
+#
+# Michôł Òstrowsczi <michol@linuxcsb.org>, 2006, 2007, 2008, 2009.
+# Mark Kwidzińsczi <mark@linuxcsb.org>, 2006, 2007, 2008, 2009.
+# Mark Kwidzińśczi <mark@linuxcsb.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2014-07-05 08:10+0000\n"
+"PO-Revision-Date: 2009-12-04 22:09+0100\n"
+"Last-Translator: Mark Kwidzińśczi <mark@linuxcsb.org>\n"
+"Language-Team: Kaszëbsczi <i18n-csb@linuxcsb.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2)\n"
+
+#: kdeinit/kinit.cpp:526
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Ni mòże zrëszëc nowégò procesu.\n"
+"Je mòżlëwé, że mómë maksymalną wielënã lopków òtemkłëch w sytemie abò "
+"maksymalną wielënã lopków òtemkłëch przez brëkòwnika,"
+
+#: kdeinit/kinit.cpp:551
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Ni mòże ùsôdzëc nowégò procesu.\n"
+"Je mòżlëwé, że mómë maksymalną wielënã procesów w sytemie abò maksymalną "
+"wielënã procesów brëkòwnika,"
+
+#: kdeinit/kinit.cpp:642
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Ni mòże nalezc wëkònëwólnegò lopka '%1'."
+
+#: kdeinit/kinit.cpp:670
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Ni mòże òtemknąc bibloteczi '%1'.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:712
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Ni mòże nalezc 'kdemain' w '%1'.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:484
+#, fuzzy, kde-format
+#| msgid "KDEInit could not launch '%1'."
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit ni mòże zrëszëc '%1'."
+
+#: klauncher/klauncher.cpp:677 klauncher/klauncher.cpp:691
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Ni mòże nalezc ùsłëżnotë '%1'."
+
+#: klauncher/klauncher.cpp:709
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr ""
+
+#: klauncher/klauncher.cpp:711 klauncher/klauncher.cpp:752
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Serwis '%1' je zepsëti."
+
+#: klauncher/klauncher.cpp:846
+#, kde-format
+msgid "Launching %1"
+msgstr "Zrëszanié %1"
+
+#: klauncher/klauncher.cpp:1048
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Nieznóny protokół '%1'.\n"
+
+#: klauncher/klauncher.cpp:1054
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Ni mòże nalezc ùsłëżnotë '%1'."
+
+#: klauncher/klauncher.cpp:1121
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "Fela ladowaniô '%1'.\n"
+
+#: klauncher/klauncher_main.cpp:142
+#, fuzzy
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: na programa nie je dlô samòstójnegò dzejaniô.\n"
+"klauncher: programa je brëkòwónô przez kdeinit4.\n"
