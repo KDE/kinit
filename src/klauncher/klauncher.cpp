@@ -446,6 +446,7 @@ KLauncher::slotAutoStart()
     KService::Ptr s;
     do {
         QString service = mAutoStart.startService();
+        qDebug() << "Service: " << mAutoStart.phase() << service;
         if (service.isEmpty()) {
             // Done
             if (!mAutoStart.phaseDone()) {
