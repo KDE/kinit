@@ -70,7 +70,7 @@
 #include <QLoggingCategory>
 Q_DECLARE_LOGGING_CATEGORY(KLAUNCHER)
 
-Q_LOGGING_CATEGORY(KLAUNCHER, "org.kde.klauncher")
+Q_LOGGING_CATEGORY(KLAUNCHER, "kf5.kinit.klauncher")
 
 static const char *const s_DBusStartupTypeToString[] =
 { "DBusNone", "DBusUnique", "DBusMulti", "ERROR" };
