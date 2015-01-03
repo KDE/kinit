@@ -1,0 +1,121 @@
+# Bengali (Bangla) translation of kdelibs4.
+# Copyright (C) 2009, Free Software Foundation, Inc.
+# translation of kdelibs4.po to Bengali
+# Copyright (C) 2003, 2004, 2005, 2006, 2008 Free Software Foundation, Inc.
+# Deepayan Sarkar,,, <deepayan.sarkar@gmail.com>, 2003.
+# Deepayan Sarkar <deepayan.sarkar@gmail.com>, 2003, 2004, 2005.
+# Deepayan Sarkar <deepayan.sarkar@gmail.com>, 2006, 2008, 2009..
+# Deepayan Sarkar <deepayan.sarkar@gmail.com>, 2009, 2010, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2014-12-29 07:47+0000\n"
+"PO-Revision-Date: 2012-07-16 14:27+0530\n"
+"Last-Translator: Deepayan Sarkar <deepayan.sarkar@gmail.com>\n"
+"Language-Team: American English <kde-translation@bengalinux.org>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.4\n"
+
+#: kdeinit/kinit.cpp:526
+#, fuzzy
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"নতুন পদ্ধতি শুরু করতে অক্ষম।\n"
+"সিস্টেম মুক্ত ফাইল সম্ভবের সর্বোচ্চ সংখ্যা পৌঁছতে পারে অথবা মুক্ত ফাইলের সর্বোচ্চ সংখ্যা "
+"যে আপনাকে ব্যবহার কর রাখ হ পৌঁছতে অনুমোদন করা হয়।"
+
+#: kdeinit/kinit.cpp:551
+#, fuzzy
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"নতুন পদ্ধতি তৈরি করতে অক্ষম।\n"
+"সিস্টেম প্রসেস সমূহ সম্ভবের সর্বোচ্চ সংখ্যা পৌঁছতে পারে অথবা প্রসেস সমূহের সর্বোচ্চ "
+"সংখ্যা যে আপনাকে ব্যবহার কর রাখ হ পৌঁছতে অনুমোদন করা হয়।"
+
+#: kdeinit/kinit.cpp:642
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "এক্সিকিউটেবল %1 পাওয়া যায়নি।"
+
+#: kdeinit/kinit.cpp:670
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"লাইব্রেরী '%1' খোলা যায়নি।\n"
+"%2"
+
+#: kdeinit/kinit.cpp:712
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"'%1'-এ 'kdemain' পাওয়া যায়নি।\n"
+"%2"
+
+#: klauncher/klauncher.cpp:490
+#, fuzzy, kde-format
+#| msgid "KDEInit could not launch '%1'."
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit '%1' চালু করতে পারেনি।"
+
+#: klauncher/klauncher.cpp:683 klauncher/klauncher.cpp:697
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "'%1' সার্ভিস পাওয়া যায়নি।"
+
+#: klauncher/klauncher.cpp:715
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr ""
+
+#: klauncher/klauncher.cpp:717 klauncher/klauncher.cpp:758
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "সার্ভিস '%1' সমস্যাপূর্ণ।"
+
+#: klauncher/klauncher.cpp:852
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 চালু করা হচ্ছে"
+
+#: klauncher/klauncher.cpp:1054
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "অজ্ঞাত প্রোটোকল '%1'।\n"
+
+#: klauncher/klauncher.cpp:1060
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "'%1' সার্ভিস পাওয়া যায়নি।"
+
+#: klauncher/klauncher.cpp:1126
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "'%1' লোড করতে সমস্যা।\n"
+
+#: klauncher/klauncher_main.cpp:142
+#, fuzzy
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit4.\n"
