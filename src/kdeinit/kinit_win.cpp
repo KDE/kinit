@@ -31,7 +31,7 @@
 
 #include <windows.h>
 #ifndef _WIN32_WCE
-#include <Sddl.h>
+#include <sddl.h>
 #endif
 #include <tlhelp32.h>
 #include <psapi.h>
