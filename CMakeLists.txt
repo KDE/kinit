@@ -56,7 +56,7 @@ set_package_properties(Libcap PROPERTIES
 endif ()
 set(HAVE_CAPABILITIES ${Libcap_FOUND})
 
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Init")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Init")
 ecm_configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KF5InitConfig.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/KF5InitConfig.cmake"

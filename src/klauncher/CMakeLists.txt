@@ -26,4 +26,4 @@ target_link_libraries(kdeinit_klauncher ${X11_LIBRARIES}
 
 install(TARGETS kdeinit_klauncher ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 install(TARGETS klauncher DESTINATION ${CMAKE_INSTALL_FULL_LIBEXECDIR_KF5} )
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.KLauncher.xml DESTINATION ${DBUS_INTERFACES_INSTALL_DIR} RENAME kf5_org.kde.KLauncher.xml)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.KLauncher.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR} RENAME kf5_org.kde.KLauncher.xml)
