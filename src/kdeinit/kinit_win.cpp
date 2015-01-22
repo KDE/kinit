@@ -48,7 +48,7 @@
 
 #include <kinit_version.h>
 
-#if defined (Q_CC_MSVC) or defined(Q_CC_MINGW)
+#if defined (Q_CC_MSVC)
 typedef unsigned int pid_t;
 #endif 
 
