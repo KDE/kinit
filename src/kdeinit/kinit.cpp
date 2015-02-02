@@ -85,6 +85,13 @@
 #include <qstandardpaths.h>
 
 #ifdef Q_OS_UNIX
+#ifdef Q_OS_MAC
+static const char *extra_libs[] = {
+    "libKF5KIOCore.5.dylib",
+    "libKF5Parts.5.dylib",
+    "libKF5Plasma.5.dylib"
+};
+#else
 //TODO: make sure what libraries we want here...
 static const char *extra_libs[] = {
     "libKF5KIOCore.so.5",
@@ -93,6 +100,7 @@ static const char *extra_libs[] = {
     "libKF5Plasma.so.5"
 //#endif
 };
+#endif
 #endif
 
 // #define SKIP_PROCTITLE 1
