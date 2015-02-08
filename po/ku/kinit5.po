@@ -1,0 +1,124 @@
+# translation of kdelibs4.po to Kurdish
+# Kurdish translation for kdelibs
+# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# This file is distributed under the same license as the kdelibs package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
+# Erdal Ronahi <erdal.ronahi@nospam.gmail.com>, 2006, 2008.
+# Erdal Ronahi <erdal.ronahi@nospam.gmail.com>, 2007, 2008, 2009.
+# Amed Çeko Jiyan <amedcj@gmail.com>, 2008.
+# Erdal Ronahî <erdal.ronahi@nospam.gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-02-04 07:44+0000\n"
+"PO-Revision-Date: 2010-08-13 15:45+0200\n"
+"Last-Translator: Erdal Ronahî <erdal.ronahi@nospam.gmail.com>\n"
+"Language-Team: Kurdish Team http://pckurd.net\n"
+"Language: ku\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.6.1\n"
+"X-Launchpad-Export-Date: 2007-11-26 09:44+0000\n"
+"X-Poedit-Language: Kurdish\n"
+"X-Poedit-Country: Kurdistan\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: kdeinit/kinit.cpp:534
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Pêvajoyeke nû nayê afirandin.\n"
+"Pergal gihîştiye sînorê herî dawî yê vekirina pelan ê ku te an jî pergalê "
+"diyar kiriye."
+
+#: kdeinit/kinit.cpp:559
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Pêvajoyeke nû nayê afirandin.\n"
+"Pergal gihîştiye sînorê herî dawî yê pêvajoyan ê ku te an jî pergalê diyar "
+"kiriye."
+
+#: kdeinit/kinit.cpp:650
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Bernameya '%1' nehate dîtin."
+
+#: kdeinit/kinit.cpp:678
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Pirtûkxaneya '%1' venebû.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:720
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Di hundirê '%1' de \"kdemain\" nehate dîtin.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:490
+#, fuzzy, kde-format
+#| msgid "KDEInit could not launch '%1'."
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInitê bernameya '%1' neda destpêkirin."
+
+#: klauncher/klauncher.cpp:683 klauncher/klauncher.cpp:697
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Xizmeta '%1' nehate dîtin."
+
+#: klauncher/klauncher.cpp:715
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Ji bo meşînê, divê servîsa '%1' bikare were xebitandin."
+
+#: klauncher/klauncher.cpp:717 klauncher/klauncher.cpp:758
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Servîsa '%1' şaş hatiye teşekirin."
+
+#: klauncher/klauncher.cpp:852
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 Tê Destpêkirin"
+
+#: klauncher/klauncher.cpp:1054
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Protokola ku nenas ya '%1'.\n"
+
+#: klauncher/klauncher.cpp:1060
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Xizmeta '%1' nehate dîtin."
+
+#: klauncher/klauncher.cpp:1126
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "Dema '%1' dihate barkirin çewtî çêbû.\n"
+
+#: klauncher/klauncher_main.cpp:142
+#, fuzzy
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Divê ev bername bi destan neyê destpêkirin.\n"
+"klauncher: Ev bername ji aliyê kdeinit4 bixweber tê destpêkirin.\n"

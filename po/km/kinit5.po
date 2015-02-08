@@ -1,0 +1,113 @@
+# translation of kdelibs4.po to Khmer
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2008, 2009, 2010, 2011, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-02-04 07:44+0000\n"
+"PO-Revision-Date: 2012-06-27 10:04+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Language: km-KH\n"
+
+#: kdeinit/kinit.cpp:534
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"មិន​អាច​ចាប់ផ្តើម​ដំណើរការ​ថ្មី​បានឡើយ ។\n"
+"ប្រព័ន្ធ​ប្រហែល​ជា​ឈាន​ដល់ចំនួន​អតិបរមា​នៃ​ឯកសារដែល​អាច​​​បើកបាន ឬ​វាបាន​ឈាន​​ដល់​ចំនួន​អតិបរមា​នៃ​ឯកសារ​បើក​"
+"ដែល​អ្នក​ត្រូវ​បាន​អនុញ្ញាត​ឲ្យ​ប្រើ​ដល់ ។"
+
+#: kdeinit/kinit.cpp:559
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"មិន​​អាច​បង្កើត​​ដំណើរការ​ថ្មី​បានទេ ។\n"
+"ប្រព័ន្ធ​ប្រហែល​ជា​ឈាន​ដល់ចំនួន​អតិបរមា​នៃ​ដំណើរការ​ដែល​អាច​​​បើកបាន ឬ​វាបាន​ឈាន​​ដល់​ចំនួន​អតិបរមា​នៃ​ដំណើរការ​"
+"ដែល​អាច ដែល​​អ្នក​បាន​កំណត់ ។"
+
+#: kdeinit/kinit.cpp:650
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "រក​មិន​ឃើញ '%1' ដែល​អាច​ប្រតិបត្តិបានទេ ។"
+
+#: kdeinit/kinit.cpp:678
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"មិន​អាច​បើក​បណ្ណាល័យ '%1' បាន​ឡើយ ។\n"
+"%2"
+
+#: kdeinit/kinit.cpp:720
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"មិន​អាច​រក​ឃើញ​ 'kdemain' ក្នុង '%1' បានឡើយ ។\n"
+"%2"
+
+#: klauncher/klauncher.cpp:490
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit មិន​អាចចាប់ផ្ដើម '%1' បាន​ឡើយ ។"
+
+#: klauncher/klauncher.cpp:683 klauncher/klauncher.cpp:697
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "មិនអាច​រក​ឃើញ​សេវា '%1' ទេ ។"
+
+#: klauncher/klauncher.cpp:715
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "សេវា '%1' ត្រូវ​តែ​អាច​ប្រតិបត្តិបាន​ដើម្បី​រត់ ។"
+
+#: klauncher/klauncher.cpp:717 klauncher/klauncher.cpp:758
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "សេវា '%1'ត្រូវ​បាន​ធ្វើ​ទ្រង់ទ្រាយ​មិន​ត្រឹមត្រូវ ។"
+
+#: klauncher/klauncher.cpp:852
+#, kde-format
+msgid "Launching %1"
+msgstr "បើក %1"
+
+#: klauncher/klauncher.cpp:1054
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "មិន​ស្គាល់​ពិធីការ '%1' ។\n"
+
+#: klauncher/klauncher.cpp:1060
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "មិនអាច​រក​ឃើញ​សេវា '%1' ទេ ។"
+
+#: klauncher/klauncher.cpp:1126
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "កំហុស​ក្នុង​ការ​ផ្ទុក '%1' ។\n"
+
+#: klauncher/klauncher_main.cpp:142
+#, fuzzy
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher ៖ កម្មវិធី​នេះ​មិន​ត្រូវ​បាន​សន្មត​ឲ្យចាប់​ផ្តើម​ដោយ​ដៃ​ទេ ។\n"
+"klauncher ៖ វា​ត្រូវបាន​ចាប់ផ្តើម​ស្វ័យ​ប្រវត្តិ​ដោយ kdeinit4 ។\n"
