@@ -80,5 +80,6 @@ install( FILES
 
 install(FILES
         kde5init_dummy.cpp.in
-
         DESTINATION ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
