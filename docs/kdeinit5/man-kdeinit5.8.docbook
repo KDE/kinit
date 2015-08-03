@@ -3,10 +3,10 @@
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
 ]>
 
-<refentry>
+<refentry lang="&language;">
 
 <refentryinfo>
-<title>&kde; User's Manual</title>
+<title>kdeinit5 User's Manual</title>
 <author>
 <firstname>Waldo</firstname>
 <surname>Bastian</surname>
@@ -31,9 +31,9 @@
 </affiliation>
 </author>
 
-<date>2008-10-03</date>
-<releaseinfo>0.01.01</releaseinfo>
-
+<date>2013-12-18</date>
+<releaseinfo>Frameworks 5.0</releaseinfo>
+<productname>KDE Frameworks</productname>
 </refentryinfo>
 
 <refmeta>
@@ -43,7 +43,7 @@
 
 <refnamediv>
 <refname><command>kdeinit5</command></refname>
-<refpurpose>&kde; process launcher.</refpurpose>
+<refpurpose>Launcher for applications built with kdeinit support, and for KIO slaves.</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -233,12 +233,12 @@ command at the prompt
 
 <refsect1>
 <title>See Also</title>
-<para>kded, kdekillall</para>
+<para>kded5, kdekillall</para>
 </refsect1>
 
 <refsect1>
 <title>Bugs</title>
-<para>There are probably tons of bugs. Use <ulink url="http://bugs.kde.org">bugs.kde.org</ulink> to report them.</para>
+<para>Please use <ulink url="http://bugs.kde.org">KDE's bugtracker</ulink> to report bugs.</para>
 </refsect1>
 
 </refentry>
