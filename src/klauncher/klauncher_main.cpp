@@ -152,9 +152,20 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     // WABA: Make sure not to enable session management.
     putenv(strdup("SESSION_MANAGER="));
 
+    // Disable the GLib event loop (rh#983110)
+    const bool wasQtNoGlibSet = !qEnvironmentVariableIsEmpty("QT_NO_GLIB");
+    if (!wasQtNoGlibSet) {
+       qputenv("QT_NO_GLIB", "1");
+    }
+
     // We need a QGuiApplication as we use X11
     QGuiApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("klauncher"));
+
+    // Now get rid of QT_NO_GLIB again so launched processes don't inherit it
+    if (!wasQtNoGlibSet) {
+       qunsetenv("QT_NO_GLIB");
+    }
 
     int maxTry = 3;
     while (true) {
