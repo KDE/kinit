@@ -49,7 +49,7 @@ find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
 find_package(KF5WindowSystem ${KF5_DEP_VERSION} REQUIRED)
 find_package(KF5Crash ${KF5_DEP_VERSION} REQUIRED)
 find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
-find_package(KF5DocTools ${KF5_DEP_VERSION} REQUIRED)
+find_package(KF5DocTools ${KF5_DEP_VERSION})
 
 if (NOT WIN32)
 find_package(Libcap)
@@ -71,10 +71,17 @@ ecm_configure_package_config_file(
 add_definitions(-DTRANSLATION_DOMAIN=\"kinit5\")
 if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
     ki18n_install(po)
-    kdoctools_install(po)
+
+    if (KF5DocTools_FOUND)
+        kdoctools_install(po)
+    endif()
 endif()
 add_subdirectory(src)
-add_subdirectory(docs)
+
+if (KF5DocTools_FOUND)
+    add_subdirectory(docs)
+endif()
+
 add_subdirectory(tests)
 
 install( FILES
