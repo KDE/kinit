@@ -121,7 +121,7 @@ static Display *X11_startup_notify_display = 0;
 #define MAX_SOCK_FILE 255
 static char sock_file[MAX_SOCK_FILE];
 
-static QByteArray displayEnvVarName()
+static const char* displayEnvVarName_c()
 {
     // Can't use QGuiApplication::platformName() here, there is no app instance.
 #if HAVE_X11
@@ -131,6 +131,10 @@ static QByteArray displayEnvVarName()
 #elif defined(Q_OS_WIN)
     return "WIN_DISPLAY";
 #endif
+}
+static inline QByteArray displayEnvVarName()
+{
+    return QByteArray::fromRawData(displayEnvVarName_c(), strlen(displayEnvVarName_c()));
 }
 
 /* Group data */
@@ -922,7 +926,7 @@ static void init_kdeinit_socket()
             exit(255);
         }
         server.sun_family = AF_UNIX;
-        strcpy(server.sun_path, sock_file);
+        qstrncpy(server.sun_path, sock_file, sizeof(server.sun_path));
         socklen = sizeof(server);
 
         if (connect(s, (struct sockaddr *)&server, socklen) == 0) {
@@ -1073,7 +1077,8 @@ static bool handle_launcher_request(int sock, const char *who)
     }
 
     if (request_header.arg_length != 0) {
-        request_data = (char *) malloc(request_header.arg_length);
+        request_data = (char *) malloc(request_header.arg_length + 1);
+        request_data[request_header.arg_length] = '\0';
 
         result = read_socket(sock, request_data, request_header.arg_length);
         if (result != 0) {
@@ -1165,14 +1170,14 @@ static bool handle_launcher_request(int sock, const char *who)
         }
 
         // support for the old a bit broken way of setting DISPLAY for multihead
-        QByteArray olddisplay = qgetenv(displayEnvVarName().constData());
+        QByteArray olddisplay = qgetenv(displayEnvVarName_c());
         QByteArray kdedisplay = qgetenv("KDE_DISPLAY");
         bool reset_display = (! olddisplay.isEmpty() &&
                               ! kdedisplay.isEmpty() &&
                               olddisplay != kdedisplay);
 
         if (reset_display) {
-            qputenv(displayEnvVarName().constData(), kdedisplay);
+            qputenv(displayEnvVarName_c(), kdedisplay);
         }
 
         pid = launch(argc, name, args, cwd, envc, envs,
@@ -1181,7 +1186,7 @@ static bool handle_launcher_request(int sock, const char *who)
 
         if (reset_display) {
             unsetenv("KDE_DISPLAY");
-            qputenv(displayEnvVarName().constData(), olddisplay);
+            qputenv(displayEnvVarName_c(), olddisplay);
         }
 
         if (pid && (d.result == 0)) {
@@ -1391,10 +1396,10 @@ static void handle_requests(pid_t waitForPid)
 static void generate_socket_name()
 {
 
-    QByteArray display = qgetenv(displayEnvVarName().constData());
+    QByteArray display = qgetenv(displayEnvVarName_c());
     if (display.isEmpty()) {
-#if HAVE_X11 // qt5: see displayEnvVarName()
-        fprintf(stderr, "kdeinit5: Aborting. $%s is not set. \n", displayEnvVarName().constData());
+#if HAVE_X11 // qt5: see displayEnvVarName_c()
+        fprintf(stderr, "kdeinit5: Aborting. $%s is not set. \n", displayEnvVarName_c());
         exit(255);
 #endif
     }
@@ -1409,7 +1414,7 @@ static void generate_socket_name()
 #endif
     // WARNING, if you change the socket name, adjust kwrapper too
     const QString socketFileName = QString::fromLatin1("kdeinit5_%1").arg(QLatin1String(display));
-    QByteArray socketName = QFile::encodeName(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation) + QLatin1Char('/') + socketFileName);
+    const QByteArray socketName = QFile::encodeName(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation) + QLatin1Char('/') + socketFileName);
     if (socketName.length() >= MAX_SOCK_FILE) {
         fprintf(stderr, "kdeinit5: Aborting. Socket name will be too long:\n");
         fprintf(stderr, "         '%s'\n", socketName.data());
@@ -1513,7 +1518,7 @@ static void setupX()
         tmp cleanup).
     */
     if (!qgetenv("XAUTHORITY").isEmpty()) {
-        QByteArray display = qgetenv(displayEnvVarName().constData());
+        QByteArray display = qgetenv(displayEnvVarName_c());
         int i;
         if ((i = display.lastIndexOf('.')) > display.lastIndexOf(':') && i >= 0) {
             display.truncate(i);
@@ -1523,7 +1528,7 @@ static void setupX()
         display.replace('/', '_');
 #endif
         QString xauth = QDir::tempPath() + QLatin1String("/xauth-")
-                        + QString::number(getuid()) + QLatin1String("-") + QString::fromLocal8Bit(display);
+                        + QString::number(getuid()) + QLatin1Char('-') + QString::fromLocal8Bit(display);
         QSaveFile xauthfile(xauth);
         QFile xauthfrom(QFile::decodeName(qgetenv("XAUTHORITY")));
         if (!xauthfrom.open(QFile::ReadOnly) || !xauthfile.open(QFile::WriteOnly)
