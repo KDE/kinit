@@ -27,7 +27,6 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <grp.h>
 #if HAVE_CAPABILITIES
 #include <sys/capability.h>
 #endif
@@ -126,7 +125,6 @@ int main(int argc, char **argv)
         }
         cap_free(caps);
 #endif
-	setgroups(0, 0); /* Remove any extraneous groups*/
         if (setgid(getgid())) {
             perror("setgid()");
             return 1;
