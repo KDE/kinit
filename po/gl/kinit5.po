@@ -1,0 +1,119 @@
+# translation of kdelibs4.po to galician
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# mvillarino <mvillarino@users.sourceforge.net>, 2007, 2008, 2009.
+# Marce Villarino <mvillarino@kde-espana.es>, 2008, 2009.
+# marce villarino <mvillarino@users.sourceforge.net>, 2009.
+# marce villarino <mvillarino@gmail.com>, 2009.
+# Marce Villarino <mvillarino@kde-espana.es>, 2009, 2010, 2011, 2012.
+# Xosé <xosecalvo@gmail.com>, 2010.
+# Marce Villarino <mvillarino@kde-espana.es>, 2011, 2012, 2013, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-11-07 16:08+0000\n"
+"PO-Revision-Date: 2014-05-12 23:26+0200\n"
+"Last-Translator: Marce Villarino <mvillarino@kde-espana.org>\n"
+"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.5\n"
+"X-Environment: kde, development\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: kdeinit/kinit.cpp:538
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Non foi posíbel iniciar o novo proceso.\n"
+"Poida que o sistema acadase o máximo de ficheiros abertos ou que o se "
+"acadase o número máximo de ficheiros abertos que se lle permite a vostede."
+
+#: kdeinit/kinit.cpp:563
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Non foi posíbel crear o novo proceso.\n"
+"Poida que o sistema acadase o máximo de procesos posíbeis ou que se acadase "
+"o máximo de procesos que se lle permite usar a vostede."
+
+#: kdeinit/kinit.cpp:654
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Non foi posíbel atopar o executábel «%1»."
+
+#: kdeinit/kinit.cpp:682
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Non foi posíbel abrir a biblioteca «%1».\n"
+"%2"
+
+#: kdeinit/kinit.cpp:724
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Non foi posíbel atopar «kdemain» en «%1».\n"
+"%2"
+
+#: klauncher/klauncher.cpp:495
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit non puido iniciar «%1»"
+
+#: klauncher/klauncher.cpp:688 klauncher/klauncher.cpp:702
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Non foi posíbel atopar o servizo «%1»."
+
+#: klauncher/klauncher.cpp:720
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "O servizo «%1» debe ser executábel."
+
+#: klauncher/klauncher.cpp:722 klauncher/klauncher.cpp:763
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "O servizo «%1» está mal formatado."
+
+#: klauncher/klauncher.cpp:857
+#, kde-format
+msgid "Launching %1"
+msgstr "Estase a iniciar %1"
+
+#: klauncher/klauncher.cpp:1059
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Non se coñece o protocolo «%1».\n"
+
+#: klauncher/klauncher.cpp:1065
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Non foi posíbel atopar o complemento «%1».\n"
+
+#: klauncher/klauncher.cpp:1131
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "Produciuse un erro ao cargar «%1».\n"
+
+#: klauncher/klauncher_main.cpp:142
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Este programa non está pensado para ser iniciado manualmente.\n"
+"klauncher: Iníciase automaticamente por kdeinit5.\n"
