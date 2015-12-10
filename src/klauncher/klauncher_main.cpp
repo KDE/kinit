@@ -150,7 +150,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 #endif
 
     // WABA: Make sure not to enable session management.
-    putenv(strdup("SESSION_MANAGER="));
+    qunsetenv("SESSION_MANAGER");
 
     // Disable the GLib event loop (rh#983110)
     const bool wasQtNoGlibSet = !qEnvironmentVariableIsEmpty("QT_NO_GLIB");
