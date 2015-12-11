@@ -13,6 +13,7 @@
 #cmakedefine01 CAN_CLOBBER_ARGV
 
 #cmakedefine01 HAVE_X11
+#cmakedefine01 HAVE_XCB
 #cmakedefine01 HAVE_CAPABILITIES
 #cmakedefine01 HAVE_SYS_SELECT_H
 

@@ -80,8 +80,15 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <fixx11h.h>
-#include <kstartupinfo.h>
 #endif
+
+#if HAVE_XCB
+#include <NETWM>
+#include <xcb/xcb.h>
+#endif
+
+#include <kstartupinfo.h>
+
 #include <qstandardpaths.h>
 
 #ifdef Q_OS_UNIX
@@ -116,7 +123,10 @@ extern char **environ;
 static int X11fd = -1;
 static Display *X11display = 0;
 static int X11_startup_notify_fd = -1;
-static Display *X11_startup_notify_display = 0;
+#endif
+#if HAVE_XCB
+static xcb_connection_t *s_startup_notify_connection = Q_NULLPTR;
+static int s_startup_notify_screen = 0;
 #endif
 // Finds size of sun_path without allocating a sockaddr_un to do it.
 // Assumes sun_path is at end of sockaddr_un though
@@ -325,30 +335,6 @@ static void setup_tty(const char *tty)
     close(fd);
 }
 
-#if HAVE_X11 // Only X11 supports multiple desktops
-// from kdecore/netwm.cpp
-static int get_current_desktop(Display *disp)
-{
-    int desktop = 0; // no desktop by default
-    Atom net_current_desktop = XInternAtom(disp, "_NET_CURRENT_DESKTOP", False);
-    Atom type_ret;
-    int format_ret;
-    unsigned char *data_ret;
-    unsigned long nitems_ret, unused;
-    if (XGetWindowProperty(disp, DefaultRootWindow(disp), net_current_desktop,
-                           0l, 1l, False, XA_CARDINAL, &type_ret, &format_ret, &nitems_ret, &unused, &data_ret)
-            == Success) {
-        if (type_ret == XA_CARDINAL && format_ret == 32 && nitems_ret == 1) {
-            desktop = *((long *) data_ret) + 1;
-        }
-        if (data_ret) {
-            XFree((char *) data_ret);
-        }
-    }
-    return desktop;
-}
-#endif
-
 // var has to be e.g. "DISPLAY=", i.e. with =
 const char *get_env_var(const char *var, int envc, const char *envs)
 {
@@ -369,7 +355,7 @@ const char *get_env_var(const char *var, int envc, const char *envs)
     return NULL;
 }
 
-#if HAVE_X11
+#if HAVE_XCB
 static void init_startup_info(KStartupInfoId &id, const QByteArray &bin,
                               int envc, const char *envs)
 {
@@ -377,34 +363,40 @@ static void init_startup_info(KStartupInfoId &id, const QByteArray &bin,
     const char *dpy = get_env_var(envname.constData(), envc, envs);
     // this may be called in a child, so it can't use display open using X11display
     // also needed for multihead
-    X11_startup_notify_display = XOpenDisplay(dpy);
-    if (X11_startup_notify_display == NULL) {
+    s_startup_notify_connection = xcb_connect(dpy, &s_startup_notify_screen);
+    if (!s_startup_notify_connection) {
         return;
     }
-    X11_startup_notify_fd = XConnectionNumber(X11_startup_notify_display);
+    if (xcb_connection_has_error(s_startup_notify_connection)) {
+        xcb_disconnect(s_startup_notify_connection);
+        s_startup_notify_connection = Q_NULLPTR;
+        return;
+    }
+    X11_startup_notify_fd = xcb_get_file_descriptor(s_startup_notify_connection);
+    NETRootInfo rootInfo(s_startup_notify_connection, NET::CurrentDesktop);
     KStartupInfoData data;
-    int desktop = get_current_desktop(X11_startup_notify_display);
-    data.setDesktop(desktop);
+    data.setDesktop(rootInfo.currentDesktop());
     data.setBin(QFile::decodeName(bin));
-    KStartupInfo::sendChangeX(X11_startup_notify_display, id, data);
-    XFlush(X11_startup_notify_display);
+    KStartupInfo::sendChangeXcb(s_startup_notify_connection, s_startup_notify_screen, id, data);
+    xcb_flush(s_startup_notify_connection);
 }
 
 static void complete_startup_info(KStartupInfoId &id, pid_t pid)
 {
-    if (X11_startup_notify_display == NULL) {
+    if (!s_startup_notify_connection) {
         return;
     }
     if (pid == 0) { // failure
-        KStartupInfo::sendFinishX(X11_startup_notify_display, id);
+        KStartupInfo::sendFinishXcb(s_startup_notify_connection, s_startup_notify_screen, id);
     } else {
         KStartupInfoData data;
         data.addPid(pid);
         data.setHostname();
-        KStartupInfo::sendChangeX(X11_startup_notify_display, id, data);
+        KStartupInfo::sendChangeXcb(s_startup_notify_connection, s_startup_notify_screen, id, data);
     }
-    XCloseDisplay(X11_startup_notify_display);
-    X11_startup_notify_display = NULL;
+    xcb_disconnect(s_startup_notify_connection);
+    s_startup_notify_connection = Q_NULLPTR;
+    s_startup_notify_screen = 0;
     X11_startup_notify_fd = -1;
 }
 #endif
@@ -543,7 +535,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
         return d.fork;
     }
 
-#if HAVE_X11
+#if HAVE_XCB
     KStartupInfoId startup_id;
     startup_id.initId(startup_id_str);
     if (!startup_id.none()) {
@@ -802,7 +794,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
         }
         close(d.fd[0]);
     }
-#if HAVE_X11
+#if HAVE_XCB
     if (!startup_id.none()) {
         if (d.fork && d.result == 0) { // launched successfully
             complete_startup_info(startup_id, d.fork);

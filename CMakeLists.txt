@@ -36,6 +36,10 @@ if (NOT APPLE)
 endif()
 set(HAVE_X11 ${X11_FOUND})
 
+find_package(XCB MODULE COMPONENTS XCB)
+set_package_properties(XCB PROPERTIES TYPE OPTIONAL)
+set(HAVE_XCB ${XCB_XCB_FOUND})
+
 # used by 4 executables in this module
 if(HAVE_SOCKET_LIBRARY)
   set(KINIT_SOCKET_LIBRARY socket)

@@ -39,6 +39,10 @@ if (X11_FOUND)
   target_link_libraries(kdeinit5 ${X11_X11_LIB})
 endif()
 
+if (HAVE_XCB)
+  target_link_libraries(kdeinit5 XCB::XCB)
+endif()
+
 install(TARGETS kdeinit5 ${KF5_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 if (NOT WIN32)
