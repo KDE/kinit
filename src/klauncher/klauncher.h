@@ -26,11 +26,6 @@
 
 #include <config-kdeinit.h> // HAVE_X11
 
-#if HAVE_X11
-#include <X11/Xlib.h>
-#include <fixx11h.h>
-#endif
-
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
 #define USE_KPROCESS_FOR_KIOSLAVES
 #endif
@@ -57,6 +52,8 @@ typedef unsigned int pid_t;
 using KIO::IdleSlave;
 
 class KSlaveLauncherAdaptor;
+
+struct xcb_connection_t;
 
 class SlaveWaitRequest
 {
@@ -252,8 +249,14 @@ protected:
     KSlaveLauncherAdaptor *mSlaveLauncherAdaptor;
     bool dontBlockReading;
 #if HAVE_X11
-    Display *mCached_dpy;
     bool mIsX11;
+#endif
+#if HAVE_XCB
+    struct {
+        xcb_connection_t *conn;
+        int screen;
+        QByteArray displayName;
+    } mCached;
 #endif
     void processRequestReturn(int status, const QByteArray &requestData);
 

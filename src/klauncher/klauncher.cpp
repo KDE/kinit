@@ -36,6 +36,10 @@
 #include <QGuiApplication>
 #endif
 
+#if HAVE_XCB
+#include <xcb/xcb.h>
+#endif
+
 #include <QDBusConnectionInterface>
 #include <QDBusMessage>
 #include <QFile>
@@ -110,8 +114,11 @@ KLauncher::KLauncher()
 #endif
 {
 #if HAVE_X11
-    mCached_dpy = NULL;
     mIsX11 = QGuiApplication::platformName() == QStringLiteral("xcb");
+#endif
+#if HAVE_XCB
+    mCached.conn = Q_NULLPTR;
+    mCached.screen = 0;
 #endif
     Q_ASSERT(g_klauncher_self == NULL);
     g_klauncher_self = this;
@@ -180,10 +187,12 @@ KLauncher::~KLauncher()
 
 void KLauncher::close()
 {
-#if HAVE_X11
-    if (mCached_dpy != NULL) {
-        XCloseDisplay(mCached_dpy);
-        mCached_dpy = NULL;
+#if HAVE_XCB
+    if (mCached.conn) {
+        xcb_disconnect(mCached.conn);
+        mCached.conn = Q_NULLPTR;
+        mCached.displayName = QByteArray();
+        mCached.screen = 0;
     }
 #endif
 }
@@ -498,24 +507,33 @@ KLauncher::requestDone(KLaunchRequest *request)
         }
         requestResult.pid = 0;
 
-#if HAVE_X11
+#if HAVE_XCB
         if (!request->startup_dpy.isEmpty() && mIsX11) {
-            Display *dpy = NULL;
-            if ((mCached_dpy != NULL) &&
-                    (request->startup_dpy == XDisplayString(mCached_dpy))) {
-                dpy = mCached_dpy;
+            xcb_connection_t *conn = Q_NULLPTR;
+            int screen = 0;
+            QByteArray displayName;
+            if (mCached.conn != Q_NULLPTR && request->startup_dpy != mCached.displayName) {
+                conn = mCached.conn;
+                screen = mCached.screen;
+                displayName = mCached.displayName;
             }
-            if (dpy == NULL) {
-                dpy = XOpenDisplay(request->startup_dpy.constData());
+            if (!conn) {
+                conn = xcb_connect(request->startup_dpy.constData(), &screen);
             }
-            if (dpy) {
-                KStartupInfoId id;
-                id.initId(request->startup_id);
-                KStartupInfo::sendFinishX(dpy, id);
-                if (mCached_dpy != dpy && mCached_dpy != NULL) {
-                    XCloseDisplay(mCached_dpy);
+            if (conn) {
+                if (!xcb_connection_has_error(conn)) {
+                    KStartupInfoId id;
+                    id.initId(request->startup_id);
+                    KStartupInfo::sendFinishXcb(conn, screen, id);
+                    if (mCached.conn != conn && mCached.conn != NULL) {
+                        xcb_disconnect(mCached.conn);
+                    }
+                    mCached.conn = conn;
+                    mCached.screen = screen;
+                    mCached.displayName = displayName;
+                } else {
+                    xcb_disconnect(conn);
                 }
-                mCached_dpy = dpy;
             }
         }
 #endif
@@ -815,7 +833,7 @@ void
 KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr service, const QByteArray &startup_id,
                                      const QStringList &envs)
 {
-#if HAVE_X11
+#if HAVE_XCB
     if (!mIsX11) {
         return;
     }
@@ -836,16 +854,23 @@ KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr serv
             dpy_str = env.mid(8).toLocal8Bit();
         }
     }
-    Display *dpy = NULL;
-    if (!dpy_str.isEmpty() && mCached_dpy != NULL && dpy_str != XDisplayString(mCached_dpy)) {
-        dpy = mCached_dpy;
+    xcb_connection_t *conn = Q_NULLPTR;
+    int screen = 0;
+    QByteArray displayName;
+    if (!dpy_str.isEmpty() && mCached.conn != Q_NULLPTR && dpy_str != mCached.displayName) {
+        conn = mCached.conn;
+        screen = mCached.screen;
+        displayName = mCached.displayName;
     }
-    if (dpy == NULL) {
-        dpy = XOpenDisplay(dpy_str.constData());
+    if (!conn) {
+        conn = xcb_connect(dpy_str.constData(), &screen);
     }
     request->startup_id = id.id();
-    if (dpy == NULL) {
+    if (conn == Q_NULLPTR || xcb_connection_has_error(conn)) {
         cancel_service_startup_info(request, startup_id, envs);
+        if (conn) {
+            xcb_disconnect(conn);
+        }
         return;
     }
 
@@ -863,11 +888,13 @@ KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr serv
     }
     data.setApplicationId(service->entryPath());
     // the rest will be sent by kdeinit
-    KStartupInfo::sendStartupX(dpy, id, data);
-    if (mCached_dpy != dpy && mCached_dpy != NULL) {
-        XCloseDisplay(mCached_dpy);
+    KStartupInfo::sendStartupXcb(conn, screen, id, data);
+    if (mCached.conn != conn && mCached.conn != NULL) {
+        xcb_disconnect(conn);
     }
-    mCached_dpy = dpy;
+    mCached.conn = conn;
+    mCached.screen = screen;
+    mCached.displayName = displayName;
     return;
 #else
     return;
@@ -878,7 +905,7 @@ void
 KLauncher::cancel_service_startup_info(KLaunchRequest *request, const QByteArray &startup_id,
                                        const QStringList &envs)
 {
-#if HAVE_X11
+#if HAVE_XCB
     if (request != NULL) {
         request->startup_id = "0";    // krazy:exclude=doublequote_chars
     }
@@ -889,24 +916,34 @@ KLauncher::cancel_service_startup_info(KLaunchRequest *request, const QByteArray
                 dpy_str = env.mid(8);
             }
         }
-        Display *dpy = NULL;
-        if (!dpy_str.isEmpty() && mCached_dpy != NULL
-                && dpy_str != QLatin1String(XDisplayString(mCached_dpy))) {
-            dpy = mCached_dpy;
+        xcb_connection_t *conn = Q_NULLPTR;
+        int screen;
+        QByteArray displayName;
+        if (!dpy_str.isEmpty() && mCached.conn != Q_NULLPTR && dpy_str.toLocal8Bit() != mCached.displayName) {
+            conn = mCached.conn;
+            screen = mCached.screen;
+            displayName = mCached.displayName;
         }
-        if (dpy == NULL) {
-            dpy = XOpenDisplay(dpy_str.toLatin1().constData());
+        if (!conn) {
+            displayName = dpy_str.toLocal8Bit();
+            conn = xcb_connect(displayName.constData(), &screen);
         }
-        if (dpy == NULL) {
+        if (conn == Q_NULLPTR) {
+            return;
+        }
+        if (xcb_connection_has_error(conn)) {
+            xcb_disconnect(conn);
             return;
         }
         KStartupInfoId id;
         id.initId(startup_id);
-        KStartupInfo::sendFinishX(dpy, id);
-        if (mCached_dpy != dpy && mCached_dpy != NULL) {
-            XCloseDisplay(mCached_dpy);
+        KStartupInfo::sendFinishXcb(conn, screen, id);
+        if (mCached.conn != conn && mCached.conn != NULL) {
+            xcb_disconnect(mCached.conn);
         }
-        mCached_dpy = dpy;
+        mCached.conn = conn;
+        mCached.screen = screen;
+        mCached.displayName = displayName;
     }
 #endif
 }
