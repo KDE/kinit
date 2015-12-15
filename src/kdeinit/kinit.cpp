@@ -452,7 +452,22 @@ static void reset_oom_protect()
     sigprocmask(SIG_BLOCK, &sigs, &oldsigs);
     pid_t pid = getpid();
     if (write(oom_pipe, &pid, sizeof(pid_t)) > 0) {
-        sigsuspend(&oldsigs);   // wait for the signal to come
+        struct timespec timeout;
+        timeout.tv_sec = 1;
+        timeout.tv_nsec = 0;
+        do {
+            if (sigtimedwait(&sigs, NULL, &timeout) < 0) { // wait for the signal to come
+                if (errno == EINTR) {
+                    // other signal
+                    continue;
+                } else if (errno == EAGAIN) {
+                    fprintf(stderr, "Timed out during reset OOM protection: %d\n", pid);
+                } else {
+                    fprintf(stderr, "Error during reset OOM protection: %d\n", pid);
+                }
+            }
+            break;
+        } while (true);
     } else {
 #ifndef NDEBUG
         fprintf(stderr, "Failed to reset OOM protection: %d\n", pid);
