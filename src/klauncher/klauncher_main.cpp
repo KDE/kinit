@@ -169,7 +169,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 
     int maxTry = 3;
     while (true) {
-        QString service(QLatin1String("org.kde.klauncher5")); // same as ktoolinvocation.cpp
+        QString service(QStringLiteral("org.kde.klauncher5")); // same as ktoolinvocation.cpp
         if (!QDBusConnection::sessionBus().isConnected()) {
             qWarning() << "No DBUS session-bus found. Check if you have started the DBUS server.";
             return 1;
@@ -201,7 +201,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 #else
     KLauncher *launcher = new KLauncher();
 #endif
-    QDBusConnection::sessionBus().registerObject(QString::fromLatin1("/"), launcher);
+    QDBusConnection::sessionBus().registerObject(QStringLiteral("/"), launcher);
 
 #ifndef USE_KPROCESS_FOR_KIOSLAVES
     if (pipe(sigpipe) != 0) {

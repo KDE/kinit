@@ -119,7 +119,7 @@ KLauncher::KLauncher()
     mAutoTimer.setSingleShot(true);
     new KLauncherAdaptor(this);
     mSlaveLauncherAdaptor = new KSlaveLauncherAdaptor(this);
-    QDBusConnection::sessionBus().registerObject(QLatin1String("/KLauncher"), this); // same as ktoolinvocation.cpp
+    QDBusConnection::sessionBus().registerObject(QStringLiteral("/KLauncher"), this); // same as ktoolinvocation.cpp
 
     connect(&mAutoTimer, SIGNAL(timeout()), this, SLOT(slotAutoStart()));
     connect(QDBusConnection::sessionBus().interface(),
@@ -487,14 +487,14 @@ KLauncher::requestDone(KLaunchRequest *request)
             (request->status == KLaunchRequest::Done)) {
         requestResult.result = 0;
         requestResult.dbusName = request->dbus_name;
-        requestResult.error = QString::fromLatin1(""); // not null, cf assert further down
+        requestResult.error = QStringLiteral(""); // not null, cf assert further down
         requestResult.pid = request->pid;
     } else {
         requestResult.result = 1;
         requestResult.dbusName.clear();
         requestResult.error = i18n("KDEInit could not launch '%1'", request->name);
         if (!request->errorMsg.isEmpty()) {
-            requestResult.error += QString::fromLatin1(":\n") + request->errorMsg;
+            requestResult.error += QStringLiteral(":\n") + request->errorMsg;
         }
         requestResult.pid = 0;
 
@@ -758,7 +758,7 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
     createArgs(request, service, qurls);
 
     // We must have one argument at least!
-    if (!request->arg_list.count()) {
+    if (request->arg_list.isEmpty()) {
         requestResult.result = ENOEXEC;
         requestResult.error = i18n("Service '%1' is malformatted.", service->entryPath());
         delete request;
@@ -774,20 +774,20 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
         // Testcase: konqueror www.kde.org, RMB on link, open with, kruler.
 
         request->dbus_startup_type = KService::DBusMulti;
-        request->dbus_name = QString::fromLatin1("org.kde.kioexec");
+        request->dbus_name = QStringLiteral("org.kde.kioexec");
     } else {
         request->dbus_startup_type = service->dbusStartupType();
 
         if ((request->dbus_startup_type == KService::DBusUnique) ||
                 (request->dbus_startup_type == KService::DBusMulti)) {
-            const QVariant v = service->property(QLatin1String("X-DBUS-ServiceName"));
+            const QVariant v = service->property(QStringLiteral("X-DBUS-ServiceName"));
             if (v.isValid()) {
                 request->dbus_name = v.toString();
             }
             if (request->dbus_name.isEmpty()) {
                 const QString binName = KIO::DesktopExecParser::executableName(service->exec());
-                request->dbus_name = QString::fromLatin1("org.kde.") + binName;
-                request->tolerant_dbus_name = QString::fromLatin1("*.") + binName;
+                request->dbus_name = QStringLiteral("org.kde.") + binName;
+                request->tolerant_dbus_name = QStringLiteral("*.") + binName;
             }
         }
     }
@@ -973,7 +973,7 @@ KLauncher::slotDequeue()
             requestDone(request);
             continue;
         }
-    } while (requestQueue.count());
+    } while (!requestQueue.isEmpty());
     bProcessingQueue = false;
 }
 
@@ -1100,12 +1100,12 @@ KLauncher::requestSlave(const QString &protocol,
 #ifndef USE_KPROCESS_FOR_KIOSLAVES // otherwise we've already done this
         arg_list.prepend(QFile::decodeName(CMAKE_INSTALL_FULL_LIBEXECDIR_KF5 "/kioslave"));
 #endif
-        name = QString::fromLatin1("valgrind");
+        name = QStringLiteral("valgrind");
 
         if (!mSlaveValgrindSkin.isEmpty()) {
             arg_list.prepend(QLatin1String("--tool=") + mSlaveValgrindSkin);
         } else {
-            arg_list.prepend(QLatin1String("--tool=memcheck"));
+            arg_list.prepend(QStringLiteral("--tool=memcheck"));
         }
     }
 #endif

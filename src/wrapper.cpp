@@ -134,7 +134,7 @@ static int openSocket()
     }
 #endif
 
-    const QString socketFileName = QString::fromLatin1("kdeinit5_%1").arg(QLatin1String(display));
+    const QString socketFileName = QStringLiteral("kdeinit5_%1").arg(QLatin1String(display));
     QByteArray socketName = QFile::encodeName(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation) +
                             QLatin1Char('/') + socketFileName);
     const char *sock_file = socketName.constData();

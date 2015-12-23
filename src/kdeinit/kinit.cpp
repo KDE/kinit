@@ -410,7 +410,7 @@ static void complete_startup_info(KStartupInfoId &id, pid_t pid)
 QByteArray execpath_avoid_loops(const QByteArray &exec, int envc, const char *envs, bool avoid_loops)
 {
     QStringList paths;
-    const QRegExp pathSepRegExp(QString::fromLatin1("[:\b]"));
+    const QRegExp pathSepRegExp(QStringLiteral("[:\b]"));
     if (envc > 0) { /* use the passed environment */
         const char *path = get_env_var("PATH=", envc, envs);
         if (path != NULL) {
@@ -655,7 +655,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
             exitWithErrorMsg(errorMsg);
         }
 
-        if (!qgetenv("KDE_IS_PRELINKED").isEmpty() && !execpath.isEmpty()) {
+        if (!qEnvironmentVariableIsEmpty("KDE_IS_PRELINKED") && !execpath.isEmpty()) {
             libpath.truncate(0);
         }
 
@@ -1413,7 +1413,7 @@ static void generate_socket_name()
     display.replace('/', '_');
 #endif
     // WARNING, if you change the socket name, adjust kwrapper too
-    const QString socketFileName = QString::fromLatin1("kdeinit5_%1").arg(QLatin1String(display));
+    const QString socketFileName = QStringLiteral("kdeinit5_%1").arg(QLatin1String(display));
     const QByteArray socketName = QFile::encodeName(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation) + QLatin1Char('/') + socketFileName);
     if (socketName.length() >= MAX_SOCK_FILE) {
         fprintf(stderr, "kdeinit5: Aborting. Socket name will be too long:\n");
@@ -1517,7 +1517,7 @@ static void setupX()
         as well, point XAUTHORITY there and never remove the file (except for possible
         tmp cleanup).
     */
-    if (!qgetenv("XAUTHORITY").isEmpty()) {
+    if (!qEnvironmentVariableIsEmpty("XAUTHORITY")) {
         QByteArray display = qgetenv(displayEnvVarName_c());
         int i;
         if ((i = display.lastIndexOf('.')) > display.lastIndexOf(':') && i >= 0) {
@@ -1770,7 +1770,7 @@ int main(int argc, char **argv)
         init_kdeinit_socket();
     }
 #ifdef Q_OS_UNIX
-    if (!d.suicide && qgetenv("KDE_IS_PRELINKED").isEmpty()) {
+    if (!d.suicide && qEnvironmentVariableIsEmpty("KDE_IS_PRELINKED")) {
         const int extrasCount = sizeof(extra_libs) / sizeof(extra_libs[0]);
         for (int i = 0; i < extrasCount; i++) {
             const QString extra = findSharedLib(QString::fromLatin1(extra_libs[i]));
