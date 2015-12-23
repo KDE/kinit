@@ -118,7 +118,9 @@ static Display *X11display = 0;
 static int X11_startup_notify_fd = -1;
 static Display *X11_startup_notify_display = 0;
 #endif
-#define MAX_SOCK_FILE 255
+// Finds size of sun_path without allocating a sockaddr_un to do it.
+// Assumes sun_path is at end of sockaddr_un though
+#define MAX_SOCK_FILE (sizeof(struct sockaddr_un) - offsetof(struct sockaddr_un,sun_path))
 static char sock_file[MAX_SOCK_FILE];
 
 static const char* displayEnvVarName_c()
@@ -968,7 +970,7 @@ static void init_kdeinit_socket()
         socklen = sizeof(sa);
         memset(&sa, 0, socklen);
         sa.sun_family = AF_UNIX;
-        strcpy(sa.sun_path, sock_file);
+        qstrncpy(sa.sun_path, sock_file, sizeof(sa.sun_path));
         if (bind(d.wrapper, (struct sockaddr *)&sa, socklen) != 0) {
             if (max_tries == 0) {
                 perror("kdeinit5: Aborting. bind() failed");
@@ -1415,7 +1417,7 @@ static void generate_socket_name()
     // WARNING, if you change the socket name, adjust kwrapper too
     const QString socketFileName = QStringLiteral("kdeinit5_%1").arg(QLatin1String(display));
     const QByteArray socketName = QFile::encodeName(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation) + QLatin1Char('/') + socketFileName);
-    if (socketName.length() >= MAX_SOCK_FILE) {
+    if (static_cast<unsigned>(socketName.length()) >= MAX_SOCK_FILE) {
         fprintf(stderr, "kdeinit5: Aborting. Socket name will be too long:\n");
         fprintf(stderr, "         '%s'\n", socketName.data());
         exit(255);
