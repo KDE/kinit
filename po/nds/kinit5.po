@@ -1,0 +1,111 @@
+# Translation of kdelibs4.po to Low Saxon
+# Heiko Evermann <heiko@evermann.de>, 2004.
+# Heiko Evermann <heiko.evermann@gmx.de>, 2004, 2005.
+# Volker Jockheck <volkae@gmx.net>, 2004.
+# Sönke Dibbern <s_dibbern@web.de>, 2004, 2005, 2006, 2007, 2008, 2009, 2014.
+# Manfred Wiese <m.j.wiese@web.de>, 2008, 2009, 2010, 2011, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-12-25 07:06+0000\n"
+"PO-Revision-Date: 2014-05-11 00:55+0200\n"
+"Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
+"Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
+"Language: nds\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:540
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Nich mööglich, en niegen Perzess to starten.\n"
+"Villicht is dat Systeem bi de Maximaaltall för apen Dateien anlangt, oder Du "
+"büst bi de Maximaaltall för apen Dateien ankamen, de du bruken dörvst."
+
+#: kdeinit/kinit.cpp:565
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Nich mööglich, en niegen Perzess optostellen.\n"
+"Villicht is dat Systeem bi de Maximaaltall för apen Dateien anlangt, oder Du "
+"büst bi de Maximaaltall för apen Dateien ankamen, de du bruken dörvst."
+
+#: kdeinit/kinit.cpp:656
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Dat Programm „%1“ lett sik nich finnen."
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"De Bibliotheek „%1“ lett sik nich opmaken.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:726
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"„kdemain“ lett sik nich binnen „%1“ finnen.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:495
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit kann „%1“ nich starten."
+
+#: klauncher/klauncher.cpp:688 klauncher/klauncher.cpp:702
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "De Deenst „%1“ lett sik nich finnen."
+
+#: klauncher/klauncher.cpp:720
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "De Deenst „%1“ mutt utföhrbor wesen, wenn he lopen schall."
+
+#: klauncher/klauncher.cpp:722 klauncher/klauncher.cpp:763
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "De Deenst „%1“ is leeg formateert."
+
+#: klauncher/klauncher.cpp:857
+#, kde-format
+msgid "Launching %1"
+msgstr "Starten vun %1"
+
+#: klauncher/klauncher.cpp:1059
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Protokoll „%1“ is nich begäng.\n"
+
+#: klauncher/klauncher.cpp:1065
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Dat Moduul „%1“ lett sik nich finnen.\n"
+
+#: klauncher/klauncher.cpp:1131
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "Fehler bi't Laden vun „%1“.\n"
+
+#: klauncher/klauncher_main.cpp:142
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Dit Programm schall nich vun Hand opropen warrn.\n"
+"klauncher: „kdeinit5“ röppt dat automaatsch op.\n"

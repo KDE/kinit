@@ -1,0 +1,116 @@
+# translation of kdelibs4.po to Telugu
+#
+#
+# Purushottam Boyanapalli <boyanapalli@gmail.com>, 2005.
+# విజయ్ కిరణ్ కముజు <infyquest@gmail.com>, 2007.
+# pavithran <pavithran.s@gmail.com>, 2007.
+# Krishna Babu K <kkrothap@redhat.com>, 2008, 2009.
+# sreekalyanbapatla <sreekalyan3@gmail.com>, 2013.
+# GVS.Giri <gvs.giri@swecha.net>, 2013.
+# Bhuvan Krishna <bhuvan@swecha.org>,2013.
+# Naveen Kandimalla <naveen@swecha.net>,2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2015-12-25 07:06+0000\n"
+"PO-Revision-Date: 2013-11-04 23:55+0630\n"
+"Last-Translator: Bhuvan Krishna <bhuvan@swecha.org>\n"
+"Language-Team: Telugu <kde-i18n-doc@kde.org>\n"
+"Language: te\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : "
+"4;\n"
+
+#: kdeinit/kinit.cpp:540
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:565
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:656
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "'%1' కార్యక్రమం కనపడలేదు"
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"'%1' లైబ్రరీ ని తెరువలేకపోయాను.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:726
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"'%1'లో 'kdemain' కనపడలేదు.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:495
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "కెడిఈ '%1' ప్రారంభించలేకపొయింది."
+
+#: klauncher/klauncher.cpp:688 klauncher/klauncher.cpp:702
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "'%1' సేవ కనపడలేదు."
+
+#: klauncher/klauncher.cpp:720
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "సేవా '%1' నడుపుటను నిర్వర్తించగదు తప్పక."
+
+#: klauncher/klauncher.cpp:722 klauncher/klauncher.cpp:763
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "'%1' సేవ తప్పుగా ఫార్మేట్ చేయబడినది."
+
+#: klauncher/klauncher.cpp:857
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 ప్రారంభిస్తున్నా"
+
+#: klauncher/klauncher.cpp:1059
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "తెలియని '%1' ప్రొటోకాల్.\n"
+
+#: klauncher/klauncher.cpp:1065
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "'%1' సేవ కనపడలేదు."
+
+#: klauncher/klauncher.cpp:1131
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "'%1'ఎక్కించుటలో దోషం.\n"
+
+#: klauncher/klauncher_main.cpp:142
+#, fuzzy
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"కెలాంచర్: ఈ ప్రోగ్రామ్ మెన్యువల్ గా మొదలుపెట్టకూడదు.\n"
+"కెలాంచర్: ఇది kdeinit4 ద్వారా మొదలుపెట్టబడును.\n"
