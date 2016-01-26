@@ -375,7 +375,7 @@ static void init_startup_info(KStartupInfoId &id, const QByteArray &bin,
     X11_startup_notify_fd = xcb_get_file_descriptor(s_startup_notify_connection);
     NETRootInfo rootInfo(s_startup_notify_connection, NET::CurrentDesktop);
     KStartupInfoData data;
-    data.setDesktop(rootInfo.currentDesktop());
+    data.setDesktop(rootInfo.currentDesktop(true));
     data.setBin(QFile::decodeName(bin));
     KStartupInfo::sendChangeXcb(s_startup_notify_connection, s_startup_notify_screen, id, data);
     xcb_flush(s_startup_notify_connection);
