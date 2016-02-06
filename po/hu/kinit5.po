@@ -1,0 +1,108 @@
+# Kiszel Kristóf <ulysses@kubuntu.org>, 2010.
+# Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2011, 2012, 2014.
+# Balázs Úr <urbalazs@gmail.com>, 2012, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: KDE 4.4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2016-01-26 08:20+0000\n"
+"PO-Revision-Date: 2014-03-28 22:59+0100\n"
+"Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: kdeinit/kinit.cpp:532
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Nem sikerült új folyamatot indítani.\n"
+"Lehet, hogy a felhasználóra vagy a rendszerre beállított korlátozás miatt "
+"már nem nyitható meg több fájl."
+
+#: kdeinit/kinit.cpp:557
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Nem sikerült új folyamatot létrehozni.\n"
+"Lehet, hogy a felhasználóra vagy a rendszerre beállított korlátozás miatt "
+"már nem indítható több folyamat."
+
+#: kdeinit/kinit.cpp:648
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "A(z) „%1” program nem található."
+
+#: kdeinit/kinit.cpp:676
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Nem sikerült megnyitni a(z) %1 programkönyvtárt.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:718
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Nem található „kdemain” függvény ebben: „%1”.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:504
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "A KDEInit nem tudta elindítani ezt a programot: „%1”"
+
+#: klauncher/klauncher.cpp:706 klauncher/klauncher.cpp:720
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "A(z) „%1” szolgáltatás nem található."
+
+#: klauncher/klauncher.cpp:738
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "A szolgáltatás („%1”) programfájljának végrehajthatónak kell lennie."
+
+#: klauncher/klauncher.cpp:740 klauncher/klauncher.cpp:781
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "A(z) „%1” szolgáltatás hibás."
+
+#: klauncher/klauncher.cpp:882
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 indítása"
+
+#: klauncher/klauncher.cpp:1096
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Ismeretlen protokoll - „%1”.\n"
+
+#: klauncher/klauncher.cpp:1102
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "A(z) „%1” bővítmény nem található.\n"
+
+#: klauncher/klauncher.cpp:1168
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "Hiba történt a(z) „%1” betöltése közben.\n"
+
+#: klauncher/klauncher_main.cpp:142
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: ezt a programot nem kézzel kell elindítani.\n"
+"klauncher: a kdeinit5 fogja automatikusan elindítani.\n"
