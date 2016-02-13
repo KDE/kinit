@@ -763,15 +763,11 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
             }
             start_service(service, singleUrl, envs, startup_id2, true, false, msg);
         }
-        QString firstURL = *(urls.begin());
+        const QString firstURL = urls.at(0);
         urls.clear();
         urls.append(firstURL);
     }
-    // Qt5 TODO: use QUrl::fromStringList
-    QList<QUrl> qurls;
-    Q_FOREACH (const QString &u, urls) {
-        qurls.append(QUrl(u));
-    }
+    const QList<QUrl> qurls = QUrl::fromStringList(urls);
 
     createArgs(request, service, qurls);
 
