@@ -656,18 +656,23 @@ static pid_t launch(int argc, const char *_name, const char *args,
         QLibrary l(libpath);
 
         if (!libpath.isEmpty()) {
-            if (!l.load()) {
-                if (libpath_relative) {
-                    // NB: Because Qt makes the actual dlopen() call, the
-                    //     RUNPATH of kdeinit is *not* respected - see
-                    //     https://sourceware.org/bugzilla/show_bug.cgi?id=13945
-                    //     - so we try hacking it in ourselves
-                    QString install_lib_dir = QFile::decodeName(
-                            CMAKE_INSTALL_PREFIX "/" LIB_INSTALL_DIR "/");
-                    libpath = install_lib_dir + libpath;
+            if (libpath_relative) {
+                // NB: Because Qt makes the actual dlopen() call, the
+                //     RUNPATH of kdeinit is *not* respected - see
+                //     https://sourceware.org/bugzilla/show_bug.cgi?id=13945
+                //     - so we try hacking it in ourselves
+                QString install_lib_dir = QFile::decodeName(
+                        CMAKE_INSTALL_PREFIX "/" LIB_INSTALL_DIR "/");
+                QString orig_libpath = libpath;
+                libpath = install_lib_dir + libpath;
+                l.setFileName(libpath);
+                if (!l.load()) {
+                    libpath = orig_libpath;
                     l.setFileName(libpath);
                     l.load();
                 }
+            } else {
+                l.load();
             }
             if (!l.isLoaded()) {
                 QString ltdlError(l.errorString());
