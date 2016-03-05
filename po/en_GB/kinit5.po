@@ -1,0 +1,109 @@
+# translation of kdelibs4.po to British English
+# Malcolm Hunter <malcolm.hunter@gmx.co.uk>, 2002,2003,2004, 2005, 2006, 2007, 2008, 2009.
+# Jonathan Riddell <kde-en-gb@jriddell.org>, 2003.
+# Andrew Coles <andrew_coles@yahoo.co.uk>, 2004, 2005, 2009, 2010.
+# Steve Allewell <steve.allewell@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2016-03-01 08:30+0000\n"
+"PO-Revision-Date: 2014-06-28 12:01+0100\n"
+"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
+"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:532
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+
+#: kdeinit/kinit.cpp:557
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+
+#: kdeinit/kinit.cpp:648
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Could not find '%1' executable."
+
+#: kdeinit/kinit.cpp:681
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Could not open library '%1'.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:723
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:504
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit could not launch '%1'"
+
+#: klauncher/klauncher.cpp:706 klauncher/klauncher.cpp:720
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Could not find service '%1'."
+
+#: klauncher/klauncher.cpp:738
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Service '%1' must be executable to run."
+
+#: klauncher/klauncher.cpp:740 klauncher/klauncher.cpp:777
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Service '%1' is malformatted."
+
+#: klauncher/klauncher.cpp:878
+#, kde-format
+msgid "Launching %1"
+msgstr "Launching %1"
+
+#: klauncher/klauncher.cpp:1092
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Unknown protocol '%1'.\n"
+
+#: klauncher/klauncher.cpp:1098
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Could not find the '%1' plugin.\n"
+
+#: klauncher/klauncher.cpp:1164
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "Error loading '%1'.\n"
+
+#: klauncher/klauncher_main.cpp:142
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
