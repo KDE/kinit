@@ -252,7 +252,13 @@ protected:
     bool mIsX11;
 #endif
 #if HAVE_XCB
-    struct {
+    struct XCBConnection {
+        XCBConnection() : conn(Q_NULLPTR), screen(0) { }
+
+        operator bool() const {
+            return conn != Q_NULLPTR;
+        }
+
         xcb_connection_t *conn;
         int screen;
         QByteArray displayName;
@@ -263,5 +269,8 @@ protected:
 protected Q_SLOTS:
     void slotGotOutput();
     void slotFinished(int exitCode, QProcess::ExitStatus exitStatus);
+
+private:
+    XCBConnection getXCBConnection(const QByteArray &displyName);
 };
 #endif

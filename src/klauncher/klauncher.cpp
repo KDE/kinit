@@ -116,10 +116,6 @@ KLauncher::KLauncher()
 #if HAVE_X11
     mIsX11 = QGuiApplication::platformName() == QStringLiteral("xcb");
 #endif
-#if HAVE_XCB
-    mCached.conn = Q_NULLPTR;
-    mCached.screen = 0;
-#endif
     Q_ASSERT(g_klauncher_self == NULL);
     g_klauncher_self = this;
 
@@ -188,11 +184,9 @@ KLauncher::~KLauncher()
 void KLauncher::close()
 {
 #if HAVE_XCB
-    if (mCached.conn) {
+    if (mCached) {
         xcb_disconnect(mCached.conn);
-        mCached.conn = Q_NULLPTR;
-        mCached.displayName = QByteArray();
-        mCached.screen = 0;
+        mCached = XCBConnection();
     }
 #endif
 }
@@ -509,31 +503,11 @@ KLauncher::requestDone(KLaunchRequest *request)
 
 #if HAVE_XCB
         if (!request->startup_dpy.isEmpty() && mIsX11) {
-            xcb_connection_t *conn = Q_NULLPTR;
-            int screen = 0;
-            QByteArray displayName;
-            if (mCached.conn != Q_NULLPTR && request->startup_dpy != mCached.displayName) {
-                conn = mCached.conn;
-                screen = mCached.screen;
-                displayName = mCached.displayName;
-            }
-            if (!conn) {
-                conn = xcb_connect(request->startup_dpy.constData(), &screen);
-            }
+            XCBConnection conn = getXCBConnection(request->startup_dpy);
             if (conn) {
-                if (!xcb_connection_has_error(conn)) {
-                    KStartupInfoId id;
-                    id.initId(request->startup_id);
-                    KStartupInfo::sendFinishXcb(conn, screen, id);
-                    if (mCached.conn != conn && mCached.conn != NULL) {
-                        xcb_disconnect(mCached.conn);
-                    }
-                    mCached.conn = conn;
-                    mCached.screen = screen;
-                    mCached.displayName = displayName;
-                } else {
-                    xcb_disconnect(conn);
-                }
+                KStartupInfoId id;
+                id.initId(request->startup_id);
+                KStartupInfo::sendFinishXcb(conn.conn, conn.screen, id);
             }
         }
 #endif
@@ -850,27 +824,15 @@ KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr serv
             dpy_str = env.mid(8).toLocal8Bit();
         }
     }
-    xcb_connection_t *conn = Q_NULLPTR;
-    int screen = 0;
-    QByteArray displayName;
-    if (!dpy_str.isEmpty() && mCached.conn != Q_NULLPTR && dpy_str != mCached.displayName) {
-        conn = mCached.conn;
-        screen = mCached.screen;
-        displayName = mCached.displayName;
-    }
-    if (!conn) {
-        conn = xcb_connect(dpy_str.constData(), &screen);
-    }
+
+    XCBConnection conn = getXCBConnection(dpy_str);
     request->startup_id = id.id();
-    if (conn == Q_NULLPTR || xcb_connection_has_error(conn)) {
+    if (!conn) {
         cancel_service_startup_info(request, startup_id, envs);
-        if (conn) {
-            xcb_disconnect(conn);
-        }
         return;
     }
 
-    request->startup_dpy = dpy_str;
+    request->startup_dpy = conn.displayName;
 
     KStartupInfoData data;
     data.setName(service->name());
@@ -884,13 +846,7 @@ KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr serv
     }
     data.setApplicationId(service->entryPath());
     // the rest will be sent by kdeinit
-    KStartupInfo::sendStartupXcb(conn, screen, id, data);
-    if (mCached.conn != conn && mCached.conn != NULL) {
-        xcb_disconnect(conn);
-    }
-    mCached.conn = conn;
-    mCached.screen = screen;
-    mCached.displayName = displayName;
+    KStartupInfo::sendStartupXcb(conn.conn, conn.screen, id, data);
     return;
 #else
     return;
@@ -912,34 +868,13 @@ KLauncher::cancel_service_startup_info(KLaunchRequest *request, const QByteArray
                 dpy_str = env.mid(8);
             }
         }
-        xcb_connection_t *conn = Q_NULLPTR;
-        int screen;
-        QByteArray displayName;
-        if (!dpy_str.isEmpty() && mCached.conn != Q_NULLPTR && dpy_str.toLocal8Bit() != mCached.displayName) {
-            conn = mCached.conn;
-            screen = mCached.screen;
-            displayName = mCached.displayName;
-        }
+        XCBConnection conn = getXCBConnection(dpy_str.toLocal8Bit());
         if (!conn) {
-            displayName = dpy_str.toLocal8Bit();
-            conn = xcb_connect(displayName.constData(), &screen);
-        }
-        if (conn == Q_NULLPTR) {
-            return;
-        }
-        if (xcb_connection_has_error(conn)) {
-            xcb_disconnect(conn);
             return;
         }
         KStartupInfoId id;
         id.initId(startup_id);
-        KStartupInfo::sendFinishXcb(conn, screen, id);
-        if (mCached.conn != conn && mCached.conn != NULL) {
-            xcb_disconnect(mCached.conn);
-        }
-        mCached.conn = conn;
-        mCached.screen = screen;
-        mCached.displayName = displayName;
+        KStartupInfo::sendFinishXcb(conn.conn, conn.screen, id);
     }
 #endif
 }
@@ -1303,3 +1238,34 @@ void KLauncher::terminate_kdeinit()
 #endif
 }
 
+KLauncher::XCBConnection KLauncher::getXCBConnection(const QByteArray &_displayName)
+{
+    const auto displayName = !_displayName.isEmpty() ? _displayName : qgetenv("DISPLAY");
+
+    // If cached connection is same as request
+    if (mCached && displayName == mCached.displayName) {
+        // Check error, if so close it, otherwise it's still valid, reuse the cached one
+        if (xcb_connection_has_error(mCached.conn)) {
+            close();
+        } else {
+            return mCached;
+        }
+    }
+
+    // At this point, the cached connection can't be reused, make a new connection
+    XCBConnection conn;
+    conn.conn = xcb_connect(displayName.constData(), &conn.screen);
+    if (conn) {
+        // check error first, if so return an empty one
+        if (xcb_connection_has_error(conn.conn)) {
+            xcb_disconnect(conn.conn);
+            return XCBConnection();
+        }
+
+        // if it's valid, replace mCached with new connection
+        conn.displayName = displayName;
+        close();
+        mCached = conn;
+    }
+    return conn;
+}
