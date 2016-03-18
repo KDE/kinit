@@ -251,6 +251,13 @@ protected:
 #if HAVE_X11
     bool mIsX11;
 #endif
+    void processRequestReturn(int status, const QByteArray &requestData);
+
+protected Q_SLOTS:
+    void slotGotOutput();
+    void slotFinished(int exitCode, QProcess::ExitStatus exitStatus);
+
+private:
 #if HAVE_XCB
     struct XCBConnection {
         XCBConnection() : conn(Q_NULLPTR), screen(0) { }
@@ -263,14 +270,8 @@ protected:
         int screen;
         QByteArray displayName;
     } mCached;
-#endif
-    void processRequestReturn(int status, const QByteArray &requestData);
 
-protected Q_SLOTS:
-    void slotGotOutput();
-    void slotFinished(int exitCode, QProcess::ExitStatus exitStatus);
-
-private:
     XCBConnection getXCBConnection(const QByteArray &displyName);
+#endif
 };
 #endif

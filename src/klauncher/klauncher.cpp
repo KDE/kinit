@@ -1238,6 +1238,7 @@ void KLauncher::terminate_kdeinit()
 #endif
 }
 
+#if HAVE_XCB
 KLauncher::XCBConnection KLauncher::getXCBConnection(const QByteArray &_displayName)
 {
     const auto displayName = !_displayName.isEmpty() ? _displayName : qgetenv("DISPLAY");
@@ -1269,3 +1270,4 @@ KLauncher::XCBConnection KLauncher::getXCBConnection(const QByteArray &_displayN
     }
     return conn;
 }
+#endif
