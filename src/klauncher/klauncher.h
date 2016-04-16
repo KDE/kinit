@@ -113,7 +113,7 @@ public:
     void close();
 
 public Q_SLOTS:
-    void destruct(); // exit!
+    Q_NORETURN void destruct(); // exit!
 
 protected:
     void processDied(pid_t pid, long exitStatus);
