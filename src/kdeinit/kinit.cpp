@@ -1531,6 +1531,7 @@ static void setupX()
         QSaveFile xauthfile(xauth);
         QFile xauthfrom(QFile::decodeName(qgetenv("XAUTHORITY")));
         if (!xauthfrom.open(QFile::ReadOnly) || !xauthfile.open(QFile::WriteOnly)
+                || !xauthfile.setPermissions(QFile::ReadOwner | QFile::WriteOwner)
                 || xauthfile.write(xauthfrom.readAll()) != xauthfrom.size() || !xauthfile.commit()) {
             // error
         } else {
