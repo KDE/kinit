@@ -1530,13 +1530,15 @@ static void setupX()
                         + QString::number(getuid()) + QLatin1Char('-') + QString::fromLocal8Bit(display);
         QSaveFile xauthfile(xauth);
         QFile xauthfrom(QFile::decodeName(qgetenv("XAUTHORITY")));
+        // Set umask to make sure the file permissions of xauthfile are correct
+        mode_t oldMask = umask(S_IRGRP | S_IROTH | S_IWGRP | S_IWOTH);
         if (!xauthfrom.open(QFile::ReadOnly) || !xauthfile.open(QFile::WriteOnly)
-                || !xauthfile.setPermissions(QFile::ReadOwner | QFile::WriteOwner)
                 || xauthfile.write(xauthfrom.readAll()) != xauthfrom.size() || !xauthfile.commit()) {
             // error
         } else {
             qputenv("XAUTHORITY", QFile::encodeName(xauth));
         }
+        umask(oldMask);
     }
 }
 
