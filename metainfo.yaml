@@ -10,3 +10,7 @@ portingAid: false
 deprecated: false
 release: true
 cmakename: KF5Init
+
+public_lib: true
+group: Frameworks
+subgroup: Tier 3
