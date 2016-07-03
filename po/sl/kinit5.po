@@ -1,0 +1,121 @@
+# translation of kdelibs4.po to Slovenian
+# Translation of kdelibs4.po to Slovenian
+# KDELIBS translation to Slovenian language
+# $Id: kdelibs4.po 685926 2007-07-10 04:25:11Z scripty $
+# $Source$
+#
+# Copyright (C) 2002,2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+# Roman Maurer <roman.maurer@amis.net>, 2002.
+# Gregor Rakar <gregor.rakar@kiss.uni-lj.si>, 2002,2003.
+# Gregor Rakar <gregor.rakar@kiss.si>, 2003, 2004, 2005.
+# Andrej Vernekar <andrej.vernekar@moj.net>, 2005, 2007, 2008, 2009, 2010.
+# Jure Repinc <jlp@holodeck1.com>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013.
+# Andrej Vernekar <andrej.vernerkar@moj.net>, 2008, 2011, 2012.
+# Andrej Mernik <andrejm@ubuntu.si>, 2012, 2013, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2016-06-10 07:29+0000\n"
+"PO-Revision-Date: 2014-06-12 14:50+0200\n"
+"Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+
+#: kdeinit/kinit.cpp:547
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Ni mogoče zagnati novega opravila.\n"
+"Mogoče je sistem dosegel gornjo omejitev sočasno odprtih datotek ali pa je "
+"bilo doseženo najvišje število datotek, ki jih še lahko imate odprte za "
+"uporabo."
+
+#: kdeinit/kinit.cpp:572
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Ni mogoče ustvariti novega opravila.\n"
+"Mogoče je sistem dosegel največje število mogočih opravil ali pa je bilo "
+"doseženo najvišje število opravil, ki jih še lahko uporabljate."
+
+#: kdeinit/kinit.cpp:663
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Izvedljive datoteke '%1' ni bilo mogoče najti."
+
+#: kdeinit/kinit.cpp:696
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Ni bilo mogoče odpreti knjižnice »%1«.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:738
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Ni bilo mogoče najti »kdemain« v »%1«.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:498
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit ni mogel zagnati »%1«"
+
+#: klauncher/klauncher.cpp:680 klauncher/klauncher.cpp:694
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Ni bilo mogoče najti storitve »%1«."
+
+#: klauncher/klauncher.cpp:712
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Za zagon mora biti storitev »%1« izvedljiva."
+
+#: klauncher/klauncher.cpp:714 klauncher/klauncher.cpp:751
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Storitev »%1« je napačno oblikovana."
+
+#: klauncher/klauncher.cpp:840
+#, kde-format
+msgid "Launching %1"
+msgstr "Zaganjanje %1"
+
+#: klauncher/klauncher.cpp:1027
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Neznan protokol »%1«.\n"
+
+#: klauncher/klauncher.cpp:1033
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Ni bilo mogoče najti vstavka »%1«.\n"
+
+#: klauncher/klauncher.cpp:1099
+#, kde-format
+msgid "Error loading '%1'.\n"
+msgstr "Napaka med nalaganjem »%1«.\n"
+
+#: klauncher/klauncher_main.cpp:142
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: ta program ni namenjen ročnemu zagonu.\n"
+"klauncher: samodejno ga zažene kdeinit5.\n"
