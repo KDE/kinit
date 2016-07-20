@@ -1,6 +1,9 @@
 if (WIN32)
   set(kdeinit_SRCS kinit_win.cpp ../klauncher_cmds.cpp )
   set(kdeinit_LIBS psapi)
+elseif (APPLE)
+  set(kdeinit_SRCS kinit.cpp kinit_mac.mm proctitle.cpp ../klauncher_cmds.cpp )
+  set(kdeinit_LIBS "")
 else ()
   set(kdeinit_SRCS kinit.cpp proctitle.cpp ../klauncher_cmds.cpp )
   set(kdeinit_LIBS "")
@@ -11,14 +14,7 @@ include_directories(${KInit_BINARY_DIR}) # for kinit_version.h
 # on win32 kdeinit5 has to be a console application
 # to be able to catch stderr based --verbose output
 add_executable(kdeinit5 ${kdeinit_SRCS})
-if (APPLE)
-  # this has to be GUI on OSX because it launches GUI apps and need a quartz context
-  set_target_properties(kdeinit5 PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.template)
-  set_target_properties(kdeinit5 PROPERTIES MACOSX_BUNDLE_GUI_IDENTIFIER "org.kde.kdeinit5")
-  set_target_properties(kdeinit5 PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "KDE Init")
-else ()
-  ecm_mark_nongui_executable(kdeinit5)
-endif ()
+ecm_mark_nongui_executable(kdeinit5)
 
 target_link_libraries(kdeinit5 ${kdeinit_LIBS} ${KINIT_SOCKET_LIBRARY}
     Qt5::Gui #QFont::initialize
@@ -28,6 +24,9 @@ target_link_libraries(kdeinit5 ${kdeinit_LIBS} ${KINIT_SOCKET_LIBRARY}
     KF5::ConfigCore
     Qt5::DBus
 )
+if (APPLE)
+    target_link_libraries(kdeinit5 "-framework Foundation -framework AppKit")
+endif ()
 
 target_compile_definitions(kdeinit5 PRIVATE
     CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}"

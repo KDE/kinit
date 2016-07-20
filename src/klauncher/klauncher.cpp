@@ -563,7 +563,7 @@ KLauncher::requestStart(KLaunchRequest *request)
     }
 
     QString executable = request->name;
-#ifdef Q_OS_MAC
+#ifdef Q_OS_OSX
     const QString bundlepath = QStandardPaths::findExecutable(executable);
     if (!bundlepath.isEmpty()) {
         executable = bundlepath;
@@ -1073,7 +1073,7 @@ KLauncher::requestSlave(const QString &protocol,
         if (!mSlaveValgrindSkin.isEmpty()) {
             arg_list.prepend(QLatin1String("--tool=") + mSlaveValgrindSkin);
         } else {
-            arg_list.prepend(QStringLiteral("--tool=memcheck"));
+            arg_list.prepend(QLatin1String("--tool=memcheck"));
         }
     }
 #endif

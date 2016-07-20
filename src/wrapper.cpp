@@ -42,42 +42,47 @@
 
 extern char **environ;
 
-static char *getDisplay()
+// copied from kdeinit/kinit.cpp
+static const char* displayEnvVarName_c()
 {
-    const char *display;
-    char *result;
-    char *screen;
-    char *colon;
-    char *i;
-
-#if defined(NO_DISPLAY)
-    display = "NODISPLAY";
-#else
-    display = getenv("DISPLAY");
+    // Can't use QGuiApplication::platformName() here, there is no app instance.
+#if HAVE_X11
+    return "DISPLAY";
+#elif defined(Q_OS_OSX)
+    return "MAC_DISPLAY";
+#elif defined(Q_OS_WIN)
+    return "WIN_DISPLAY";
 #endif
-    if (!display || !*display) {
-        display = ":0";
+}
+
+// adapted from kdeinit/kinit.cpp
+// WARNING, if you change the socket name, adjust kinit.cpp too
+static const QString generate_socket_file_name()
+{
+
+#if HAVE_X11 || HAVE_XCB // qt5: see displayEnvVarName_c()
+    QByteArray display = qgetenv(displayEnvVarName_c());
+    if (display.isEmpty()) {
+        fprintf(stderr, "Error: could not determine $%s.\n", displayEnvVarName_c());
+        return QString();
     }
-    result = (char *)malloc(strlen(display) + 1);
-    if (result == NULL) {
-        return NULL;
+    int i;
+    if ((i = display.lastIndexOf('.')) > display.lastIndexOf(':') && i >= 0) {
+        display.truncate(i);
     }
 
-    strcpy(result, display);
-    screen = strrchr(result, '.');
-    colon = strrchr(result, ':');
-    if (screen && (screen > colon)) {
-        *screen = '\0';
-    }
-    while ((i = strchr(result, ':'))) {
-        *i = '_';
-    }
+    display.replace(':', '_');
 #ifdef __APPLE__
-    while ((i = strchr(result, '/'))) {
-        *i = '_';
-    }
+    // not entirely impossible, so let's leave it
+    display.replace('/', '_');
 #endif
-    return result;
+#else
+    // not using a DISPLAY variable; use an empty string instead
+    QByteArray display = "";
+#endif
+    // WARNING, if you change the socket name, adjust kwrapper too
+    const QString socketFileName = QStringLiteral("kdeinit5_%1").arg(QLatin1String(display));
+    return socketFileName;
 }
 
 /*
@@ -126,22 +131,13 @@ static int read_socket(int sock, char *buffer, int len)
 
 static int openSocket()
 {
-    char *display = getDisplay();
-#if !defined (NO_DISPLAY)
-    if (display == NULL) {
-        fprintf(stderr, "Error: Could not determine display.\n");
+    const QString socketFileName = generate_socket_file_name();
+    if (socketFileName.isEmpty()) {
         return -1;
     }
-#endif
-
-    const QString socketFileName = QStringLiteral("kdeinit5_%1").arg(QLatin1String(display));
     QByteArray socketName = QFile::encodeName(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation) +
                             QLatin1Char('/') + socketFileName);
     const char *sock_file = socketName.constData();
-
-#if !defined (NO_DISPLAY)
-    free(display);
-#endif
 
     struct sockaddr_un server;
     if (strlen(sock_file) >= sizeof(server.sun_path)) {
@@ -252,7 +248,7 @@ static int kwrapper_run(pid_t wrapped, int sock)
 
     buffer = (char *) malloc(header.arg_length);
     if (buffer == NULL) {
-        fprintf(stderr, "Error: malloc() failed\n");
+        perror("Error: malloc() failed\n");
         exit(255);
     }
 
@@ -408,7 +404,7 @@ int main(int argc, char **argv)
 
     buffer = (char *) malloc(size);
     if (buffer == NULL) {
-        fprintf(stderr, "Error: malloc() failed.");
+        perror("Error: malloc() failed.");
         exit(255);
     }
     p = buffer;
@@ -475,7 +471,7 @@ int main(int argc, char **argv)
         long pid;
         buffer = (char *) malloc(header.arg_length);
         if (buffer == NULL) {
-            fprintf(stderr, "Error: malloc() failed\n");
+            perror("Error: malloc() failed\n");
             exit(255);
         }
         read_socket(sock, buffer, header.arg_length);

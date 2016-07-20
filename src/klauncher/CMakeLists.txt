@@ -23,6 +23,9 @@ target_link_libraries(kdeinit_klauncher
    KF5::I18n   # i18n()
    Qt5::DBus
 )
+if (APPLE)
+    target_link_libraries(kdeinit_klauncher "-framework CoreFoundation")
+endif()
 
 if (HAVE_XCB)
     target_link_libraries(kdeinit_klauncher XCB::XCB)

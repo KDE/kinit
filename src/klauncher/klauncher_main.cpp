@@ -35,6 +35,10 @@
 #include <QDBusConnectionInterface>
 #include <QThread>
 
+#ifdef Q_OS_OSX
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
 #ifndef USE_KPROCESS_FOR_KIOSLAVES
 static int sigpipe[ 2 ];
 static void sig_handler(int sig_num)
@@ -48,7 +52,7 @@ static void sig_handler(int sig_num)
 }
 #endif
 
-#if defined(Q_OS_DARWIN) || defined (Q_OS_MAC)
+#if defined(Q_OS_DARWIN)
 // Copied from kkernel_mac.cpp
 bool dbus_initialized = false;
 
@@ -145,7 +149,19 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     }
 #endif
 
-#if defined(Q_OS_DARWIN) || defined (Q_OS_MAC)
+#if defined(Q_OS_DARWIN)
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    if (mainBundle) {
+        // get the application's Info Dictionary. For app bundles this would live in the bundle's Info.plist,
+        // for regular executables it is obtained in another way.
+        CFMutableDictionaryRef infoDict = (CFMutableDictionaryRef) CFBundleGetInfoDictionary(mainBundle);
+        if (infoDict) {
+            // Add or set the "LSUIElement" key with/to value "1". This can simply be a CFString.
+            CFDictionarySetValue(infoDict, CFSTR("LSUIElement"), CFSTR("1"));
+            // That's it. We're now considered as an "agent" by the window server, and thus will have
+            // neither menubar nor presence in the Dock or App Switcher.
+        }
+    }
     mac_initialize_dbus();
 #endif
 

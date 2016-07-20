@@ -26,7 +26,7 @@
 
 #include <config-kdeinit.h> // HAVE_X11
 
-#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
+#if defined(Q_OS_WIN) || defined(Q_OS_OSX)
 #define USE_KPROCESS_FOR_KIOSLAVES
 #endif
 #ifdef Q_CC_MSVC

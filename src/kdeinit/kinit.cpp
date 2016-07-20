@@ -64,14 +64,6 @@
 #endif
 #endif
 
-#ifdef Q_OS_MAC
-#include <CoreFoundation/CFBundle.h>
-#include <CoreFoundation/CFString.h>
-#include <CoreFoundation/CFURL.h>
-#include <crt_externs.h> // for _NSGetArgc and friends
-#include <mach-o/dyld.h> // for _NSGetExecutablePath
-#endif
-
 #include <kinit_version.h>
 
 #include "klauncher_cmds.h"
@@ -91,23 +83,26 @@
 
 #include <qstandardpaths.h>
 
+#include "kinit.h"
+#ifdef Q_OS_OSX
+#include "kinit_mac.h"
+#endif
+
 #ifdef Q_OS_UNIX
-#ifdef Q_OS_MAC
+//TODO: make sure what libraries we want here...
 static const char *extra_libs[] = {
+#ifdef Q_OS_OSX
     "libKF5KIOCore.5.dylib",
     "libKF5Parts.5.dylib",
     "libKF5Plasma.5.dylib"
-};
 #else
-//TODO: make sure what libraries we want here...
-static const char *extra_libs[] = {
     "libKF5KIOCore.so.5",
     "libKF5Parts.so.5",
 //#ifdef __KDE_HAVE_GCC_VISIBILITY // Removed for KF5, we'll see.
     "libKF5Plasma.so.5"
 //#endif
-};
 #endif
+};
 #endif
 
 // #define SKIP_PROCTITLE 1
@@ -133,51 +128,17 @@ static int s_startup_notify_screen = 0;
 #define MAX_SOCK_FILE (sizeof(struct sockaddr_un) - offsetof(struct sockaddr_un,sun_path))
 static char sock_file[MAX_SOCK_FILE];
 
+#if HAVE_X11 || HAVE_XCB
 static const char* displayEnvVarName_c()
 {
     // Can't use QGuiApplication::platformName() here, there is no app instance.
-#if HAVE_X11
     return "DISPLAY";
-#elif defined(Q_OS_MACX)
-    return "MAC_DISPLAY";
-#elif defined(Q_OS_WIN)
-    return "WIN_DISPLAY";
-#endif
 }
 static inline QByteArray displayEnvVarName()
 {
     return QByteArray::fromRawData(displayEnvVarName_c(), strlen(displayEnvVarName_c()));
 }
-
-/* Group data */
-static struct {
-    int maxname;
-    int fd[2];
-    int launcher[2]; /* socket pair for launcher communication */
-    int deadpipe[2]; /* pipe used to detect dead children */
-    int initpipe[2];
-    int wrapper; /* socket for wrapper communication */
-    int accepted_fd; /* socket accepted and that must be closed in the child process */
-    char result;
-    int exit_status;
-    pid_t fork;
-    pid_t launcher_pid;
-    pid_t kded_pid;
-    int n;
-    char **argv;
-    int (*func)(int, char *[]);
-    int (*launcher_func)(int);
-    bool debug_wait;
-    QByteArray errorMsg;
-    bool launcher_ok;
-    bool suicide;
-} d;
-
-struct child {
-    pid_t pid;
-    int sock; /* fd to write message when child is dead*/
-    struct child *next;
-};
+#endif
 
 static struct child *children;
 
@@ -218,7 +179,7 @@ static void cleanup_fds()
  * Close fd's which are only useful for the parent process.
  * Restore default signal handlers.
  */
-static void close_fds()
+void close_fds()
 {
     while (struct child *child = children) {
         close(child->sock);
@@ -300,20 +261,7 @@ static void child_died(pid_t exit_pid, int exit_status)
     }
 }
 
-static void exitWithErrorMsg(const QString &errorMsg)
-{
-    fprintf(stderr, "%s\n", errorMsg.toLocal8Bit().data());
-    QByteArray utf8ErrorMsg = errorMsg.toUtf8();
-    d.result = 3; // Error with msg
-    write(d.fd[1], &d.result, 1);
-    int l = utf8ErrorMsg.length();
-    write(d.fd[1], &l, sizeof(int));
-    write(d.fd[1], utf8ErrorMsg.data(), l);
-    close(d.fd[1]);
-    exit(255);
-}
-
-static void setup_tty(const char *tty)
+void setup_tty(const char *tty)
 {
     if (tty == NULL || *tty == '\0') {
         return;
@@ -436,7 +384,7 @@ static void oom_protect_sighandler(int)
 {
 }
 
-static void reset_oom_protect()
+void reset_oom_protect()
 {
     if (oom_pipe <= 0) {
         return;
@@ -479,10 +427,24 @@ static void reset_oom_protect()
     oom_pipe = -1;
 }
 #else
-static void reset_oom_protect()
+void reset_oom_protect()
 {
 }
 #endif
+
+#ifndef Q_OS_OSX
+static void exitWithErrorMsg(const QString &errorMsg)
+{
+    fprintf(stderr, "%s\n", errorMsg.toLocal8Bit().data());
+    QByteArray utf8ErrorMsg = errorMsg.toUtf8();
+    d.result = 3; // Error with msg
+    write(d.fd[1], &d.result, 1);
+    int l = utf8ErrorMsg.length();
+    write(d.fd[1], &l, sizeof(int));
+    write(d.fd[1], utf8ErrorMsg.data(), l);
+    close(d.fd[1]);
+    exit(255);
+}
 
 static pid_t launch(int argc, const char *_name, const char *args,
                     const char *cwd = 0, int envc = 0, const char *envs = 0,
@@ -559,9 +521,6 @@ static pid_t launch(int argc, const char *_name, const char *args,
 #endif
     // find out this path before forking, doing it afterwards
     // crashes on some platforms, notably OSX
-#ifdef Q_OS_MAC
-    const QString bundlepath = QStandardPaths::findExecutable(QFile::decodeName(execpath));
-#endif
 
     d.errorMsg = 0;
     d.fork = fork();
@@ -624,14 +583,6 @@ static pid_t launch(int argc, const char *_name, const char *args,
             QByteArray procTitle;
             d.argv = (char **) malloc(sizeof(char *) * (argc + 1));
             d.argv[0] = (char *) _name;
-#ifdef Q_OS_MAC
-            QString argvexe = QStandardPaths::findExecutable(QString::fromLatin1(d.argv[0]));
-            if (!argvexe.isEmpty()) {
-                QByteArray cstr = argvexe.toLocal8Bit();
-                // qDebug() << "kdeinit5: launch() setting argv: " << cstr.data();
-                d.argv[0] = strdup(cstr.data());
-            }
-#endif
             for (int i = 1;  i < argc; i++) {
                 d.argv[i] = (char *) args;
                 procTitle += ' ';
@@ -713,11 +664,6 @@ static pid_t launch(int argc, const char *_name, const char *args,
             setup_tty(tty);
 
             QByteArray executable = execpath;
-#ifdef Q_OS_MAC
-            if (!bundlepath.isEmpty()) {
-                executable = QFile::encodeName(bundlepath);
-            }
-#endif
 
             if (!executable.isEmpty()) {
                 execvp(executable.constData(), d.argv);
@@ -825,6 +771,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
 #endif
     return d.fork;
 }
+#endif // !Q_OS_OSX
 
 extern "C" {
 
@@ -1044,7 +991,7 @@ static void start_klauncher()
     char args[32];
     strcpy(args, "--fd=");
     sprintf(args + 5, "%d", d.launcher[1]);
-    d.launcher_pid = launch(2, "klauncher", args);
+    d.launcher_pid = launch(2, CMAKE_INSTALL_FULL_LIBEXECDIR_KF5 "/klauncher", args);
     close(d.launcher[1]);
 #ifndef NDEBUG
     fprintf(stderr, "kdeinit5: Launched KLauncher, pid = %ld, result = %d\n",
@@ -1183,6 +1130,7 @@ static bool handle_launcher_request(int sock, const char *who)
             return true; // sure?
         }
 
+#if HAVE_X11 || HAVE_XCB
         // support for the old a bit broken way of setting DISPLAY for multihead
         QByteArray olddisplay = qgetenv(displayEnvVarName_c());
         QByteArray kdedisplay = qgetenv("KDE_DISPLAY");
@@ -1193,15 +1141,17 @@ static bool handle_launcher_request(int sock, const char *who)
         if (reset_display) {
             qputenv(displayEnvVarName_c(), kdedisplay);
         }
-
+#endif
         pid = launch(argc, name, args, cwd, envc, envs,
                      request_header.cmd == LAUNCHER_SHELL || request_header.cmd == LAUNCHER_KWRAPPER,
                      tty, avoid_loops, startup_id_str);
 
+#if HAVE_X11 || HAVE_XCB
         if (reset_display) {
             unsetenv("KDE_DISPLAY");
             qputenv(displayEnvVarName_c(), olddisplay);
         }
+#endif
 
         if (pid && (d.result == 0)) {
             response_header.cmd = LAUNCHER_OK;
@@ -1410,12 +1360,11 @@ static void handle_requests(pid_t waitForPid)
 static void generate_socket_name()
 {
 
+#if HAVE_X11 || HAVE_XCB // qt5: see displayEnvVarName_c()
     QByteArray display = qgetenv(displayEnvVarName_c());
     if (display.isEmpty()) {
-#if HAVE_X11 // qt5: see displayEnvVarName_c()
         fprintf(stderr, "kdeinit5: Aborting. $%s is not set. \n", displayEnvVarName_c());
         exit(255);
-#endif
     }
     int i;
     if ((i = display.lastIndexOf('.')) > display.lastIndexOf(':') && i >= 0) {
@@ -1424,7 +1373,12 @@ static void generate_socket_name()
 
     display.replace(':', '_');
 #ifdef __APPLE__
+    // not entirely impossible, so let's leave it
     display.replace('/', '_');
+#endif
+#else
+    // not using a DISPLAY variable; use an empty string instead
+    QByteArray display = "";
 #endif
     // WARNING, if you change the socket name, adjust kwrapper too
     const QString socketFileName = QStringLiteral("kdeinit5_%1").arg(QLatin1String(display));
@@ -1506,9 +1460,7 @@ int kdeinit_x_errhandler(Display *dpy, XErrorEvent *err)
 #endif
     return 0;
 }
-#endif
 
-#if HAVE_X11
 // needs to be done sooner than initXconnection() because of also opening
 // another X connection for startup notification purposes
 static void setupX()
@@ -1581,6 +1533,7 @@ static int initXconnection()
 }
 #endif
 
+#ifndef Q_OS_OSX
 // Find a shared lib in the lib dir, e.g. libkio.so.
 // Completely unrelated to plugins.
 static QString findSharedLib(const QString &lib)
@@ -1591,57 +1544,6 @@ static QString findSharedLib(const QString &lib)
     }
     // We could also look in LD_LIBRARY_PATH, but really, who installs the main libs in different prefixes?
     return QString();
-}
-
-#ifdef Q_OS_MAC
-/**
- Calling CoreFoundation APIs (which is unavoidable in Qt/Mac) has always had issues
- on Mac OS X, but as of 10.5 is explicitly disallowed with an exception.  As a
- result, in the case where we would normally fork and then dlopen code, or continue
- to run other code, we must now fork-and-exec.
-
- See "CoreFoundation and fork()" at http://developer.apple.com/releasenotes/CoreFoundation/CoreFoundation.html
-*/
-// Copied from kkernel_mac.cpp
-void
-mac_fork_and_reexec_self()
-{
-    int argc = *_NSGetArgc();
-    char **argv = *_NSGetArgv();
-    char *newargv[argc + 2];
-    char progname[PATH_MAX];
-    uint32_t buflen = PATH_MAX;
-    _NSGetExecutablePath(progname, &buflen);
-    bool found_psn = false;
-
-    for (int i = 0; i < argc; i++) {
-        newargv[i] = argv[i];
-    }
-
-    newargv[argc] = "--nofork";
-    newargv[argc + 1] = NULL;
-
-    int x_fork_result = fork();
-    switch (x_fork_result) {
-
-    case -1:
-#ifndef NDEBUG
-        fprintf(stderr, "Mac OS X workaround fork() failed!\n");
-#endif
-        ::_exit(255);
-        break;
-
-    case 0:
-        // Child
-        execvp(progname, newargv);
-        break;
-
-    default:
-        // Parent
-        _exit(0);
-        break;
-
-    }
 }
 #endif
 
@@ -1721,7 +1623,7 @@ int main(int argc, char **argv)
     (void)dup2(2, 1);
 
     if (do_fork) {
-#ifdef Q_OS_MAC
+#ifdef Q_OS_OSX
         mac_fork_and_reexec_self();
 #else
         if (pipe(d.initpipe) != 0) {
@@ -1786,7 +1688,7 @@ int main(int argc, char **argv)
          */
         init_kdeinit_socket();
     }
-#ifdef Q_OS_UNIX
+#if defined(Q_OS_UNIX) && !defined(Q_OS_OSX)
     if (!d.suicide && qEnvironmentVariableIsEmpty("KDE_IS_PRELINKED")) {
         const int extrasCount = sizeof(extra_libs) / sizeof(extra_libs[0]);
         for (int i = 0; i < extrasCount; i++) {
