@@ -552,7 +552,15 @@ KLauncher::requestStart(KLaunchRequest *request)
     connect(process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slotFinished(int,QProcess::ExitStatus)));
     request->process = process;
 
-// process.setEnvironment(envlist);
+    QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
+    foreach (const QString &env, request->envs) {
+        const int pos = env.indexOf(QLatin1Char('='));
+        const QString envVariable = env.left(pos);
+        const QString envValue = env.mid(pos + 1);
+        environment.insert(envVariable, envValue);
+    }
+    process.setEnvironment(environment);
+
     QStringList args;
     foreach (const QString &arg, request->arg_list) {
         args << arg;
