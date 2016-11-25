@@ -559,7 +559,7 @@ KLauncher::requestStart(KLaunchRequest *request)
         const QString envValue = env.mid(pos + 1);
         environment.insert(envVariable, envValue);
     }
-    process->setEnvironment(environment);
+    process->setProcessEnvironment(environment);
 
     QStringList args;
     foreach (const QString &arg, request->arg_list) {
