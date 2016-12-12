@@ -723,6 +723,31 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
     KLaunchRequest *request = new KLaunchRequest;
     request->autoStart = autoStart;
 
+    enum DiscreteGpuCheck { NotChecked, Present, Absent };
+    static DiscreteGpuCheck s_gpuCheck = NotChecked;
+
+    if (service->runOnDiscreteGpu() && s_gpuCheck == NotChecked) {
+        // Check whether we have a discrete gpu
+        bool hasDiscreteGpu = false;
+        QDBusInterface iface(QLatin1String("org.kde.Solid.PowerManagement"),
+                             QLatin1String("/org/kde/Solid/PowerManagement"),
+                             QLatin1String("org.kde.Solid.PowerManagement"),
+                             QDBusConnection::sessionBus());
+        if (iface.isValid()) {
+            QDBusReply<bool> reply = iface.call(QLatin1String("hasDualGpu"));
+            if (reply.isValid()) {
+                hasDiscreteGpu = reply.value();
+            }
+        }
+
+        s_gpuCheck = hasDiscreteGpu ? Present : Absent;
+    }
+
+    QStringList _envs = envs;
+    if (service->runOnDiscreteGpu() && s_gpuCheck == Present) {
+        _envs << QLatin1String("DRI_PRIME=1");
+    }
+
     if ((urls.count() > 1) && !service->allowMultipleFiles()) {
         // We need to launch the application N times. That sucks.
         // We ignore the result for application 2 to N.
@@ -739,7 +764,7 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
             if (!startup_id2.isEmpty() && startup_id2 != "0") {
                 startup_id2 = "0";    // can't use the same startup_id several times // krazy:exclude=doublequote_chars
             }
-            start_service(service, singleUrl, envs, startup_id2, true, false, msg);
+            start_service(service, singleUrl, _envs, startup_id2, true, false, msg);
         }
         const QString firstURL = urls.at(0);
         urls.clear();
@@ -754,7 +779,7 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
         requestResult.result = ENOEXEC;
         requestResult.error = i18n("Service '%1' is malformatted.", service->entryPath());
         delete request;
-        cancel_service_startup_info(NULL, startup_id, envs);
+        cancel_service_startup_info(NULL, startup_id, _envs);
         return false;
     }
 
@@ -791,8 +816,8 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
 
     request->pid = 0;
     request->wait = false;
-    request->envs = envs;
-    send_service_startup_info(request, service, startup_id, envs);
+    request->envs = _envs;
+    send_service_startup_info(request, service, startup_id, _envs);
 
     // Request will be handled later.
     if (!blind && !autoStart) {
