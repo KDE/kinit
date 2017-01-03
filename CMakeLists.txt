@@ -16,7 +16,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 
 
-include(ECMPackageConfigHelpers)
+include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 
 set(KF5_VERSION "5.30.0") # handled by release scripts
@@ -65,7 +65,7 @@ endif ()
 set(HAVE_CAPABILITIES ${Libcap_FOUND})
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Init")
-ecm_configure_package_config_file(
+configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KF5InitConfig.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/KF5InitConfig.cmake"
   PATH_VARS KDE_INSTALL_DBUSINTERFACEDIR
