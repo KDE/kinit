@@ -120,7 +120,7 @@ static Display *X11display = nullptr;
 static int X11_startup_notify_fd = -1;
 #endif
 #if HAVE_XCB
-static xcb_connection_t *s_startup_notify_connection = Q_NULLPTR;
+static xcb_connection_t *s_startup_notify_connection = nullptr;
 static int s_startup_notify_screen = 0;
 #endif
 // Finds size of sun_path without allocating a sockaddr_un to do it.
@@ -317,7 +317,7 @@ static void init_startup_info(KStartupInfoId &id, const QByteArray &bin,
     }
     if (xcb_connection_has_error(s_startup_notify_connection)) {
         xcb_disconnect(s_startup_notify_connection);
-        s_startup_notify_connection = Q_NULLPTR;
+        s_startup_notify_connection = nullptr;
         return;
     }
     X11_startup_notify_fd = xcb_get_file_descriptor(s_startup_notify_connection);
@@ -343,7 +343,7 @@ static void complete_startup_info(KStartupInfoId &id, pid_t pid)
         KStartupInfo::sendChangeXcb(s_startup_notify_connection, s_startup_notify_screen, id, data);
     }
     xcb_disconnect(s_startup_notify_connection);
-    s_startup_notify_connection = Q_NULLPTR;
+    s_startup_notify_connection = nullptr;
     s_startup_notify_screen = 0;
     X11_startup_notify_fd = -1;
 }

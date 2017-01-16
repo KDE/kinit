@@ -260,10 +260,10 @@ protected Q_SLOTS:
 private:
 #if HAVE_XCB
     struct XCBConnection {
-        XCBConnection() : conn(Q_NULLPTR), screen(0) { }
+        XCBConnection() : conn(nullptr), screen(0) { }
 
         operator bool() const {
-            return conn != Q_NULLPTR;
+            return conn != nullptr;
         }
 
         xcb_connection_t *conn;
