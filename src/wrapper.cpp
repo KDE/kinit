@@ -182,7 +182,7 @@ static void setup_signal_handler(int signo, int clean)
     sigemptyset(&sa.sa_mask);
     sigaddset(&sa.sa_mask, signo);
     sa.sa_flags = 0; /* don't use SA_RESTART */
-    sigaction(signo, &sa, 0);
+    sigaction(signo, &sa, nullptr);
 }
 
 static void sig_pass_handler(int signo)
@@ -247,7 +247,7 @@ static int kwrapper_run(pid_t wrapped, int sock)
     }
 
     buffer = (char *) malloc(header.arg_length);
-    if (buffer == NULL) {
+    if (buffer == nullptr) {
         perror("Error: malloc() failed\n");
         exit(255);
     }
@@ -275,9 +275,9 @@ int main(int argc, char **argv)
     klauncher_header header;
     char *start, *p, *buffer;
     char cwd[8192];
-    const char *tty = NULL;
+    const char *tty = nullptr;
     long avoid_loops = 0;
-    const char *startup_id = NULL;
+    const char *startup_id = nullptr;
     int sock;
 
     long size = 0;
@@ -386,7 +386,7 @@ int main(int argc, char **argv)
 
     if (!wrapper) {
         startup_id = getenv("DESKTOP_STARTUP_ID");
-        if (startup_id == NULL) {
+        if (startup_id == nullptr) {
             startup_id = "";
         }
         size += strlen(startup_id) + 1;
@@ -403,7 +403,7 @@ int main(int argc, char **argv)
     write_socket(sock, (char *) &header, sizeof(header));
 
     buffer = (char *) malloc(size);
-    if (buffer == NULL) {
+    if (buffer == nullptr) {
         perror("Error: malloc() failed.");
         exit(255);
     }
@@ -470,7 +470,7 @@ int main(int argc, char **argv)
     if (header.cmd == LAUNCHER_OK) {
         long pid;
         buffer = (char *) malloc(header.arg_length);
-        if (buffer == NULL) {
+        if (buffer == nullptr) {
             perror("Error: malloc() failed\n");
             exit(255);
         }

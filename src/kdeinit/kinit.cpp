@@ -116,7 +116,7 @@ extern char **environ;
 
 #if HAVE_X11
 static int X11fd = -1;
-static Display *X11display = 0;
+static Display *X11display = nullptr;
 static int X11_startup_notify_fd = -1;
 #endif
 #if HAVE_XCB
@@ -263,7 +263,7 @@ static void child_died(pid_t exit_pid, int exit_status)
 
 void setup_tty(const char *tty)
 {
-    if (tty == NULL || *tty == '\0') {
+    if (tty == nullptr || *tty == '\0') {
         return;
     }
     QFile f(QFile::decodeName(tty));
@@ -300,7 +300,7 @@ const char *get_env_var(const char *var, int envc, const char *envs)
             env_l++;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 #if HAVE_XCB
@@ -355,7 +355,7 @@ QByteArray execpath_avoid_loops(const QByteArray &exec, int envc, const char *en
     const QRegExp pathSepRegExp(QStringLiteral("[:\b]"));
     if (envc > 0) { /* use the passed environment */
         const char *path = get_env_var("PATH=", envc, envs);
-        if (path != NULL) {
+        if (path != nullptr) {
             paths = QFile::decodeName(path).split(pathSepRegExp);
         }
     } else {
@@ -404,7 +404,7 @@ void reset_oom_protect()
         timeout.tv_sec = 1;
         timeout.tv_nsec = 0;
         do {
-            if (sigtimedwait(&sigs, NULL, &timeout) < 0) { // wait for the signal to come
+            if (sigtimedwait(&sigs, nullptr, &timeout) < 0) { // wait for the signal to come
                 if (errno == EINTR) {
                     // other signal
                     continue;
@@ -421,8 +421,8 @@ void reset_oom_protect()
         fprintf(stderr, "Failed to reset OOM protection: %d\n", pid);
 #endif
     }
-    sigprocmask(SIG_SETMASK, &oldsigs, NULL);
-    sigaction(SIGUSR1, &oldact, NULL);
+    sigprocmask(SIG_SETMASK, &oldsigs, nullptr);
+    sigaction(SIGUSR1, &oldact, nullptr);
     close(oom_pipe);
     oom_pipe = -1;
 }
@@ -447,9 +447,9 @@ static void exitWithErrorMsg(const QString &errorMsg)
 }
 
 static pid_t launch(int argc, const char *_name, const char *args,
-                    const char *cwd = 0, int envc = 0, const char *envs = 0,
+                    const char *cwd = nullptr, int envc = 0, const char *envs = nullptr,
                     bool reset_env = false,
-                    const char *tty = 0, bool avoid_loops = false,
+                    const char *tty = nullptr, bool avoid_loops = false,
                     const char *startup_id_str = "0")  // krazy:exclude=doublequote_chars
 {
     QString lib;
@@ -522,7 +522,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
     // find out this path before forking, doing it afterwards
     // crashes on some platforms, notably OSX
 
-    d.errorMsg = 0;
+    d.errorMsg = nullptr;
     d.fork = fork();
     switch (d.fork) {
     case -1:
@@ -592,7 +592,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
                 }
                 args++;
             }
-            d.argv[argc] = 0;
+            d.argv[argc] = nullptr;
 
 #ifndef SKIP_PROCTITLE
             /** Give the process a new name **/
@@ -820,7 +820,7 @@ static void init_signals()
     act.sa_handler = sig_child_handler;
     sigemptyset(&(act.sa_mask));
     sigaddset(&(act.sa_mask), SIGCHLD);
-    sigprocmask(SIG_UNBLOCK, &(act.sa_mask), 0L);
+    sigprocmask(SIG_UNBLOCK, &(act.sa_mask), nullptr);
     act.sa_flags = SA_NOCLDSTOP;
 
     // CC: take care of SunOS which automatically restarts interrupted system
@@ -829,14 +829,14 @@ static void init_signals()
 #ifdef SA_RESTART
     act.sa_flags |= SA_RESTART;
 #endif
-    sigaction(SIGCHLD, &act, 0L);
+    sigaction(SIGCHLD, &act, nullptr);
 
     act.sa_handler = SIG_IGN;
     sigemptyset(&(act.sa_mask));
     sigaddset(&(act.sa_mask), SIGPIPE);
-    sigprocmask(SIG_UNBLOCK, &(act.sa_mask), 0L);
+    sigprocmask(SIG_UNBLOCK, &(act.sa_mask), nullptr);
     act.sa_flags = 0;
-    sigaction(SIGPIPE, &act, 0L);
+    sigaction(SIGPIPE, &act, nullptr);
 }
 
 static void init_kdeinit_socket()
@@ -1031,7 +1031,7 @@ static bool handle_launcher_request(int sock, const char *who)
     (void)who; // for NDEBUG
 
     klauncher_header request_header;
-    char *request_data = 0L;
+    char *request_data = nullptr;
     int result = read_socket(sock, (char *) &request_header, sizeof(request_header));
     if (result != 0) {
         return false;
@@ -1065,10 +1065,10 @@ static bool handle_launcher_request(int sock, const char *who)
         int argc = l;
         const char *name = request_data + sizeof(long);
         const char *args = name + strlen(name) + 1;
-        const char *cwd = 0;
+        const char *cwd = nullptr;
         int envc = 0;
-        const char *envs = 0;
-        const char *tty = 0;
+        const char *envs = nullptr;
+        const char *tty = nullptr;
         int avoid_loops = 0;
         const char *startup_id_str = "0"; // krazy:exclude=doublequote_chars
 
@@ -1203,7 +1203,7 @@ static bool handle_launcher_request(int sock, const char *who)
         fprintf(stderr, "kdeinit5: terminate KDE.\n");
 #endif
 #if HAVE_X11
-        kdeinit_xio_errhandler(0L);
+        kdeinit_xio_errhandler(nullptr);
 #endif
     } else if (request_header.cmd == LAUNCHER_TERMINATE_KDEINIT) {
 #ifndef NDEBUG
@@ -1311,7 +1311,7 @@ static void handle_requests(pid_t waitForPid)
         }
 #endif
 
-        result = select(max_sock, &rd_set, &wr_set, &e_set, 0);
+        result = select(max_sock, &rd_set, &wr_set, &e_set, nullptr);
         if (result < 0) {
             if (errno == EINTR || errno == EAGAIN) {
                 continue;
@@ -1346,7 +1346,7 @@ static void handle_requests(pid_t waitForPid)
 #if HAVE_X11
         /* Look for incoming X11 events */
         if (X11fd >= 0 && FD_ISSET(X11fd, &rd_set)) {
-            if (X11display != 0) {
+            if (X11display != nullptr) {
                 XEvent event_return;
                 while (XPending(X11display)) {
                     XNextEvent(X11display, &event_return);
@@ -1512,8 +1512,8 @@ static void setupX()
 // Borrowed from kdebase/kaudio/kaudioserver.cpp
 static int initXconnection()
 {
-    X11display = XOpenDisplay(NULL);
-    if (X11display != 0) {
+    X11display = XOpenDisplay(nullptr);
+    if (X11display != nullptr) {
         XCreateSimpleWindow(X11display, DefaultRootWindow(X11display), 0, 0, 1, 1, \
                             0,
                             BlackPixelOfScreen(DefaultScreenOfDisplay(X11display)),
@@ -1551,7 +1551,7 @@ extern "C" {
 
     static void secondary_child_handler(int)
     {
-        waitpid(-1, 0, WNOHANG);
+        waitpid(-1, nullptr, WNOHANG);
     }
 
 }
@@ -1674,7 +1674,7 @@ int main(int argc, char **argv)
     d.accepted_fd = -1;
     d.debug_wait = false;
     d.launcher_ok = false;
-    children = NULL;
+    children = nullptr;
     init_signals();
 #if HAVE_X11
     setupX();
@@ -1722,14 +1722,14 @@ int main(int argc, char **argv)
         if (XSupportsLocale()) {
             // Similar to QApplication::create_xim()
             // but we need to use our own display
-            XOpenIM(X11display, 0, 0, 0);
+            XOpenIM(X11display, nullptr, nullptr, nullptr);
         }
 #endif
     }
 
     if (launch_kded) {
         qputenv("KDED_STARTED_BY_KDEINIT", "1");
-        pid = launch(1, KDED_EXENAME, 0);
+        pid = launch(1, KDED_EXENAME, nullptr);
         unsetenv("KDED_STARTED_BY_KDEINIT");
 #ifndef NDEBUG
         fprintf(stderr, "kdeinit5: Launched KDED, pid = %ld result = %d\n", (long) pid, d.result);
@@ -1741,7 +1741,7 @@ int main(int argc, char **argv)
 
     for (int i = 1; i < argc; i++) {
         if (safe_argv[i][0] == '+') {
-            pid = launch(1, safe_argv[i] + 1, 0);
+            pid = launch(1, safe_argv[i] + 1, nullptr);
 #ifndef NDEBUG
             fprintf(stderr, "kdeinit5: Launched '%s', pid = %ld result = %d\n", safe_argv[i] + 1, (long) pid, d.result);
 #endif
@@ -1753,7 +1753,7 @@ int main(int argc, char **argv)
                   ) {
             // Ignore
         } else {
-            pid = launch(1, safe_argv[i], 0);
+            pid = launch(1, safe_argv[i], nullptr);
 #ifndef NDEBUG
             fprintf(stderr, "kdeinit5: Launched '%s', pid = %ld result = %d\n", safe_argv[i], (long) pid, d.result);
 #endif

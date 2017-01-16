@@ -66,7 +66,7 @@
 #endif
 
 #if PT_TYPE == PT_REUSEARGV
-static char *argv_start = NULL;
+static char *argv_start = nullptr;
 static size_t argv_env_len = 0;
 #endif
 
@@ -97,11 +97,11 @@ proctitle_init(int argc, char *argv[])
 #endif
 
 #if PT_TYPE == PT_REUSEARGV
-    if (argc == 0 || argv[0] == NULL)
+    if (argc == 0 || argv[0] == nullptr)
         return;
 
     extern char **environ;
-    char *lastargv = NULL;
+    char *lastargv = nullptr;
     char **envp = environ;
     int i;
 
@@ -112,9 +112,9 @@ proctitle_init(int argc, char *argv[])
      */
 
     /* Fail if we can't allocate room for the new environment */
-    for (i = 0; envp[i] != NULL; i++)
+    for (i = 0; envp[i] != nullptr; i++)
         ;
-    if ((environ = (char**)calloc(i + 1, sizeof(*environ))) == NULL) {
+    if ((environ = (char**)calloc(i + 1, sizeof(*environ))) == nullptr) {
         environ = envp;    /* put it back */
         return;
     }
@@ -124,15 +124,15 @@ proctitle_init(int argc, char *argv[])
      * our process memory area.
      */
     for (i = 0; i < argc; i++) {
-        if (lastargv == NULL || lastargv + 1 == argv[i])
+        if (lastargv == nullptr || lastargv + 1 == argv[i])
             lastargv = argv[i] + strlen(argv[i]);
     }
-    for (i = 0; envp[i] != NULL; i++) {
+    for (i = 0; envp[i] != nullptr; i++) {
         if (lastargv + 1 == envp[i])
             lastargv = envp[i] + strlen(envp[i]);
     }
 
-    argv[1] = NULL;
+    argv[1] = nullptr;
     argv_start = argv[0];
     argv_env_len = lastargv - argv[0] - 1;
 
@@ -140,9 +140,9 @@ proctitle_init(int argc, char *argv[])
      * Copy environment
      * XXX - will truncate env on strdup fail
      */
-    for (i = 0; envp[i] != NULL; i++)
+    for (i = 0; envp[i] != nullptr; i++)
         environ[i] = strdup(envp[i]);
-    environ[i] = NULL;
+    environ[i] = nullptr;
 #endif /* PT_REUSEARGV */
 }
 
@@ -156,7 +156,7 @@ proctitle_set(const char *fmt, ...)
 #endif
 
     bool skip_proctitle = false;
-    if (fmt != NULL && fmt[0] == '-') {
+    if (fmt != nullptr && fmt[0] == '-') {
         skip_proctitle = true;
         ++fmt;
     }
@@ -168,14 +168,14 @@ proctitle_set(const char *fmt, ...)
     if (!skip_proctitle) {
         strncpy(ptitle, __progname, sizeof(ptitle)-1);
         len = strlen(ptitle);
-        if (fmt != NULL && sizeof(ptitle) - len > 2) {
+        if (fmt != nullptr && sizeof(ptitle) - len > 2) {
             strcpy(ptitle + len, ": ");
             len += 2;
         }
     }
 #endif
 
-    if (fmt != NULL) {
+    if (fmt != nullptr) {
         int r = -1;
         if (len < sizeof(ptitle) - 1) {
             va_list ap;

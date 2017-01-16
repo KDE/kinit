@@ -102,7 +102,7 @@ ssize_t kde_safe_write(int fd, const void *buf, size_t count)
 
 #ifndef USE_KPROCESS_FOR_KIOSLAVES
 KLauncher::KLauncher(int _kdeinitSocket)
-    : QObject(0),
+    : QObject(nullptr),
       kdeinitSocket(_kdeinitSocket)
 #else
 KLauncher::KLauncher()
@@ -112,7 +112,7 @@ KLauncher::KLauncher()
 #if HAVE_X11
     mIsX11 = QGuiApplication::platformName() == QStringLiteral("xcb");
 #endif
-    Q_ASSERT(g_klauncher_self == NULL);
+    Q_ASSERT(g_klauncher_self == nullptr);
     g_klauncher_self = this;
 
     mAutoTimer.setSingleShot(true);
@@ -141,7 +141,7 @@ KLauncher::KLauncher()
             this, SLOT(slotKDEInitData(int)));
     kdeinitNotifier->setEnabled(true);
 #endif
-    lastRequest = 0;
+    lastRequest = nullptr;
     bProcessingQueue = false;
 
     mSlaveDebug = QString::fromLocal8Bit(qgetenv("KDE_SLAVE_DEBUG_WAIT"));
@@ -174,7 +174,7 @@ KLauncher::KLauncher()
 KLauncher::~KLauncher()
 {
     close();
-    g_klauncher_self = NULL;
+    g_klauncher_self = nullptr;
 }
 
 void KLauncher::close()
@@ -235,7 +235,7 @@ read_socket(int sock, char *buffer, int len)
         timeval tm = { 30, 0 }; // 30 seconds timeout, so we're not stuck in case kdeinit dies on us
         FD_ZERO(&in);
         FD_SET(sock, &in);
-        select(sock + 1, &in, 0, 0, &tm);
+        select(sock + 1, &in, nullptr, nullptr, &tm);
         if (!FD_ISSET(sock, &in)) {
             qCDebug(KLAUNCHER) << "read_socket" << sock << "nothing to read, kdeinit5 must be dead";
             return -1;
@@ -304,7 +304,7 @@ void KLauncher::processRequestReturn(int status, const QByteArray &requestData)
             lastRequest->status = KLaunchRequest::Launching;
             break;
         }
-        lastRequest = 0;
+        lastRequest = nullptr;
         return;
     }
     if (lastRequest && (status == LAUNCHER_ERROR)) {
@@ -313,7 +313,7 @@ void KLauncher::processRequestReturn(int status, const QByteArray &requestData)
         if (!requestData.isEmpty()) {
             lastRequest->errorMsg = QString::fromUtf8((char *) requestData.data());
         }
-        lastRequest = 0;
+        lastRequest = nullptr;
         return;
     }
 
@@ -635,7 +635,7 @@ KLauncher::requestStart(KLaunchRequest *request)
     lastRequest = request;
     do {
         slotKDEInitData(kdeinitSocket);
-    } while (lastRequest != 0);
+    } while (lastRequest != nullptr);
 #endif
 }
 
@@ -682,7 +682,7 @@ KLauncher::start_service_by_desktop_path(const QString &serviceName, const QStri
     if (!service) {
         requestResult.result = ENOENT;
         requestResult.error = i18n("Could not find service '%1'.", serviceName);
-        cancel_service_startup_info(NULL, startup_id.toLocal8Bit(), envs);   // cancel it if any
+        cancel_service_startup_info(nullptr, startup_id.toLocal8Bit(), envs);   // cancel it if any
         return false;
     }
     return start_service(service, urls, envs, startup_id.toLocal8Bit(), blind, false, msg);
@@ -696,7 +696,7 @@ KLauncher::start_service_by_desktop_name(const QString &serviceName, const QStri
     if (!service) {
         requestResult.result = ENOENT;
         requestResult.error = i18n("Could not find service '%1'.", serviceName);
-        cancel_service_startup_info(NULL, startup_id.toLocal8Bit(), envs);   // cancel it if any
+        cancel_service_startup_info(nullptr, startup_id.toLocal8Bit(), envs);   // cancel it if any
         return false;
     }
     return start_service(service, urls, envs, startup_id.toLocal8Bit(), blind, false, msg);
@@ -717,7 +717,7 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
         } else {
             requestResult.error = i18n("Service '%1' is malformatted.", service->entryPath());
         }
-        cancel_service_startup_info(NULL, startup_id, envs);   // cancel it if any
+        cancel_service_startup_info(nullptr, startup_id, envs);   // cancel it if any
         return false;
     }
     KLaunchRequest *request = new KLaunchRequest;
@@ -779,7 +779,7 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
         requestResult.result = ENOEXEC;
         requestResult.error = i18n("Service '%1' is malformatted.", service->entryPath());
         delete request;
-        cancel_service_startup_info(NULL, startup_id, _envs);
+        cancel_service_startup_info(nullptr, startup_id, _envs);
         return false;
     }
 
@@ -887,7 +887,7 @@ KLauncher::cancel_service_startup_info(KLaunchRequest *request, const QByteArray
                                        const QStringList &envs)
 {
 #if HAVE_XCB
-    if (request != NULL) {
+    if (request != nullptr) {
         request->startup_id = "0";    // krazy:exclude=doublequote_chars
     }
     if (!startup_id.isEmpty() && startup_id != "0" && mIsX11) {
@@ -1001,7 +1001,7 @@ pid_t
 KLauncher::requestHoldSlave(const QString &urlStr, const QString &app_socket)
 {
     const QUrl url(urlStr);
-    IdleSlave *slave = 0;
+    IdleSlave *slave = nullptr;
     foreach (IdleSlave *p, mSlaveList) {
         if (p->onHold(url)) {
             slave = p;
@@ -1022,7 +1022,7 @@ KLauncher::requestSlave(const QString &protocol,
                         const QString &app_socket,
                         QString &error)
 {
-    IdleSlave *slave = 0;
+    IdleSlave *slave = nullptr;
     foreach (IdleSlave *p, mSlaveList) {
         if (p->match(protocol, host, true)) {
             slave = p;
