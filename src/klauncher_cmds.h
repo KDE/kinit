@@ -174,6 +174,7 @@ typedef struct {
  * int avoid_loops : avoid using the first path in $PATH where
  *    this process binary is found in order to avoid
  *    infinite loop by binary->kdeinit_wrapper link in $PATH
+ * char *cwd: Working directory (optional).
  */
 
 const char *commandToString(int command);
