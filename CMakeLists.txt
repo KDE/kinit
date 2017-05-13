@@ -19,7 +19,7 @@ include(KDECMakeSettings)
 include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 
-set(KF5_VERSION "5.34.0") # handled by release scripts
+set(KF5_VERSION "5.35.0") # handled by release scripts
 set(KF5_DEP_VERSION "5.34.0") # handled by release scripts
 
 ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KINIT
