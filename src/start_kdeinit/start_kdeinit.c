@@ -19,6 +19,8 @@
 
 #include <config-kdeinit.h>
 
+#define _POSIX_C_SOURCE 200809L /* kill(2) */
+
 #include <errno.h>
 #include <fcntl.h>
 #include <signal.h>
