@@ -360,6 +360,11 @@ static bool matchesPendingRequest(const QString &appId, const QString &pendingAp
         return appName == pendingName;
     }
 
+    // Match sandboxed apps (e.g. flatpak), see https://phabricator.kde.org/D5775
+    if (newAppId.endsWith(QLatin1String(".kdbus"))) {
+        return newAppId.leftRef(newAppId.length() - 6) == pendingAppId;
+    }
+
     return newAppId == pendingAppId;
 }
 
