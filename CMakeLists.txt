@@ -20,7 +20,7 @@ include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 
 set(KF5_VERSION "5.38.0") # handled by release scripts
-set(KF5_DEP_VERSION "5.37.0") # handled by release scripts
+set(KF5_DEP_VERSION "5.38.0") # handled by release scripts
 
 ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KINIT
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kinit_version.h"
