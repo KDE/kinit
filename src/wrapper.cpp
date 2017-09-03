@@ -43,6 +43,7 @@
 extern char **environ;
 
 // copied from kdeinit/kinit.cpp
+#if HAVE_X11 || HAVE_XCB
 static const char* displayEnvVarName_c()
 {
     // Can't use QGuiApplication::platformName() here, there is no app instance.
@@ -54,6 +55,7 @@ static const char* displayEnvVarName_c()
     return "WIN_DISPLAY";
 #endif
 }
+#endif
 
 // adapted from kdeinit/kinit.cpp
 // WARNING, if you change the socket name, adjust kinit.cpp too
