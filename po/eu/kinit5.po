@@ -1,0 +1,117 @@
+# Translation of kinit5.po to Euskara/Basque (eu).
+# Copyright (C) 1999-2017, Free Software Foundation, Inc.
+# This file is distributed under the same license as the frameworks package.
+# KDE Euskaratzeko proiektuaren arduraduna <xalba@euskalnet.net>.
+#
+# Marcos <marcos@euskalgnu.org>, 2002,2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
+# Ion Gaztañaga <igaztanaga@gmail.com>, 2005.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2009.
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2010, 2011, 2012, 2013, 2014, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: kinit5\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-08-28 03:01+0200\n"
+"PO-Revision-Date: 2017-08-28 11:43+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
+"Language-Team: Basque <kde-i18n-doc@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kdeinit/kinit.cpp:509
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Ezin izan da prozesu berria abiarazi.\n"
+"Sistema gehienezko irekitako fitxategi (edo gehienez irekita eduki "
+"ditzakezun) kopururaino iritsi da."
+
+#: kdeinit/kinit.cpp:531
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Ezin izan da prozesu berria sortu.\n"
+"Sistema gehienezko prozesuen (edo gehienez eduki ditzakezun) kopururaino "
+"iritsi da."
+
+#: kdeinit/kinit.cpp:614
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Ezin da aurkitu '%1' exekutagarria."
+
+#: kdeinit/kinit.cpp:647
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Ezin izan da '%1' liburutegia ireki.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Ezin izan da '%1'(e)n 'kdemain' aurkitu.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:472
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit-ek ezin du '%1' abiarazi"
+
+#: klauncher/klauncher.cpp:658 klauncher/klauncher.cpp:672
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Ezin da '%1' zerbitzua aurkitu."
+
+#: klauncher/klauncher.cpp:690
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "'%1' zerbitzua exekutagarria izan behar du exekutatu ahal izateko."
+
+#: klauncher/klauncher.cpp:692 klauncher/klauncher.cpp:754
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "'%1' zerbitzua gaizki osatua dago."
+
+#: klauncher/klauncher.cpp:841
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 abiarazten"
+
+#: klauncher/klauncher.cpp:1026
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Protokolo ezezaguna: %1.\n"
+
+#: klauncher/klauncher.cpp:1032
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Ezin da '%1' plugina aurkitu.\n"
+
+#: klauncher/klauncher.cpp:1098
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "Errorea '%1' zamatzean."
+
+#: klauncher/klauncher_main.cpp:146
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Programa hau ez litzateke eskuz abiatu behar.\n"
+"klauncher: kdeinit5-ek automatikoki abiatzen du.\n"

@@ -1,0 +1,109 @@
+# translation of kdelibs4.po to marathi
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Sandeep Shedmake <sandeep.shedmake@gmail.com>, 2008, 2009.
+# Chetan Khona <chetan@kompkin.com>, 2012, 2013, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-08-28 03:01+0200\n"
+"PO-Revision-Date: 2014-10-28 14:44+0530\n"
+"Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
+"Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
+"Language: mr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: kdeinit/kinit.cpp:509
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:531
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:614
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "'%1' एक्जीक्यूटेबल आढळले नाही."
+
+#: kdeinit/kinit.cpp:647
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"लायब्ररी '%1' उघडू शकत नाही.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"'%1' अंतर्गत 'kdemain' आढळले नाही.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:472
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "केडीईInit '%1' सुरु करू शकला नाही."
+
+#: klauncher/klauncher.cpp:658 klauncher/klauncher.cpp:672
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "सेवा '%1' शोधू शकला नाही."
+
+#: klauncher/klauncher.cpp:690
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "'%1' ही सेवा चालू करण्याकरिता एक्जीक्यूटेबल असणे आवश्यक आहे."
+
+#: klauncher/klauncher.cpp:692 klauncher/klauncher.cpp:754
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "सेवा '%1' सदोषीत आहे."
+
+#: klauncher/klauncher.cpp:841
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 दाखल केले"
+
+#: klauncher/klauncher.cpp:1026
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "अपरिचीत शिष्टाचार '%1'.\n"
+
+#: klauncher/klauncher.cpp:1032
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "प्लगइन '%1' शोधू शकला नाही.\n"
+
+#: klauncher/klauncher.cpp:1098
+#, fuzzy, kde-format
+#| msgid "Error loading '%1'.\n"
+msgid "Error loading '%1'."
+msgstr "'%1' दाखलन करतेवेळी त्रुटी.\n"
+
+#: klauncher/klauncher_main.cpp:146
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: हा प्रोग्राम स्वचालित प्रारंभ होण्याकरिता नाही.\n"
+"klauncher: हा kdeinit5 द्वारे स्वचालित होता.\n"
