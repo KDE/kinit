@@ -1,0 +1,123 @@
+# translation of kdelibs4.po to Esperanto
+# Esperantaj mesaĝoj por "kdelibs"
+# Copyright (C) 1998,2002, 2003, 2004, 2005, 2007, 2008 Free Software Foundation, Inc.
+#
+# Minuskloj: ĉ ĝ ĵ ĥ ŝ ŭ   Majuskloj: Ĉ Ĝ Ĵ Ĥ Ŝ Ŭ
+#
+# Wolfram Diestel <wolfram@steloj.de>, 1998.
+# Heiko Evermann <heiko@evermann.de>, 2002, 2003.
+# Matthias Peick <matthias@peick.de>, 2004, 2005.
+# Oliver Kellogg <okellogg@users.sourceforge.net>,2007.
+# Cindy McKee <cfmckee@gmail.com>, 2007, 2008.
+# Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Michael Moroni <michael.moroni@mailoo.org>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-09-11 03:17+0200\n"
+"PO-Revision-Date: 2012-05-22 12:30+0200\n"
+"Last-Translator: Michael Moroni <michael.moroni@mailoo.org>\n"
+"Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
+"Language: eo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:509
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Ne povas lanĉi novan procezon.\n"
+"La sistemo eble atingis la maksimuman nombron de eblaj malfermitaj dosieroj "
+"aŭ atingis la nombron kiu vi estas permesata."
+
+#: kdeinit/kinit.cpp:531
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Ne povas krei novan procezon.\n"
+"La sistemo eble atingis la maksimuman nombron de eblaj procezoj aŭ atingis "
+"la nombron kiu vi estas permesata."
+
+#: kdeinit/kinit.cpp:614
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Ne eblis trovi la programon '%1'."
+
+#: kdeinit/kinit.cpp:647
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Ne eblis dinamike ŝargi la bibliotekon '%1'.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Ne eblis trovi la funkcion 'kdemain' en '%1'.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:472
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit ne povis ruli '%1'"
+
+#: klauncher/klauncher.cpp:658 klauncher/klauncher.cpp:672
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Ne eblis trovi la servon '%1'."
+
+#: klauncher/klauncher.cpp:690
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Servo '%1' lanĉeblu por ruli."
+
+#: klauncher/klauncher.cpp:692 klauncher/klauncher.cpp:754
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Servo '%1' estas malbonforma."
+
+#: klauncher/klauncher.cpp:841
+#, kde-format
+msgid "Launching %1"
+msgstr "Lanĉas %1"
+
+#: klauncher/klauncher.cpp:1026
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Nekonata protokolo '%1'.\n"
+
+#: klauncher/klauncher.cpp:1032
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Ne eblis trovi la servon '%1'."
+
+#: klauncher/klauncher.cpp:1106
+#, fuzzy, kde-format
+#| msgid "Error loading '%1'.\n"
+msgid "Error loading '%1'."
+msgstr "Eraro dum lego de '%1'.\n"
+
+#: klauncher/klauncher_main.cpp:146
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klanĉilo: Ĉi tiun programon ne lanĉu mane.\n"
+"klanĉilo: Ĝi estas lanĉata aŭtomate de kdeinit5.\n"

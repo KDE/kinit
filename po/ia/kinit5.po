@@ -1,0 +1,113 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# g.sora <g.sora@tiscali.it>, 2010, 2011, 2012, 2013, 2014, 2017.
+# Giovanni Sora <g.sora@tioscali.it>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-09-11 03:17+0200\n"
+"PO-Revision-Date: 2017-01-15 19:49+0100\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-it@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: kdeinit/kinit.cpp:509
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Incapabile de poner in marcha nove processos.\n"
+"Le systema pote haber attingite le numero maxime de possibile files aperite "
+"o le numero maxime de files aperite que tu ha le permission de usar."
+
+#: kdeinit/kinit.cpp:531
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Incapabile de crear un nove processo.\n"
+"Le systema pote haber attingite le numero maxime de processos possibile o le "
+"numero maxime de processos que tu ha le permission de usar."
+
+#: kdeinit/kinit.cpp:614
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Il non pote trovar '%1' executabile."
+
+#: kdeinit/kinit.cpp:647
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Il non pote aperir le libreria '%1'.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Il non pote trovar 'kdemain' in '%1'.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:472
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit non pote lancear '%1'"
+
+#: klauncher/klauncher.cpp:658 klauncher/klauncher.cpp:672
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Il non pote trovar le servicio '%1'."
+
+#: klauncher/klauncher.cpp:690
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Le servicio '%1' debe esser executabile pro executar se."
+
+#: klauncher/klauncher.cpp:692 klauncher/klauncher.cpp:754
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Le servicio '%1' es de mal forma."
+
+#: klauncher/klauncher.cpp:841
+#, kde-format
+msgid "Launching %1"
+msgstr "Il es lanceante %1"
+
+#: klauncher/klauncher.cpp:1026
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Protocollo '%1' incognite.\n"
+
+#: klauncher/klauncher.cpp:1032
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Il non pote trovar le plugin '%1'.\n"
+
+#: klauncher/klauncher.cpp:1106
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "Error in cargamento de '%1'."
+
+#: klauncher/klauncher_main.cpp:146
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Il non suppone que iste programma debe lancear se manualmente.\n"
+"klauncher: Il es ponite in marcha automaticamente per kdeinit5.\n"
