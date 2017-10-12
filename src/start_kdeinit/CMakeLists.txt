@@ -15,7 +15,7 @@ if (KDEINIT_OOM_PROTECT)
                           COMMAND
                                  ${SETCAP_EXECUTABLE}
                                  CAP_SYS_RESOURCE=+ep
-                                 $ENV{DESTDIR}${CMAKE_INSTALL_FULL_LIBEXECDIR_KF5}/start_kdeinit)"
+                                 \$ENV{DESTDIR}${CMAKE_INSTALL_FULL_LIBEXECDIR_KF5}/start_kdeinit)"
                 )
        else()
                   install(CODE "
