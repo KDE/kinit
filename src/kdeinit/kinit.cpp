@@ -515,7 +515,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
 #if HAVE_XCB
     KStartupInfoId startup_id;
     startup_id.initId(startup_id_str);
-    if (!startup_id.none()) {
+    if (!startup_id.isNull()) {
         init_startup_info(startup_id, name, envc, envs);
     }
 #endif
@@ -572,7 +572,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
         }
 
 #if HAVE_X11
-        if (startup_id.none()) {
+        if (startup_id.isNull()) {
             KStartupInfo::resetStartupEnv();
         } else {
             startup_id.setupStartupEnv();
@@ -761,7 +761,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
         close(d.fd[0]);
     }
 #if HAVE_XCB
-    if (!startup_id.none()) {
+    if (!startup_id.isNull()) {
         if (d.fork && d.result == 0) { // launched successfully
             complete_startup_info(startup_id, d.fork);
         } else { // failure, cancel ASN
