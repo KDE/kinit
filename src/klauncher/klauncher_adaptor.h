@@ -45,7 +45,6 @@ public:
 
 public: // PROPERTIES
 public Q_SLOTS: // METHODS
-    void autoStart(int phase = 1);
     void exec_blind(const QString &name, const QStringList &arg_list);
     void exec_blind(const QString &name, const QStringList &arg_list, const QStringList &envs, const QString &startup_id);
     int kdeinit_exec(const QString &app, const QStringList &args, const QStringList &env, const QString &startup_id, const QDBusMessage &msg, QString &dbusServiceName, QString &error, int &pid);
@@ -56,10 +55,6 @@ public Q_SLOTS: // METHODS
     int start_service_by_desktop_name(const QString &serviceName, const QStringList &urls, const QStringList &envs, const QString &startup_id, bool blind, const QDBusMessage &msg, QString &dbusServiceName, QString &error, int &pid);
     int start_service_by_desktop_path(const QString &serviceName, const QStringList &urls, const QStringList &envs, const QString &startup_id, bool blind, const QDBusMessage &msg, QString &dbusServiceName, QString &error, int &pid);
     void terminate_kdeinit();
-Q_SIGNALS: // SIGNALS
-    void autoStart0Done();
-    void autoStart1Done();
-    void autoStart2Done();
 };
 
 #endif

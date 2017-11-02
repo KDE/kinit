@@ -50,12 +50,6 @@ KLauncherAdaptor::~KLauncherAdaptor()
     // destructor
 }
 
-void KLauncherAdaptor::autoStart(int phase)
-{
-    // handle method call org.kde.KLauncher.autoStart
-    static_cast<KLauncher *>(parent())->autoStart(phase);
-}
-
 void KLauncherAdaptor::exec_blind(const QString &name, const QStringList &arg_list)
 {
     // handle method call org.kde.KLauncher.exec_blind
