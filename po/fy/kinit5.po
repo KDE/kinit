@@ -1,0 +1,127 @@
+# translation of kdelibs4.po to Nederlands
+# translation of kdelibs4.po to
+# KTranslator Generated File
+# Fryske oersetting fan kdelibs.
+# Copyright (C) 2000,2001,2002,2003 KDE e.v..
+# let op! het bestand bevat ter hoogte van string 2470
+# een gesplitste zinnen die mbv. %1 of %2 weer worden samengevoegd!!
+# Bauke Nicolai <mildaam@hotmail.com>, 2002.
+# KDE-oersetgroep Frysk <frysk@kde.nl>, 2000, 2001, 2002,2003.
+# Rinse de Vries <rinsedevries@kde.nl>, 2004, 2005, 2006, 2007.
+# Berend ytsma <berendy@bigfoot.com>, 2004.
+# Rinse de Vries <RinseDeVries@home.nl>, 2006, 2008.
+# Berend Ytsma <berendy@gmail.com>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-11-04 03:08+0100\n"
+"PO-Revision-Date: 2010-07-22 09:48+0100\n"
+"Last-Translator: Berend Ytsma <berendy@gmail.com>\n"
+"Language-Team: nl <kde-i18n-doc@lists.kde.org>\n"
+"Language: fy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KAider 0.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:509
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Der koe gjin nij proses begon wurde.\n"
+"It systeem hat mooglik it maksimum oantal triemmen dat iepene kin wurde "
+"berikt of it maksimum oantal iepene triemmen dat jo brûke meie is berikt."
+
+#: kdeinit/kinit.cpp:531
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Der koe gjin nij proses oanmakke wurde.\n"
+"It systeem hat mooglik it maksimum oantal mooglike prosessen berikt of it "
+"maksimum oantal prosessen dat jo brûke meie is berikt."
+
+#: kdeinit/kinit.cpp:614
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Koe útfiertriem '%1' net fine."
+
+#: kdeinit/kinit.cpp:647
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Koe bibleteek '%1' net iepenje.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Koe 'kdemain' net fine yn '%1'\n"
+"%2"
+
+#: klauncher/klauncher.cpp:427
+#, fuzzy, kde-format
+#| msgid "KDEInit could not launch '%1'."
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit koe '%1' net starte."
+
+#: klauncher/klauncher.cpp:608 klauncher/klauncher.cpp:622
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Koe de tsjinst '%1' net fine."
+
+#: klauncher/klauncher.cpp:640
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr ""
+
+#: klauncher/klauncher.cpp:642 klauncher/klauncher.cpp:703
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "De tsjinst '%1' is ferkeard opmakke."
+
+#: klauncher/klauncher.cpp:790
+#, kde-format
+msgid "Launching %1"
+msgstr "Opstarte fan %1"
+
+#: klauncher/klauncher.cpp:974
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Unbekend protokol: '%1'.\n"
+
+#: klauncher/klauncher.cpp:980
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Koe de tsjinst '%1' net fine."
+
+#: klauncher/klauncher.cpp:1053
+#, fuzzy, kde-format
+#| msgid "Error loading '%1'.\n"
+msgid "Error loading '%1'."
+msgstr "Flater by it laden fan '%1'.\n"
+
+#: klauncher/klauncher_main.cpp:146
+#, fuzzy, kde-format
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Dit programma is net bedoelt om mei de hân opstart te wurden.\n"
+"klauncher: It wurdt automatysk start troch kdeinit4.\n"

@@ -1,0 +1,207 @@
+# translation of kdelibs4.po to Polish
+# translation of kdelibs4.po to
+# Version: $Revision: 685926 $
+# Ostatnie poprawki przed 2.0 Jacek Stolarczyk <jstolarz@kde.org>
+# Jacek Stolarczyk <jstolarz@kde.org>, 2001.
+# Piotr Roszatycki <dexter@debian.org>, 1997-2000.
+# Artur Górniak <artur_gorniak@software.pl>, 2000.
+# Michał Rudolf <mrudolf@kdewebdev.org>, 2002.
+# Michal Rudolf <mrudolf@kdewebdev.org>, 2002,2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
+# Krzysztof Lichota <lichota@mimuw.edu.pl>, 2005, 2006.
+# Marta Rybczyńska <kde-i18n@rybczynska.net>, 2007, 2008, 2009, 2010, 2011, 2012, 2013.
+# Michal Rudolf <michal@rudolf.waw.pl>, 2010.
+# Artur Chłond <eugenewolfe@o2.pl>, 2010.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2013, 2014, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-11-04 03:08+0100\n"
+"PO-Revision-Date: 2016-12-24 11:45+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+">\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+
+#: kdeinit/kinit.cpp:509
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Nie można rozpocząć nowego procesu.\n"
+"Być może osiągnięto maksymalną liczbę plików otwartych w systemie albo "
+"maksymalną liczbę plików otwartych przez użytkownika."
+
+#: kdeinit/kinit.cpp:531
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Nie można utworzyć nowego procesu.\n"
+"Być może osiągnięto maksymalną liczbę procesów w systemie albo maksymalną "
+"liczbę procesów użytkownika."
+
+#: kdeinit/kinit.cpp:614
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Nie można odnaleźć pliku wykonywalnego '%1'."
+
+#: kdeinit/kinit.cpp:647
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Nie można otworzyć biblioteki '%1'.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Nie można znaleźć 'kdemain' w '%1'.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:427
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit nie może uruchomić '%1'"
+
+#: klauncher/klauncher.cpp:608 klauncher/klauncher.cpp:622
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Nie można znaleźć usługi '%1'."
+
+#: klauncher/klauncher.cpp:640
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Usługa '%1' musi być wykonywalna, żeby można ją było uruchomić."
+
+#: klauncher/klauncher.cpp:642 klauncher/klauncher.cpp:703
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Usługa '%1' jest zniekształcona."
+
+#: klauncher/klauncher.cpp:790
+#, kde-format
+msgid "Launching %1"
+msgstr "Uruchamianie %1"
+
+#: klauncher/klauncher.cpp:974
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Nieznany protokół '%1'.\n"
+
+#: klauncher/klauncher.cpp:980
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Nie można znaleźć wtyczki '%1'.\n"
+
+#: klauncher/klauncher.cpp:1053
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "Błąd wczytywania '%1'."
+
+#: klauncher/klauncher_main.cpp:146
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: ten program nie jest przeznaczony do samodzielnego działania.\n"
+"klauncher: program jest wykorzystywany przez kdeinit5.\n"
