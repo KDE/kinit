@@ -43,17 +43,11 @@
 extern char **environ;
 
 // copied from kdeinit/kinit.cpp
+// Can't use QGuiApplication::platformName() here, there is no app instance.
 #if HAVE_X11 || HAVE_XCB
 static const char* displayEnvVarName_c()
 {
-    // Can't use QGuiApplication::platformName() here, there is no app instance.
-#if HAVE_X11
     return "DISPLAY";
-#elif defined(Q_OS_OSX)
-    return "MAC_DISPLAY";
-#elif defined(Q_OS_WIN)
-    return "WIN_DISPLAY";
-#endif
 }
 #endif
 

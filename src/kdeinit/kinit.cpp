@@ -128,10 +128,10 @@ static int s_startup_notify_screen = 0;
 #define MAX_SOCK_FILE (sizeof(struct sockaddr_un) - offsetof(struct sockaddr_un,sun_path))
 static char sock_file[MAX_SOCK_FILE];
 
+// Can't use QGuiApplication::platformName() here, there is no app instance.
 #if HAVE_X11 || HAVE_XCB
 static const char* displayEnvVarName_c()
 {
-    // Can't use QGuiApplication::platformName() here, there is no app instance.
     return "DISPLAY";
 }
 static inline QByteArray displayEnvVarName()
