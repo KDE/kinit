@@ -50,6 +50,8 @@
 
 #if defined (Q_CC_MSVC)
 typedef unsigned int pid_t;
+#else
+#include <sys/types.h>
 #endif 
 
 //#define ENABLE_SUICIDE
