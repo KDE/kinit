@@ -1,0 +1,122 @@
+# translation of kdelibs4.po to Persian
+# Nazanin Kazemi <kazemi@itland.ir>, 2006, 2007.
+# Mahdi Foladgar <foladgar@itland.ir>, 2006.
+# Nasim Daniarzadeh <daniarzadeh@itland.ir>, 2006, 2007.
+# Tahereh Dadkhahfar <dadkhahfar@itland.ir>, 2006.
+# MaryamSadat Razavi <razavi@itland.ir>, 2007.
+# Nooshin Asiaie <asiaie@itland.ir>, 2007.
+# Mohamad Reza Mirdamadi <mohi@linuxshop.ir>, 2009, 2010, 2011, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-11-04 03:08+0100\n"
+"PO-Revision-Date: 2012-06-28 16:40+0430\n"
+"Last-Translator: Mohammad Reza Mirdamadi <mohi@linuxshop.ir>\n"
+"Language-Team: Farsi (Persian) <kde-i18n-fa@kde.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: kdeinit/kinit.cpp:509
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"قادر نیست فرآیند جدید را آغاز کند.\n"
+"ممکن است سیستم به تعداد بیشینه پرونده‌های باز ممکن یا تعداد بیشینه پرونده‌های "
+"بازی که مجاز به استفاده از آن هستید، رسیده باشد."
+
+#: kdeinit/kinit.cpp:531
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"قادر نیست فرآیند جدید را آغاز کند.\n"
+"ممکن است سیستم به تعداد بیشینه فرآیندهای ممکن یا تعداد بیشینه فرآیندهایی که "
+"مجاز به استفاده از آنها هستید، رسیده باشد."
+
+#: kdeinit/kinit.cpp:614
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "نتوانست »%1« اجرایی را پیدا کند."
+
+#: kdeinit/kinit.cpp:647
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+" کتابخانه »%1« را نتوانست باز کند.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"«kdemain»در »%1« پیدا نشد.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:427
+#, fuzzy, kde-format
+#| msgid "KDEInit could not launch '%1'."
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit نتوانست  »%1« را راه‌اندازی کند."
+
+#: klauncher/klauncher.cpp:608 klauncher/klauncher.cpp:622
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "نتوانست خدمت »%1« را پیدا کند."
+
+#: klauncher/klauncher.cpp:640
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "سرویس «%1»  برای اجرا شدن باید اجرایی باشد."
+
+#: klauncher/klauncher.cpp:642 klauncher/klauncher.cpp:703
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "خدمت »%1« بد شکل می‌شود."
+
+#: klauncher/klauncher.cpp:790
+#, kde-format
+msgid "Launching %1"
+msgstr "راه‌اندازی %1"
+
+#: klauncher/klauncher.cpp:974
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "قرارداد ناشناخته »%1«.\n"
+
+#: klauncher/klauncher.cpp:980
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "نتوانست خدمت »%1« را پیدا کند."
+
+#: klauncher/klauncher.cpp:1053
+#, fuzzy, kde-format
+#| msgid "Error loading '%1'.\n"
+msgid "Error loading '%1'."
+msgstr "خطای بارگذاری »%1«.\n"
+
+#: klauncher/klauncher_main.cpp:146
+#, fuzzy, kde-format
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: این برنامه که باید به صورت دستی آغاز شود، پشتیبانی نمی‌شود.\n"
+"klauncher: به صورت خودکار توسط kdeinit4 آغاز می‌شود.\n"
