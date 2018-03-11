@@ -20,7 +20,7 @@
 #ifndef _AUTOSTART_H_
 #define _AUTOSTART_H_
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 class AutoStartItem;
 typedef QList<AutoStartItem *> AutoStartList;

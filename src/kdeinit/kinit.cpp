@@ -43,13 +43,13 @@
 #include <unistd.h>
 #include <locale.h>
 
-#include <QtCore/QLibrary>
-#include <QtCore/QString>
-#include <QtCore/QFile>
-#include <QtCore/QDate>
-#include <QtCore/QDir>
-#include <QtCore/QFileInfo>
-#include <QtCore/QRegExp>
+#include <QLibrary>
+#include <QString>
+#include <QFile>
+#include <QDate>
+#include <QDir>
+#include <QFileInfo>
+#include <QRegExp>
 #include <QFont>
 #include <kcrash.h>
 #include <kconfig.h>

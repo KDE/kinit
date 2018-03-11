@@ -23,7 +23,7 @@
 #ifndef KLAUNCHER_ADAPTOR_H_18181148166088
 #define KLAUNCHER_ADAPTOR_H_18181148166088
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QDBusAbstractAdaptor>
 #include <QDBusMessage>
 

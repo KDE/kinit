@@ -31,13 +31,13 @@
 typedef unsigned int pid_t;
 #endif
 
-#include <QtCore/QString>
-#include <QtCore/QSocketNotifier>
-#include <QtCore/QTimer>
-#include <QtCore/QList>
-#include <QtCore/QObject>
-#include <QtCore/QProcess>
-#include <QtCore/QDateTime>
+#include <QString>
+#include <QSocketNotifier>
+#include <QTimer>
+#include <QList>
+#include <QObject>
+#include <QProcess>
+#include <QDateTime>
 #include <QUrl>
 #include <QDBusConnection>
 #include <QDBusMessage>

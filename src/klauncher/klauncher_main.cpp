@@ -30,7 +30,7 @@
 
 #include "klauncher_cmds.h"
 #include <QGuiApplication>
-#include <QtCore/QFile>
+#include <QFile>
 #include <QDebug>
 #include <QDBusConnectionInterface>
 #include <QThread>
