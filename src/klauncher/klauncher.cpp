@@ -1108,6 +1108,11 @@ KLauncher::slotSlaveStatus(IdleSlave *slave)
             delete waitRequest;
         }
     }
+
+    if (slave->hasTempAuthorization()) {
+        mSlaveList.removeAll(slave);
+        slave->deleteLater();
+    }
 }
 
 void
