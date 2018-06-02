@@ -1,0 +1,119 @@
+# translation of kdelibs4.po to Gujarati
+# Copyright (C) 2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Kartik Mistry <kartik.mistry@gmail.com>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2017-11-04 03:08+0100\n"
+"PO-Revision-Date: 2009-11-22 00:01+0530\n"
+"Last-Translator: Kartik Mistry <kartik.mistry@gmail.com>\n"
+"Language-Team: Gujarati <team@utkarsh.org>\n"
+"Language: gu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: kdeinit/kinit.cpp:509
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"નવી પ્રક્રિયા શરૂ કરવામાં અસક્ષમ.\n"
+"સિસ્ટમ કદાચ મહત્તમ ખૂલ્લી ફાઇલો રાખવાની મર્યાદા સુધી પહોંચી ગઇ હશે અથવા તમને માન્ય એવી "
+"મહત્તમ ખૂલ્લી ફાઇલોની મર્યાદા સુધી પહોંચી ગઇ હશે."
+
+#: kdeinit/kinit.cpp:531
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"નવી પ્રક્રિયા બનાવવામાં અસક્ષમ.\n"
+"સિસ્ટમ કદાચ શક્ય મહત્તમ પ્રક્રિયાની મર્યાદા સુધી પહોંચી ગઇ હશે અથવા તમને માન્ય એવી શક્ય "
+"મહત્તમ પ્રક્રિયાની મર્યાદા સુધી પહોંચી ગઇ હશે."
+
+#: kdeinit/kinit.cpp:614
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "'%1' ચલાવનાર શોધી શકાયું નહી."
+
+#: kdeinit/kinit.cpp:647
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"'%1' પર લાઇબ્રેરી ખોલી શકાઇ નહી.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:684
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"'%1' માં 'kdemain' મળ્યું નહી.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:427
+#, fuzzy, kde-format
+#| msgid "KDEInit could not launch '%1'."
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit '%1' કરી શક્યું નહી."
+
+#: klauncher/klauncher.cpp:608 klauncher/klauncher.cpp:622
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "સેવા '%1' શોધી શકાઇ નહી."
+
+#: klauncher/klauncher.cpp:640
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr ""
+
+#: klauncher/klauncher.cpp:642 klauncher/klauncher.cpp:703
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "સેવા '%1' ખરાબ છે."
+
+#: klauncher/klauncher.cpp:790
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 શરૂ કરે છે"
+
+#: klauncher/klauncher.cpp:974
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "અજાણ્યો પ્રોટોકોલ '%1'.\n"
+
+#: klauncher/klauncher.cpp:980
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "સેવા '%1' શોધી શકાઇ નહી."
+
+#: klauncher/klauncher.cpp:1053
+#, fuzzy, kde-format
+#| msgid "Error loading '%1'.\n"
+msgid "Error loading '%1'."
+msgstr "'%1' લાવવામાં ક્ષતિ.\n"
+
+#: klauncher/klauncher_main.cpp:146
+#, fuzzy, kde-format
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: આ કાર્યક્રમ તમે શરૂ કરો તેમ ઇચ્છનીય નથી.\n"
+"klauncher: તે kdeinit4 દ્વારા આપમેળે શરૂ થાય છે.\n"
