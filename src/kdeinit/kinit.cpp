@@ -490,7 +490,8 @@ static pid_t launch(int argc, const char *_name, const char *args,
                                                QLatin1String(LIB_INSTALL_DIR "/libkdeinit5_")) + QLatin1String(".so");
             }
             // Don't confuse the user with "Could not load libkdeinit5_foo.so" if it doesn't exist
-            if (!QFile::exists(libpath)) {
+            // (and check for empty string to avoid warning message in QFileInfo::exists)
+            if (libpath.isEmpty() || !QFileInfo::exists(libpath)) {
                 libpath.clear();
             }
         }
