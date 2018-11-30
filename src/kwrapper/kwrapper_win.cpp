@@ -129,7 +129,7 @@ int main(int argc, char **argv)
     path = QString::fromLocal8Bit(qgetenv("KDEDIRS")).toLower().replace(QLatin1Char('\\'), QLatin1Char('/'));
     QStringList kdedirs;
 
-    if (path.size() > 0) {
+    if (!path.isEmpty()) {
         kdedirs = path.split(QLatin1Char(';'));
     }
 
