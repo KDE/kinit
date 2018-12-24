@@ -165,7 +165,7 @@ static void cleanup_fds()
     int maxfd = FD_SETSIZE;
     struct rlimit rl;
     if (getrlimit(RLIMIT_NOFILE, &rl) == 0) {
-        maxfd = rl.rlim_max;
+        maxfd = rl.rlim_cur;
     }
     for (int fd = 3; fd < maxfd; ++fd) {
 #if KDEINIT_OOM_PROTECT
