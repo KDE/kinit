@@ -31,6 +31,9 @@ public:
     AutoStart();
     ~AutoStart();
 
+    AutoStart(const AutoStart &) = delete;
+    AutoStart &operator=(const AutoStart &) = delete;
+
     void loadAutoStartList();
     QString startService();
     void    setPhase(int phase);
