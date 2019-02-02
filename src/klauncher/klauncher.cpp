@@ -320,7 +320,6 @@ void
 KLauncher::processDied(pid_t pid, long exitStatus)
 {
     qCDebug(KLAUNCHER) << pid << "exitStatus=" << exitStatus;
-    // We should probably check the exitStatus for the uniqueapp case?
     foreach (KLaunchRequest *request, requestList) {
         qCDebug(KLAUNCHER) << "  had pending request" << request->pid;
         if (request->pid == pid) {
@@ -331,6 +330,14 @@ KLauncher::processDied(pid_t pid, long exitStatus)
             } else if(request->dbus_startup_type == KService::DBusNone && request->wait) {
                 request->status = KLaunchRequest::Running;
                 qCDebug(KLAUNCHER) << pid << "running as DBusNone with wait to true";
+            } else if (exitStatus == 0 &&
+                       (request->dbus_startup_type == KService::DBusUnique ||
+                        request->dbus_startup_type == KService::DBusMulti)) {
+                // e.g. opening kate from a widget on the panel/desktop, where it
+                // shows the session chooser dialog before ever entering the main
+                // app event loop, then quitting/closing the dialog without starting kate
+                request->status = KLaunchRequest::Done;
+                qCDebug(KLAUNCHER) << pid << "exited without error, requestDone. status=" << request->status;
             } else {
                 request->status = KLaunchRequest::Error;
                 qCDebug(KLAUNCHER) << pid << "died, requestDone. status=" << request->status;
