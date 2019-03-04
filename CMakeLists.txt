@@ -80,6 +80,7 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
         kdoctools_install(po)
     endif()
 endif()
+add_definitions(-DQT_NO_FOREACH)
 add_subdirectory(src)
 
 if (KF5DocTools_FOUND)

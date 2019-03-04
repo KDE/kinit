@@ -298,9 +298,7 @@ ProcessList::ProcessList(PSID userSid)
 
 ProcessList::~ProcessList()
 {
-    foreach (const ProcessListEntry *ple, m_processes) {
-        delete ple;
-    }
+    qDeleteAll(ple);
 }
 
 void ProcessList::init()
@@ -344,7 +342,7 @@ void ProcessList::init()
 ProcessListEntry *ProcessList::find(const QString &name)
 {
     ProcessListEntry *ple;
-    foreach (ple, m_processes) {
+    for (ple : qAsConst(m_processes)) {
         if (ple->pid < 0) {
             qDebug() << "negative pid!";
             continue;
@@ -438,7 +436,8 @@ void listAllRunningKDEProcesses(ProcessList &processList)
 {
     QString installPrefix = QStringLiteral(CMAKE_INSTALL_PREFIX);
 
-    foreach (const ProcessListEntry *ple, processList.list()) {
+    const auto list = processList.list();
+    for (const ProcessListEntry *ple : list) {
         if (!ple->path.isEmpty() && ple->path.toLower().startsWith(installPrefix.toLower())) {
             fprintf(stderr, "path: %s name: %s pid: %u\n", ple->path.toLatin1().data(), ple->name.toLatin1().data(), ple->pid);
         }
@@ -449,7 +448,8 @@ void terminateAllRunningKDEProcesses(ProcessList &processList)
 {
     QString installPrefix = QStringLiteral(CMAKE_INSTALL_PREFIX);
 
-    foreach (const ProcessListEntry *ple, processList.list()) {
+    const auto list = processList.list();
+    for (const ProcessListEntry *ple : list) {
         if (!ple->path.isEmpty() && ple->path.toLower().startsWith(installPrefix.toLower())) {
             if (verbose) {
                 fprintf(stderr, "terminating path: %s name: %s pid: %u\n", ple->path.toLatin1().data(), ple->name.toLatin1().data(), ple->pid);
@@ -464,7 +464,7 @@ void listAllNamedAppsInDBus()
     QDBusConnection connection = QDBusConnection::sessionBus();
     QDBusConnectionInterface *bus = connection.interface();
     const QStringList services = bus->registeredServiceNames();
-    foreach (const QString &service, services) {
+    for (const QString &service : services) {
         if (service.startsWith(QLatin1String("org.freedesktop.DBus")) || service.startsWith(QLatin1Char(':'))) {
             continue;
         }
@@ -477,7 +477,7 @@ void quitApplicationsOverDBus()
     QDBusConnection connection = QDBusConnection::sessionBus();
     QDBusConnectionInterface *bus = connection.interface();
     const QStringList services = bus->registeredServiceNames();
-    foreach (const QString &service, services) {
+    for (const QString &service : services) {
         if (service.startsWith(QLatin1String("org.freedesktop.DBus")) || service.startsWith(QLatin1Char(':'))) {
             continue;
         }
@@ -668,7 +668,7 @@ int main(int argc, char **argv, char **envp)
         QProcess *proc;
         int can_exit = 1;
         do {
-            foreach (proc, startedProcesses) {
+            for (proc : qAsConst(startedProcesses)) {
                 if (proc->state() != QProcess::NotRunning) {
                     can_exit = 0;
                 }

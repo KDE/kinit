@@ -320,7 +320,7 @@ void
 KLauncher::processDied(pid_t pid, long exitStatus)
 {
     qCDebug(KLAUNCHER) << pid << "exitStatus=" << exitStatus;
-    foreach (KLaunchRequest *request, requestList) {
+    for (KLaunchRequest *request : qAsConst(requestList)) {
         qCDebug(KLAUNCHER) << "  had pending request" << request->pid;
         if (request->pid == pid) {
             if ((request->dbus_startup_type == KService::DBusUnique)
@@ -383,7 +383,7 @@ KLauncher::slotNameOwnerChanged(const QString &appId, const QString &oldOwner,
     }
 
     qCDebug(KLAUNCHER) << "new app" << appId;
-    foreach (KLaunchRequest *request, requestList) {
+    for (KLaunchRequest *request : qAsConst(requestList)) {
         if (request->status != KLaunchRequest::Launching) {
             continue;
         }
@@ -487,7 +487,7 @@ KLauncher::requestStart(KLaunchRequest *request)
     request->process = process;
 
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
-    foreach (const QString &env, request->envs) {
+    for (const QString &env : qAsConst(request->envs)) {
         const int pos = env.indexOf(QLatin1Char('='));
         const QString envVariable = env.left(pos);
         const QString envValue = env.mid(pos + 1);
@@ -496,7 +496,7 @@ KLauncher::requestStart(KLaunchRequest *request)
     process->setProcessEnvironment(environment);
 
     QStringList args;
-    foreach (const QString &arg, request->arg_list) {
+    for (const QString &arg : qAsConst(request->arg_list)) {
         args << arg;
     }
 
@@ -532,11 +532,11 @@ KLauncher::requestStart(KLaunchRequest *request)
     appendLong(requestData, request->arg_list.count() + 1);
     requestData.append(request->name.toLocal8Bit());
     requestData.append('\0');
-    foreach (const QString &arg, request->arg_list) {
+    for (const QString &arg : qAsConst(request->arg_list)) {
         requestData.append(arg.toLocal8Bit()).append('\0');
     }
     appendLong(requestData, request->envs.count());
-    foreach (const QString &env, request->envs) {
+    for (const QString &env : qAsConst(request->envs)) {
         requestData.append(env.toLocal8Bit()).append('\0');
     }
     appendLong(requestData, 0); // avoid_loops, always false here
@@ -776,7 +776,7 @@ KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr serv
     KStartupInfoId id;
     id.initId(startup_id);
     QByteArray dpy_str;
-    foreach (const QString &env, envs) {
+    for (const QString &env : envs) {
         if (env.startsWith(QLatin1String("DISPLAY="))) {
             dpy_str = env.mid(8).toLocal8Bit();
         }
@@ -820,7 +820,7 @@ KLauncher::cancel_service_startup_info(KLaunchRequest *request, const QByteArray
     }
     if (!startup_id.isEmpty() && startup_id != "0" && mIsX11) {
         QString dpy_str;
-        foreach (const QString &env, envs) {
+        for (const QString &env : envs) {
             if (env.startsWith(QLatin1String("DISPLAY="))) {
                 dpy_str = env.mid(8);
             }
@@ -905,7 +905,7 @@ KLauncher::createArgs(KLaunchRequest *request, const KService::Ptr service,
 {
     KIO::DesktopExecParser parser(*service, urls);
     const QStringList params = parser.resultingArguments();
-    Q_FOREACH (const QString &arg, params) {
+    for (const QString &arg : params) {
         request->arg_list.append(arg);
     }
 
@@ -927,7 +927,7 @@ KLauncher::requestHoldSlave(const QString &urlStr, const QString &app_socket)
 {
     const QUrl url(urlStr);
     IdleSlave *slave = nullptr;
-    foreach (IdleSlave *p, mSlaveList) {
+    for (IdleSlave *p : qAsConst(mSlaveList)) {
         if (p->onHold(url)) {
             slave = p;
             break;
@@ -948,14 +948,14 @@ KLauncher::requestSlave(const QString &protocol,
                         QString &error)
 {
     IdleSlave *slave = nullptr;
-    foreach (IdleSlave *p, mSlaveList) {
+    for (IdleSlave *p : qAsConst(mSlaveList)) {
         if (p->match(protocol, host, true)) {
             slave = p;
             break;
         }
     }
     if (!slave) {
-        foreach (IdleSlave *p, mSlaveList) {
+        for (IdleSlave *p : qAsConst(mSlaveList)) {
             if (p->match(protocol, host, false)) {
                 slave = p;
                 break;
@@ -963,7 +963,7 @@ KLauncher::requestSlave(const QString &protocol,
         }
     }
     if (!slave) {
-        foreach (IdleSlave *p, mSlaveList) {
+        for (IdleSlave *p : qAsConst(mSlaveList)) {
             if (p->match(protocol, QString(), false)) {
                 slave = p;
                 break;
@@ -1065,7 +1065,7 @@ KLauncher::requestSlave(const QString &protocol,
 bool KLauncher::checkForHeldSlave(const QString &urlStr)
 {
     QUrl url(urlStr);
-    Q_FOREACH (const IdleSlave *p, mSlaveList) {
+    for (const IdleSlave *p : qAsConst(mSlaveList)) {
         if (p->onHold(url)) {
             return true;
         }
@@ -1077,7 +1077,7 @@ void
 KLauncher::waitForSlave(int pid)
 {
     Q_ASSERT(calledFromDBus());
-    foreach (IdleSlave *slave, mSlaveList) {
+    for (IdleSlave *slave : qAsConst(mSlaveList)) {
         if (slave->pid() == static_cast<pid_t>(pid)) {
             return;    // Already here.
         }
@@ -1137,7 +1137,7 @@ KLauncher::idleTimeout()
 {
     bool keepOneFileSlave = true;
     QDateTime now = QDateTime::currentDateTime();
-    foreach (IdleSlave *slave, mSlaveList) {
+    for (IdleSlave *slave : qAsConst(mSlaveList)) {
         if ((slave->protocol() == QLatin1String("file")) && (keepOneFileSlave)) {
             keepOneFileSlave = false;
         } else if (slave->age(now) > SLAVE_MAX_IDLE) {
@@ -1150,7 +1150,7 @@ KLauncher::idleTimeout()
 void KLauncher::reparseConfiguration()
 {
     KProtocolManager::reparseConfiguration();
-    foreach (IdleSlave *slave, mSlaveList) {
+    for (IdleSlave *slave : qAsConst(mSlaveList)) {
         slave->reparseConfiguration();
     }
 }
@@ -1172,7 +1172,7 @@ KLauncher::slotFinished(int exitCode, QProcess::ExitStatus exitStatus)
     QProcess *p = static_cast<QProcess *>(sender());
     qCDebug(KLAUNCHER) << "process finished exitcode=" << exitCode << "exitStatus=" << exitStatus;
 
-    foreach (KLaunchRequest *request, requestList) {
+    for (KLaunchRequest *request : qAsConst(requestList)) {
         if (request->process == p) {
             qCDebug(KLAUNCHER) << "found KProcess, request done";
             if (exitCode == 0  && exitStatus == QProcess::NormalExit) {

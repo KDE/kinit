@@ -556,7 +556,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
                     tmp_env_count++) {
                 unset_envs.append(environ[ tmp_env_count ]);
             }
-            foreach (const QByteArray &tmp, unset_envs) {
+            for (const QByteArray &tmp : qAsConst(unset_envs)) {
                 int pos = tmp.indexOf('=');
                 if (pos >= 0) {
                     unsetenv(tmp.left(pos).constData());
