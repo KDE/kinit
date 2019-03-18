@@ -341,8 +341,7 @@ void ProcessList::init()
 
 ProcessListEntry *ProcessList::find(const QString &name)
 {
-    ProcessListEntry *ple;
-    for (ple : qAsConst(m_processes)) {
+    for (ProcessListEntry *ple : qAsConst(m_processes)) {
         if (ple->pid < 0) {
             qDebug() << "negative pid!";
             continue;
