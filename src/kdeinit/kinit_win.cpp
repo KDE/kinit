@@ -298,7 +298,7 @@ ProcessList::ProcessList(PSID userSid)
 
 ProcessList::~ProcessList()
 {
-    qDeleteAll(ple);
+    qDeleteAll(m_processes);
 }
 
 void ProcessList::init()
