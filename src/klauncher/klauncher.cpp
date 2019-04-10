@@ -1127,7 +1127,7 @@ KLauncher::slotSlaveGone()
 {
     IdleSlave *slave = (IdleSlave *) sender();
     mSlaveList.removeAll(slave);
-    if ((mSlaveList.count() == 0) && (mTimer.isActive())) {
+    if ((mSlaveList.isEmpty()) && (mTimer.isActive())) {
         mTimer.stop();
     }
 }
