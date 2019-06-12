@@ -96,6 +96,6 @@ install(FILES
         kde5init_dummy.cpp.in
         DESTINATION ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
 
-install( FILES kinit.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
+install(FILES kinit.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
