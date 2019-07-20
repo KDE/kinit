@@ -98,9 +98,7 @@ static const char *extra_libs[] = {
 #else
     "libKF5KIOCore.so.5",
     "libKF5Parts.so.5",
-//#ifdef __KDE_HAVE_GCC_VISIBILITY // Removed for KF5, we'll see.
     "libKF5Plasma.so.5"
-//#endif
 #endif
 };
 #endif
@@ -241,7 +239,7 @@ static void child_died(pid_t exit_pid, int exit_status)
 
     while ((child = *childptr)) {
         if (child->pid == exit_pid) {
-            /* Send a message with the return value of the child on the control socket */
+            // Send a message with the return value of the child on the control socket
             klauncher_header request_header;
             long request_data[2];
             request_header.cmd = LAUNCHER_CHILD_DIED;
@@ -353,7 +351,7 @@ QByteArray execpath_avoid_loops(const QByteArray &exec, int envc, const char *en
 {
     QStringList paths;
     const QRegExp pathSepRegExp(QStringLiteral("[:\b]"));
-    if (envc > 0) { /* use the passed environment */
+    if (envc > 0) { // use the passed environment
         const char *path = get_env_var("PATH=", envc, envs);
         if (path != nullptr) {
             paths = QFile::decodeName(path).split(pathSepRegExp);
@@ -596,9 +594,9 @@ static pid_t launch(int argc, const char *_name, const char *args,
             d.argv[argc] = nullptr;
 
 #ifndef SKIP_PROCTITLE
-            /** Give the process a new name **/
+            // Give the process a new name
 #ifdef Q_OS_LINUX
-            /* set the process name, so that killall works like intended */
+            // set the process name, so that killall works like intended
             r = prctl(PR_SET_NAME, (unsigned long) name.data(), 0, 0, 0);
             if (r == 0) {
                 proctitle_set("-%s [kdeinit5]%s", name.data(), procTitle.data() ? procTitle.data() : "");
@@ -703,7 +701,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
             setup_tty(tty);
         }
 
-        exit(d.func(argc, d.argv));  /* Launch! */
+        exit(d.func(argc, d.argv));  // Launch!
 
         break;
     }
@@ -857,8 +855,8 @@ static void init_kdeinit_socket()
     }
 
     {
-        QByteArray path = home_dir;
-        QByteArray readOnly = qgetenv("KDE_HOME_READONLY");
+        const QByteArray path = home_dir;
+        const QByteArray readOnly = qgetenv("KDE_HOME_READONLY");
         if (access(path.data(), R_OK | W_OK)) {
             if (errno == ENOENT) {
                 fprintf(stderr, "kdeinit5: Aborting. $HOME directory (%s) does not exist.\n", path.data());
@@ -879,9 +877,7 @@ static void init_kdeinit_socket()
         struct sockaddr_un server;
 
 //     fprintf(stderr, "kdeinit5: Warning, socket_file already exists!\n");
-        /*
-         * create the socket stream
-         */
+        // create the socket stream
         s = socket(PF_UNIX, SOCK_STREAM, 0);
         if (s < 0) {
             perror("socket() failed");
@@ -902,10 +898,10 @@ static void init_kdeinit_socket()
         close(s);
     }
 
-    /** Delete any stale socket file (and symlink) **/
+    // Delete any stale socket file (and symlink)
     unlink(sock_file);
 
-    /** create socket **/
+    // Create socket
     d.wrapper = socket(PF_UNIX, SOCK_STREAM, 0);
     if (d.wrapper < 0) {
         perror("kdeinit5: Aborting. socket() failed");
@@ -926,7 +922,7 @@ static void init_kdeinit_socket()
     }
 
     while (1) {
-        /** bind it **/
+        // bind it
         socklen = sizeof(sa);
         memset(&sa, 0, socklen);
         sa.sun_family = AF_UNIX;
@@ -944,7 +940,7 @@ static void init_kdeinit_socket()
         }
     }
 
-    /** set permissions **/
+    // set permissions
     if (chmod(sock_file, 0600) != 0) {
         perror("kdeinit5: Aborting. Can not set permissions on socket");
         fprintf(stderr, "Wrong permissions of socket '%s'\n", sock_file);
@@ -1003,7 +999,7 @@ static void start_klauncher()
 static void launcher_died()
 {
     if (!d.launcher_ok) {
-        /* This is bad. */
+        // This is bad.
         fprintf(stderr, "kdeinit5: Communication error with launcher. Exiting!\n");
         ::exit(255);
         return;
@@ -1161,7 +1157,7 @@ static bool handle_launcher_request(int sock, const char *who)
             write(sock, &response_header, sizeof(response_header));
             write(sock, &response_data, response_header.arg_length);
 
-            /* add new child to list */
+            // add new child to list
             struct child *child = (struct child *) malloc(sizeof(struct child));
             child->pid = pid;
             child->sock = dup(sock);
@@ -1263,11 +1259,11 @@ static void handle_requests(pid_t waitForPid)
         int exit_status;
         char c;
 
-        /* Flush the pipe of death */
+        // Flush the pipe of death
         while (read(d.deadpipe[0], &c, 1) == 1) {
         }
 
-        /* Handle dying children */
+        // Handle dying children
         do {
             exit_pid = waitpid(-1, &exit_status, WNOHANG);
             if (exit_pid > 0) {
@@ -1321,7 +1317,7 @@ static void handle_requests(pid_t waitForPid)
             return;
         }
 
-        /* Handle wrapper request */
+        // Handle wrapper request
         if (d.wrapper >= 0 && FD_ISSET(d.wrapper, &rd_set)) {
             struct sockaddr_un client;
             kde_socklen_t sClient = sizeof(client);
@@ -1334,7 +1330,7 @@ static void handle_requests(pid_t waitForPid)
             }
         }
 
-        /* Handle launcher request */
+        // Handle launcher request
         if (d.launcher[0] >= 0 && FD_ISSET(d.launcher[0], &rd_set)) {
             if (!handle_launcher_request(d.launcher[0], "launcher")) {
                 launcher_died();
@@ -1345,7 +1341,7 @@ static void handle_requests(pid_t waitForPid)
         }
 
 #if HAVE_X11
-        /* Look for incoming X11 events */
+        // Look for incoming X11 events
         if (X11fd >= 0 && FD_ISSET(X11fd, &rd_set)) {
             if (X11display != nullptr) {
                 XEvent event_return;
@@ -1360,8 +1356,7 @@ static void handle_requests(pid_t waitForPid)
 
 static void generate_socket_name()
 {
-
-#if HAVE_X11 || HAVE_XCB // qt5: see displayEnvVarName_c()
+#if HAVE_X11 || HAVE_XCB
     QByteArray display = qgetenv(displayEnvVarName_c());
     if (display.isEmpty()) {
         fprintf(stderr, "kdeinit5: Aborting. $%s is not set. \n", displayEnvVarName_c());
@@ -1395,14 +1390,14 @@ static void generate_socket_name()
 #if HAVE_X11
 int kdeinit_xio_errhandler(Display *disp)
 {
-    // disp is 0L when KDE shuts down. We don't want those warnings then.
+    // disp is nullptr when KDE shuts down. We don't want those warnings then.
 
     if (disp) {
         qWarning("kdeinit5: Fatal IO error: client killed");
     }
 
     if (sock_file[0]) {
-        /** Delete any stale socket file **/
+        // Delete any stale socket file
         unlink(sock_file);
     }
 
@@ -1421,7 +1416,7 @@ int kdeinit_xio_errhandler(Display *disp)
         qWarning("kdeinit5: sending SIGHUP to children.");
     }
 
-    /* this should remove all children we started */
+    // this should remove all children we started
     signal(SIGHUP, SIG_IGN);
     kill(0, SIGHUP);
 
@@ -1431,7 +1426,7 @@ int kdeinit_xio_errhandler(Display *disp)
         qWarning("kdeinit5: sending SIGTERM to children.");
     }
 
-    /* and if they don't listen to us, this should work */
+    // and if they don't listen to us, this should work
     signal(SIGTERM, SIG_IGN);
     kill(0, SIGTERM);
 
@@ -1510,7 +1505,6 @@ static void setupX()
     }
 }
 
-// Borrowed from kdebase/kaudio/kaudioserver.cpp
 static int initXconnection()
 {
     X11display = XOpenDisplay(nullptr);
@@ -1571,7 +1565,7 @@ int main(int argc, char **argv)
     int keep_running = 1;
     d.suicide = false;
 
-    /** Save arguments first... **/
+    // Save arguments first...
     char **safe_argv = (char **) malloc(sizeof(char *) * argc);
     for (int i = 0; i < argc; i++) {
         safe_argv[i] = strcpy((char *)malloc(strlen(argv[i]) + 1), argv[i]);
@@ -1653,12 +1647,12 @@ int main(int argc, char **argv)
 #endif
     }
 
-    /** Make process group leader (for shutting down children later) **/
+    // Make process group leader (for shutting down children later)
     if (keep_running) {
         setsid();
     }
 
-    /** Prepare to change process name **/
+    // Prepare to change process name
 #ifndef SKIP_PROCTITLE
     proctitle_init(argc, argv);
 #endif
@@ -1683,10 +1677,7 @@ int main(int argc, char **argv)
 
     generate_socket_name();
     if (keep_running) {
-        /*
-         * Create ~/.kde/tmp-<hostname>/kdeinit5-<display> socket for incoming wrapper
-         * requests.
-         */
+        // Create <runtime dir>/kdeinit5-<display> socket for incoming wrapper requests.
         init_kdeinit_socket();
     }
 #if defined(Q_OS_UNIX) && !defined(Q_OS_OSX)
@@ -1717,16 +1708,14 @@ int main(int argc, char **argv)
     X11fd = initXconnection();
 #endif
 
-    {
-        QFont::initialize();
+    QFont::initialize();
 #if HAVE_X11
-        if (XSupportsLocale()) {
-            // Similar to QApplication::create_xim()
-            // but we need to use our own display
-            XOpenIM(X11display, nullptr, nullptr, nullptr);
-        }
-#endif
+    if (XSupportsLocale()) {
+        // Similar to QApplication::create_xim()
+        // but we need to use our own display
+        XOpenIM(X11display, nullptr, nullptr, nullptr);
     }
+#endif
 
     if (launch_kded) {
         qputenv("KDED_STARTED_BY_KDEINIT", "1");
@@ -1761,7 +1750,7 @@ int main(int argc, char **argv)
         }
     }
 
-    /** Free arguments **/
+    // Free arguments
     for (int i = 0; i < argc; i++) {
         free(safe_argv[i]);
     }
@@ -1786,4 +1775,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-
