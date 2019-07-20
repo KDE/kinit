@@ -217,7 +217,6 @@ void KLauncher::setLaunchEnv(const QString &name, const QString &value)
 static int
 read_socket(int sock, char *buffer, int len)
 {
-    ssize_t result;
     int bytes_left = len;
     while (bytes_left > 0) {
         // in case we get a request to start an application and data arrive
@@ -237,7 +236,7 @@ read_socket(int sock, char *buffer, int len)
             return -1;
         }
 
-        result = read(sock, buffer, bytes_left);
+        const ssize_t result = read(sock, buffer, bytes_left);
         if (result > 0) {
             buffer += result;
             bytes_left -= result;
@@ -260,15 +259,17 @@ KLauncher::slotKDEInitData(int)
 
     int result = read_socket(kdeinitSocket, (char *) &request_header,
                              sizeof(request_header));
+    if (result != -1) {
+        requestData.resize(request_header.arg_length);
+        result = read_socket(kdeinitSocket, (char *) requestData.data(),
+                             request_header.arg_length);
+    }
     if (result == -1) {
         qCDebug(KLAUNCHER) << "Exiting on read_socket errno:" << errno;
         signal(SIGHUP, SIG_IGN);
         signal(SIGTERM, SIG_IGN);
         destruct(); // Exit!
     }
-    requestData.resize(request_header.arg_length);
-    result = read_socket(kdeinitSocket, (char *) requestData.data(),
-                         request_header.arg_length);
 
     processRequestReturn(request_header.cmd, requestData);
 #endif
@@ -804,9 +805,6 @@ KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr serv
     data.setApplicationId(service->entryPath());
     // the rest will be sent by kdeinit
     KStartupInfo::sendStartupXcb(conn.conn, conn.screen, id, data);
-    return;
-#else
-    return;
 #endif
 }
 
