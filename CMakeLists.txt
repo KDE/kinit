@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(KInit)
 
 include(FeatureSummary)
-find_package(ECM 5.61.0  NO_MODULE)
+find_package(ECM 5.62.0  NO_MODULE)
 set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://projects.kde.org/projects/kdesupport/extra-cmake-modules")
 feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
@@ -20,7 +20,7 @@ include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 
 set(KF5_VERSION "5.62.0") # handled by release scripts
-set(KF5_DEP_VERSION "5.61.0") # handled by release scripts
+set(KF5_DEP_VERSION "5.62.0") # handled by release scripts
 
 ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KINIT
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kinit_version.h"
