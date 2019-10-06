@@ -1,0 +1,128 @@
+# translation of kdelibs4.po to Arabic
+# translation of kdelibs4.po to
+# Copyright (C) 2001-2003, 2004, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+# Isam Bayazidi <bayazidi@arabeyes.org>, 2001,2003.
+# Sayed Jaffer Al-Mosawi <mosawi@arabeyes.org>, 2002.
+# Hicham Amaoui <amaoui@wanadoo.fr>, 2002.
+# Youcef Rabah Rahal <rahal@arabeyes.org>, 2003.
+# Ahmad M. Zawawi <azawawi@emirates.net.ae>, 2004.
+# Mohammed Gamal <f2c2001@yahoo.com>, 2004.
+# Usamah Ali Al-Maqdad <msareehi@kacst.edu.sa>, 2004.
+# Munzir Taha <munzir@kacst.edu.sa>, 2004.
+# Mohamed SAAD <metehyi@free.fr>, 2006.
+# Khaled Hosny <khaledhosny@eglug.org>, 2007.
+# Youssef Chahibi <chahibi@gmail.com>, 2007.
+# zayed <zayed.alsaidi@gmail.com>, 2008, 2009.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2009.
+# hanny <hannysabbagh@hotmail.com>, 2012.
+# Abderrahim Kitouni <a.kitouni@gmail.com>, 2012.
+# Safa Alfulaij <safaalfulaij@hotmail.com>, 2013, 2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-07-21 02:50+0200\n"
+"PO-Revision-Date: 2018-06-09 20:21+0300\n"
+"Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: kdeinit/kinit.cpp:508
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"تعذر بدء العملية الجديدة.\n"
+"لربّما وصل النظام إلى الحد الأقصى للملفات المفتوحة، أو الحد الأقصى للملفات "
+"المفتوحة الذي سمحت أنت به."
+
+#: kdeinit/kinit.cpp:530
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"تعذر إنشاء عملية جديدة.\n"
+"لربّما وصل النظام إلى الحد الأقصى للعمليات المفتوحة، أو الحد الأقصى للعمليات "
+"المفتوحة الذي سمحت أنت به."
+
+#: kdeinit/kinit.cpp:613
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "تعذر العثور على التنفيذي ”%1“."
+
+#: kdeinit/kinit.cpp:646
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"تعذر فتح المكتبة ”%1“.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:683
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"تعذر العثور على ”kdemain“ في ”%1“\n"
+"%2"
+
+#: klauncher/klauncher.cpp:435
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "تعذر على KDEInit إطلاق ”%1“"
+
+#: klauncher/klauncher.cpp:616 klauncher/klauncher.cpp:630
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "تعذر العثور على الخدمة ”%1“."
+
+#: klauncher/klauncher.cpp:648
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "لا بد أن تكون الخدمة ”%1“ تنفيذية حتى تعمل."
+
+#: klauncher/klauncher.cpp:650 klauncher/klauncher.cpp:711
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "لم تُنسّق الخدمة ”%1“ كما ينبغي."
+
+#: klauncher/klauncher.cpp:798
+#, kde-format
+msgid "Launching %1"
+msgstr "يُطلق %1"
+
+#: klauncher/klauncher.cpp:979
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "الميفاق ”%1“ مجهول.\n"
+
+#: klauncher/klauncher.cpp:985
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "تعذر العثور على الملحقة ”%1“.\n"
+
+#: klauncher/klauncher.cpp:1058
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "خطأ أثناء تحميل ”%1“."
+
+#: klauncher/klauncher_main.cpp:146
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"«مُطلقك»: يجب ألا يُشغّل هذا البرنامج يدويًا.\n"
+"«مُطلقك»: kdeinit5 يُشغّل البرنامج هذا تلقائيًا.\n"
