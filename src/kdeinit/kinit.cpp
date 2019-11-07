@@ -1682,9 +1682,8 @@ int main(int argc, char **argv)
     }
 #if defined(Q_OS_UNIX) && !defined(Q_OS_OSX)
     if (!d.suicide && qEnvironmentVariableIsEmpty("KDE_IS_PRELINKED")) {
-        const int extrasCount = sizeof(extra_libs) / sizeof(extra_libs[0]);
-        for (int i = 0; i < extrasCount; i++) {
-            const QString extra = findSharedLib(QString::fromLatin1(extra_libs[i]));
+        for (const char *extra_lib : extra_libs) {
+            const QString extra = findSharedLib(QString::fromLatin1(extra_lib));
             if (!extra.isEmpty()) {
                 QLibrary l(extra);
                 l.setLoadHints(QLibrary::ExportExternalSymbolsHint);
@@ -1692,7 +1691,7 @@ int main(int argc, char **argv)
             }
 #ifndef NDEBUG
             else {
-                fprintf(stderr, "%s was not found.\n", extra_libs[i]);
+                fprintf(stderr, "%s was not found.\n", extra_lib);
             }
 #endif
 
