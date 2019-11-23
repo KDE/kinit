@@ -2,7 +2,6 @@ set(klauncher_SRCS
    klauncher.cpp
    klauncher_main.cpp
    klauncher_adaptor.cpp
-   autostart.cpp
    ../klauncher_cmds.cpp
    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.KLauncher.xml # just so that it gets generated
    )
