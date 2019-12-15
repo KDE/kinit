@@ -81,5 +81,5 @@ However, applications like `killall` will only see "kdeinit" as process name.
 To workaround this, use `kdekillall`, from [kde-dev-scripts][], for applications
 started via kdeinit.
 
-[kde-dev-scripts]: https://projects.kde.org/projects/kde/kdesdk/kde-dev-scripts/
+[kde-dev-scripts]: https://commits.kde.org/kde-dev-scripts
 
