@@ -1,0 +1,118 @@
+# Uyghur translation for kdelibs4.
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sahran <sahran.ug@gmail.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2019-07-21 02:50+0200\n"
+"PO-Revision-Date: 2013-09-08 07:05+0900\n"
+"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#: kdeinit/kinit.cpp:508
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"يېڭى جەرياننى قوزغىتالمىدى.\n"
+"سىستېما ئاچقان ھۆججەت ئەڭ يۇقىرى چەككە يەتكەن بولۇشى مۇمكىن، ياكى سىز "
+"ئېچىشقا يول قويىدىغان ھۆججەت چېكىگە يەتكەن بولۇشى مۇمكىن."
+
+#: kdeinit/kinit.cpp:530
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"يېڭى جەرياننى قۇرالمىدى.\n"
+"سىستېما قۇرغان جەريان سانى ئەڭ يۇقىرى چەككە يەتكەن بولۇشى مۇمكىن، ياكى سىز "
+"قۇرۇشقا يول قويىدىغان جەريان سانى چېكىگە يەتكەن بولۇشى مۇمكىن."
+
+#: kdeinit/kinit.cpp:613
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "'%1' ئىجراچان پروگراممىنى تاپالمىدى."
+
+#: kdeinit/kinit.cpp:646
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"'%1' ئامبارنى ئاچالمىدى.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:683
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"'%1' دىن 'kdemain' نى تاپالمىدى.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:435
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "'%1' نى KDEInit قوزغىتالمىدى"
+
+#: klauncher/klauncher.cpp:616 klauncher/klauncher.cpp:630
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "'%1' مۇلازىمەتنى تاپالمىدى."
+
+#: klauncher/klauncher.cpp:648
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "'%1' مۇلازىمەت ئىجراچان بولغاندىلا ئاندىن ئىجرا قىلىنىدۇ."
+
+#: klauncher/klauncher.cpp:650 klauncher/klauncher.cpp:711
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "'%1' مۇلازىمەتنىڭ فورماتى خاتا."
+
+#: klauncher/klauncher.cpp:798
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 ئىجرا قىلىۋاتىدۇ"
+
+#: klauncher/klauncher.cpp:979
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "نامەلۇم كېلىشىم '%1'.\n"
+
+#: klauncher/klauncher.cpp:985
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "'%1' مۇلازىمەتنى تاپالمىدى."
+
+#: klauncher/klauncher.cpp:1058
+#, fuzzy, kde-format
+#| msgid "Error loading '%1'.\n"
+msgid "Error loading '%1'."
+msgstr "'%1' يۈكلىگەندە خاتالىق كۆرۈلدى.\n"
+
+#: klauncher/klauncher_main.cpp:146
+#, fuzzy, kde-format
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: بۇ پروگرامما قولدا ئىجرا قىلىشقا لايىھىلەنمىگەن.\n"
+"klauncher: ئۇ ئۆزلۈكىدىن kdeinit4 تەرىپىدىن قوزغىتىلىدۇ\n"
