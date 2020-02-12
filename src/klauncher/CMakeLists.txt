@@ -6,6 +6,14 @@ set(klauncher_SRCS
    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.KLauncher.xml # just so that it gets generated
    )
 
+ecm_qt_export_logging_category(
+    IDENTIFIER KLAUNCHER
+    CATEGORY_NAME kf5.kinit.klauncher
+    DEFAULT_SEVERITY Warning
+    DESCRIPTION "KLauncher"
+    EXPORT KINIT
+)
+
 # Use org.kde.KSlaveLauncher.xml installed by kio
 qt5_add_dbus_adaptor(klauncher_SRCS ${KSlaveLauncher_DBUS_INTERFACE} klauncher.h KLauncher)
 

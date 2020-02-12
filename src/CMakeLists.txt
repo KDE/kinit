@@ -21,3 +21,9 @@ if (NOT WIN32)
   add_subdirectory(kshell)
   add_subdirectory(start_kdeinit)
 endif ()
+
+ecm_qt_install_logging_categories(
+    EXPORT KINIT
+    FILE kinit.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)

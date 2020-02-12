@@ -18,6 +18,7 @@ include(KDECMakeSettings)
 
 include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
+include(ECMQtDeclareLoggingCategory)
 
 set(KF5_VERSION "5.68.0") # handled by release scripts
 set(KF5_DEP_VERSION "5.67.0") # handled by release scripts
@@ -96,7 +97,5 @@ install( FILES
 install(FILES
         kde5init_dummy.cpp.in
         DESTINATION ${CMAKECONFIG_INSTALL_DIR} COMPONENT Devel)
-
-install(FILES kinit.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
