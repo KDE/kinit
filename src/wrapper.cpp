@@ -40,6 +40,8 @@
 #include <pwd.h>
 #include <signal.h>
 
+#include <kdeinitinterface.h>
+
 extern char **environ;
 
 // copied from kdeinit/kinit.cpp
@@ -289,6 +291,10 @@ int main(int argc, char **argv)
         p++;
     }
     start = p;
+
+#ifdef QT_DBUS_LIB
+    KDEInitInterface::ensureKdeinitRunning();
+#endif
 
     if (strcmp(start, "kdeinit5_wrapper") == 0) {
         wrapper = 1;

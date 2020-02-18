@@ -24,6 +24,11 @@ target_link_libraries(kdeinit5 ${kdeinit_LIBS} ${KINIT_SOCKET_LIBRARY}
     KF5::ConfigCore
     Qt5::DBus
 )
+
+if (NOT WIN32)
+    target_link_libraries(kdeinit5 KF5::DBusAddons)
+endif()
+
 if (APPLE)
     target_link_libraries(kdeinit5 "-framework Foundation -framework AppKit")
 endif ()
@@ -49,7 +54,7 @@ if (NOT WIN32)
   add_executable(kdeinit5_shutdown ../wrapper.cpp)
   ecm_mark_nongui_executable(kdeinit5_shutdown)
 
-  target_link_libraries(kdeinit5_shutdown  ${KINIT_SOCKET_LIBRARY} Qt5::Core)
+  target_link_libraries(kdeinit5_shutdown  ${KINIT_SOCKET_LIBRARY} Qt5::Core KF5::DBusAddons)
 
   install(TARGETS kdeinit5_shutdown ${KF5_INSTALL_TARGETS_DEFAULT_ARGS} )
 
@@ -57,7 +62,7 @@ if (NOT WIN32)
   add_executable(kdeinit5_wrapper ../wrapper.cpp)
   ecm_mark_nongui_executable(kdeinit5_wrapper)
 
-  target_link_libraries(kdeinit5_wrapper  ${KINIT_SOCKET_LIBRARY} Qt5::Core)
+  target_link_libraries(kdeinit5_wrapper  ${KINIT_SOCKET_LIBRARY} Qt5::Core KF5::DBusAddons)
 
   if (NOT X11_FOUND)
     target_compile_definitions(kdeinit5_wrapper PRIVATE -DNO_DISPLAY)

@@ -58,6 +58,7 @@ find_package(KF5DocTools ${KF5_DEP_VERSION})
 
 if (NOT WIN32)
 find_package(Libcap)
+find_package(KF5DBusAddons ${KF5_DEP_VERSION} REQUIRED)
 set_package_properties(Libcap PROPERTIES
                        TYPE OPTIONAL
                        PURPOSE "KInit needs setcap in order to install start_kdeinit with CAP_SYS_RESOURCE capabilities"
