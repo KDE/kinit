@@ -59,6 +59,7 @@
 #include <kio/desktopexecparser.h>
 #include <kio/global.h>
 #include <kio/slaveinterface.h>
+#include <kiogui_export.h>
 
 #ifdef Q_OS_WIN
 #include <qt_windows.h>
@@ -757,6 +758,13 @@ KLauncher::start_service(KService::Ptr service, const QStringList &_urls,
     return true;
 }
 
+
+namespace KIOGuiPrivate {
+// defined in kprocessrunner.cpp
+extern bool KIOGUI_EXPORT checkStartupNotify(const KService *service, bool *silent_arg,
+                                             QByteArray *wmclass_arg);
+}
+
 void
 KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr service, const QByteArray &startup_id,
                                      const QStringList &envs)
@@ -771,7 +779,8 @@ KLauncher::send_service_startup_info(KLaunchRequest *request, KService::Ptr serv
     }
     bool silent;
     QByteArray wmclass;
-    if (!KRun::checkStartupNotify(QString(), service.data(), &silent, &wmclass)) {
+
+    if (!KIOGuiPrivate::checkStartupNotify(service.data(), &silent, &wmclass)) {
         return;
     }
     KStartupInfoId id;
