@@ -1,0 +1,120 @@
+# translation of kdelibs4.po to Swedish
+# Översättning kdelibs4.po till Svenska
+#
+# Copyright (C) 1997,2002,2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+# Magnus Reftel <d96reftl@dtek.chalmers.se>, 1997.
+# Anders Widell <awl@hem.passagen.se>, 1998-2000.
+# Per Lindström <pelinstr@algonet.se>, 2000.
+# Mattias Newzella <newzella@linux.nu>, 2000, 2001, 2002,2003, 2004, 2005.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2002.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
+# Stefan Asserhall <stefan.asserhall@bredband.net>, 2010, 2011, 2012, 2013, 2014, 2016.
+# Arve Eriksson <031299870@telia.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-05-31 17:58+0200\n"
+"PO-Revision-Date: 2016-12-14 18:51+0100\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:512
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Kan inte starta en ny process.\n"
+"Systemet kan ha nått maximalt antal möjliga öppna filer, eller har maximalt "
+"antal öppna filer som du tillåts använda uppnåtts."
+
+#: kdeinit/kinit.cpp:534
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Kan inte starta en ny process.\n"
+"Systemet kan ha nått maximalt antal möjliga processer, eller har maximalt "
+"antal processer som du tillåts använda uppnåtts."
+
+#: kdeinit/kinit.cpp:617
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Kunde inte hitta körbar \"%1\"."
+
+#: kdeinit/kinit.cpp:650
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Kunde inte öppna biblioteket \"%1\":\n"
+"%2"
+
+#: kdeinit/kinit.cpp:687
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Hittade inte \"kdemain\" i \"%1\".\n"
+"%2"
+
+#: klauncher/klauncher.cpp:436
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit kunde inte starta '%1'."
+
+#: klauncher/klauncher.cpp:617 klauncher/klauncher.cpp:631
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Kunde inte hitta tjänst \"%1\"."
+
+#: klauncher/klauncher.cpp:649
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Tjänsten '%1' måste vara körbar för att köra."
+
+#: klauncher/klauncher.cpp:651 klauncher/klauncher.cpp:712
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Tjänsten \"%1\" är felaktig."
+
+#: klauncher/klauncher.cpp:807
+#, kde-format
+msgid "Launching %1"
+msgstr "Startar %1"
+
+#: klauncher/klauncher.cpp:988
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Okänt protokoll \"%1\".\n"
+
+#: klauncher/klauncher.cpp:994
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Kunde inte hitta insticksprogrammet '%1'.\n"
+
+#: klauncher/klauncher.cpp:1067
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "Fel vid laddning av '%1'."
+
+#: klauncher/klauncher_main.cpp:146
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"Klauncher: Det här programmet är inte avsett att startas manuellt.\n"
+"Klauncher: Det startas automatiskt av kdeinit5.\n"
