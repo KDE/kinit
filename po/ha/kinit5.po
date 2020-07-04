@@ -1,0 +1,101 @@
+# Hausa translation for kdelibs strings.
+# Copyright 2009 Adriaan de Groot, Mustapha Abubakar, Ibrahim Dasuna
+# This file is distributed under the same license as the kdelibs package.
+#
+# Adriaan de Groot <groot@kde.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-05-31 17:58+0200\n"
+"PO-Revision-Date: 2009-03-17 11:22+0100\n"
+"Last-Translator: Adriaan de Groot <groot@kde.org>\n"
+"Language-Team: Hausa <kde-i18n-doc@lists.kde.org>\n"
+"Language: ha\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 0.2\n"
+
+#: kdeinit/kinit.cpp:512
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:534
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:617
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr ""
+
+#: kdeinit/kinit.cpp:650
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+
+#: kdeinit/kinit.cpp:687
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+
+#: klauncher/klauncher.cpp:436
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr ""
+
+#: klauncher/klauncher.cpp:617 klauncher/klauncher.cpp:631
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr ""
+
+#: klauncher/klauncher.cpp:649
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr ""
+
+#: klauncher/klauncher.cpp:651 klauncher/klauncher.cpp:712
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr ""
+
+#: klauncher/klauncher.cpp:807
+#, kde-format
+msgid "Launching %1"
+msgstr ""
+
+#: klauncher/klauncher.cpp:988
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr ""
+
+#: klauncher/klauncher.cpp:994
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr ""
+
+#: klauncher/klauncher.cpp:1067
+#, kde-format
+msgid "Error loading '%1'."
+msgstr ""
+
+#: klauncher/klauncher_main.cpp:146
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""

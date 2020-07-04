@@ -1,0 +1,115 @@
+# translation of kdelibs4.po to Estonian
+# Copyright (C) 1999-2004, 2005, 2006, 2009 Free Software Foundation, Inc.
+#
+# Hasso Tepper <hasso@kde.org>, 1999-2004, 2005, 2006.
+# Marek Laane <bald@smail.ee>, 2003-2009.
+# Peeter Russak <pezz@tkwcy.ee>, 2005.
+# Marek Laane <bald@smail.ee>, 2009, 2010, 2011, 2012, 2014, 2016, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-05-31 17:58+0200\n"
+"PO-Revision-Date: 2019-10-31 12:38+0200\n"
+"Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
+"Language-Team: Estonian <kde-et@lists.linux.ee>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 19.08.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:512
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Uue protsessi käivitamine nurjus.\n"
+"Võib-olla on süsteem juba avanud maksimaalse arvu faile või vähemalt nii "
+"palju faile, kui sa oled maksimaalselt lubanud avada."
+
+#: kdeinit/kinit.cpp:534
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Uue protsessi loomine nurjus.\n"
+"Võib-olla on süsteem juba loonud maksimaalse arvu protsesse või vähemalt nii "
+"palju protsesse, kui sa oled maksimaalselt lubanud luua."
+
+#: kdeinit/kinit.cpp:617
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Täitmisfaili '%1' ei leitud."
+
+#: kdeinit/kinit.cpp:650
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Teeki '%1' pole võimalik avada.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:687
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Failist '%1' ei leitud funktsiooni 'kdemain'.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:436
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit ei suutnud käivitada rakendust %1"
+
+#: klauncher/klauncher.cpp:617 klauncher/klauncher.cpp:631
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Teenust '%1' ei leitud."
+
+#: klauncher/klauncher.cpp:649
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Teenus '%1' peab töötamiseks olema käivitatav."
+
+#: klauncher/klauncher.cpp:651 klauncher/klauncher.cpp:712
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Teenus '%1' on vigase vorminguga."
+
+#: klauncher/klauncher.cpp:807
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 käimapanek"
+
+#: klauncher/klauncher.cpp:988
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Tundmatu protokoll '%1'.\n"
+
+#: klauncher/klauncher.cpp:994
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Pluginat '%1' ei leitud.\n"
+
+#: klauncher/klauncher.cpp:1067
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "Tõrge '%1' laadimisel."
+
+#: klauncher/klauncher_main.cpp:146
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: seda programmi ei peaks käsitsi käivitama.\n"
+"klauncher: selle käivitab automaatselt kdeinit5.\n"
