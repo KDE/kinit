@@ -43,7 +43,7 @@ typedef unsigned int pid_t;
 #include <QDBusMessage>
 #include <QDBusContext>
 
-#include <kservice.h>
+#include <KService>
 #include <kio/idleslave.h>
 #include <kio/connectionserver.h>
 

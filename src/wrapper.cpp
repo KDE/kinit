@@ -23,8 +23,8 @@
 
 #include "config-kdeinit.h"
 
-#include <qstandardpaths.h>
-#include <qfile.h>
+#include <QStandardPaths>
+#include <QFile>
 
 #include <sys/types.h>
 #include <sys/param.h>
@@ -40,7 +40,7 @@
 #include <pwd.h>
 #include <signal.h>
 
-#include <kdeinitinterface.h>
+#include <KDEInitInterface>
 
 extern char **environ;
 

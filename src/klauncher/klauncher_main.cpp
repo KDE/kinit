@@ -22,11 +22,11 @@
 #include <qplatformdefs.h>
 
 #include "klauncher.h"
-#include "kcrash.h"
+#include <KCrash>
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include "klauncher_cmds.h"
 #include <QGuiApplication>

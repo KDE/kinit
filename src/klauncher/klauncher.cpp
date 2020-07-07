@@ -47,14 +47,14 @@
 #include <QUrl>
 #include <qplatformdefs.h>
 
-#include <kconfig.h>
+#include <KConfig>
 #include <QDebug>
-#include <klocalizedstring.h>
-#include <kdesktopfile.h>
-#include <kpluginloader.h> // to find kioslave modules
-#include <kprotocolmanager.h>
-#include <kprotocolinfo.h>
-#include <krun.h> // TODO port away from kiofilewidgets
+#include <KLocalizedString>
+#include <KDesktopFile>
+#include <KPluginLoader> // to find kioslave modules
+#include <KProtocolManager>
+#include <KProtocolInfo>
+#include <KRun> // TODO port away from kiofilewidgets
 
 #include <kio/desktopexecparser.h>
 #include <kio/global.h>

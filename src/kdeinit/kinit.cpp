@@ -51,11 +51,11 @@
 #include <QFileInfo>
 #include <QRegExp>
 #include <QFont>
-#include <kcrash.h>
-#include <kconfig.h>
-#include <klocalizedstring.h>
+#include <KCrash>
+#include <KConfig>
+#include <KLocalizedString>
 #include <QDebug>
-#include <qsavefile.h>
+#include <QSaveFile>
 
 #ifdef Q_OS_LINUX
 #include <sys/prctl.h>
@@ -81,7 +81,7 @@
 
 #include <kstartupinfo.h>
 
-#include <qstandardpaths.h>
+#include <QStandardPaths>
 
 #include "kinit.h"
 #ifdef Q_OS_OSX

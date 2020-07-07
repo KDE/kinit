@@ -54,10 +54,10 @@
 #include <QtCore/QRegExp>
 #include <QCoreApplication>
 #include <QFont>
-#include <kconfig.h>
-#include <klocalizedstring.h>
+#include <KConfig>
+#include <KLocalizedString>
 #include <QDebug>
-#include <qsavefile.h>
+#include <QSaveFile>
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
@@ -71,7 +71,7 @@
 
 #include "klauncher_cmds.h"
 
-#include <qstandardpaths.h>
+#include <QStandardPaths>
 
 #include "kinit.h"
 #include "kinit_mac.h"
