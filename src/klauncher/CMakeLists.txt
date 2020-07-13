@@ -8,7 +8,8 @@ set(klauncher_SRCS
 
 ecm_qt_export_logging_category(
     IDENTIFIER KLAUNCHER
-    CATEGORY_NAME kf5.kinit.klauncher
+    CATEGORY_NAME kf.init.klauncher
+    OLD_CATEGORY_NAMES kf5.kinit.klauncher
     DEFAULT_SEVERITY Warning
     DESCRIPTION "KLauncher"
     EXPORT KINIT

@@ -74,7 +74,7 @@
 Q_DECLARE_LOGGING_CATEGORY(KLAUNCHER)
 
 // logging category for this framework, default: log stuff >= warning
-Q_LOGGING_CATEGORY(KLAUNCHER, "kf5.kinit.klauncher", QtWarningMsg)
+Q_LOGGING_CATEGORY(KLAUNCHER, "kf.init.klauncher", QtWarningMsg)
 
 static const char *const s_DBusStartupTypeToString[] =
 { "DBusNone", "DBusUnique", "DBusMulti", "ERROR" };
