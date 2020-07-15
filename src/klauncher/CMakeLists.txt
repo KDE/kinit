@@ -6,7 +6,8 @@ set(klauncher_SRCS
    ${CMAKE_CURRENT_BINARY_DIR}/org.kde.KLauncher.xml # just so that it gets generated
    )
 
-ecm_qt_export_logging_category(
+ecm_qt_declare_logging_category(klauncher_SRCS
+    HEADER klauncher_debug.h
     IDENTIFIER KLAUNCHER
     CATEGORY_NAME kf.init.klauncher
     OLD_CATEGORY_NAMES kf5.kinit.klauncher

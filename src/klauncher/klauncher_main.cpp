@@ -19,6 +19,8 @@
 
 #include <config-kdeinit.h>
 
+#include <klauncher_debug.h>
+
 #include <qplatformdefs.h>
 
 #include "klauncher.h"
@@ -187,13 +189,13 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     while (true) {
         QString service(QStringLiteral("org.kde.klauncher5")); // same as ktoolinvocation.cpp
         if (!QDBusConnection::sessionBus().isConnected()) {
-            qWarning() << "No DBUS session-bus found. Check if you have started the DBUS server.";
+            qCWarning(KLAUNCHER) << "No D-Bus session-bus found. Check if you have started the D-Bus server.";
             return 1;
         }
         QDBusReply<QDBusConnectionInterface::RegisterServiceReply> reply =
             QDBusConnection::sessionBus().interface()->registerService(service);
         if (!reply.isValid()) {
-            qWarning() << "DBUS communication problem!";
+            qCWarning(KLAUNCHER) << "D-Bus communication problem!";
             return 1;
         }
         if (reply == QDBusConnectionInterface::ServiceRegistered) {
@@ -201,12 +203,12 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
         }
 
         if (--maxTry == 0) {
-            qWarning() << "Another instance of klauncher is already running!";
+            qCWarning(KLAUNCHER) << "Another instance of klauncher is already running!";
             return 1;
         }
 
         // Wait a bit...
-        qWarning() << "Waiting for already running klauncher to exit.";
+        qCWarning(KLAUNCHER) << "Waiting for already running klauncher to exit.";
         QThread::sleep(1);
 
         // Try again...

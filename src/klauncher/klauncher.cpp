@@ -25,6 +25,7 @@
 #include "klauncher_cmds.h"
 #include "klauncher_adaptor.h"
 #include "kslavelauncheradaptor.h"
+#include <klauncher_debug.h>
 
 #include <stdio.h>
 #include <qplatformdefs.h>
@@ -70,12 +71,6 @@
 // Dispose slaves after being idle for SLAVE_MAX_IDLE seconds
 #define SLAVE_MAX_IDLE  30
 
-#include <QLoggingCategory>
-Q_DECLARE_LOGGING_CATEGORY(KLAUNCHER)
-
-// logging category for this framework, default: log stuff >= warning
-Q_LOGGING_CATEGORY(KLAUNCHER, "kf.init.klauncher", QtWarningMsg)
-
 static const char *const s_DBusStartupTypeToString[] =
 { "DBusNone", "DBusUnique", "DBusMulti", "ERROR" };
 
@@ -94,7 +89,7 @@ ssize_t kde_safe_write(int fd, const void *buf, size_t count)
     ssize_t ret = 0;
     K_EINTR_LOOP(ret, QT_WRITE(fd, buf, count));
     if (ret < 0) {
-        qWarning() << "write failed:" << strerror(errno);
+        qCWarning(KLAUNCHER) << "write failed:" << strerror(errno);
     }
     return ret;
 }
@@ -126,7 +121,7 @@ KLauncher::KLauncher()
     connect(&mConnectionServer, SIGNAL(newConnection()), SLOT(acceptSlave()));
     if (!mConnectionServer.isListening()) {
         // Severe error!
-        qWarning("KLauncher: Fatal error, can't create tempfile!");
+        qCWarning(KLAUNCHER, "KLauncher: Fatal error, can't create tempfile!");
         ::_exit(1);
     }
 
@@ -144,19 +139,19 @@ KLauncher::KLauncher()
     mSlaveDebug = QString::fromLocal8Bit(qgetenv("KDE_SLAVE_DEBUG_WAIT"));
     if (!mSlaveDebug.isEmpty()) {
 #ifndef USE_KPROCESS_FOR_KIOSLAVES
-        qWarning("Klauncher running in slave-debug mode for slaves of protocol '%s'", qPrintable(mSlaveDebug));
+        qCWarning(KLAUNCHER, "Klauncher running in slave-debug mode for slaves of protocol '%s'", qPrintable(mSlaveDebug));
 #else
         // Slave debug mode causes kdeinit to suspend the process waiting
         // for the developer to attach gdb to the process; we do not have
         // a good way of doing a similar thing if we are using QProcess.
         mSlaveDebug.clear();
-        qWarning("slave-debug mode is not available as Klauncher is not using kdeinit");
+        qCWarning(KLAUNCHER, "slave-debug mode is not available as Klauncher is not using kdeinit");
 #endif
     }
     mSlaveValgrind = QString::fromLocal8Bit(qgetenv("KDE_SLAVE_VALGRIND"));
     if (!mSlaveValgrind.isEmpty()) {
         mSlaveValgrindSkin = QString::fromLocal8Bit(qgetenv("KDE_SLAVE_VALGRIND_SKIN"));
-        qWarning("Klauncher running slaves through valgrind for slaves of protocol '%s'", qPrintable(mSlaveValgrind));
+        qCWarning(KLAUNCHER, "Klauncher running slaves through valgrind for slaves of protocol '%s'", qPrintable(mSlaveValgrind));
     }
 #ifdef USE_KPROCESS_FOR_KIOSLAVES
     qCDebug(KLAUNCHER) << "LAUNCHER_OK";
@@ -315,7 +310,7 @@ void KLauncher::processRequestReturn(int status, const QByteArray &requestData)
         return;
     }
 
-    qWarning() << "Unexpected request return" << (unsigned int) status;
+    qCWarning(KLAUNCHER) << "Unexpected request return" << (unsigned int) status;
 }
 
 void
