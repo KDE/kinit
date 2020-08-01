@@ -1,0 +1,119 @@
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Danishka Navin <danishka@gmail.com>, 2008, 2009, 2010, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-07-16 02:01+0200\n"
+"PO-Revision-Date: 2011-07-25 07:45+0530\n"
+"Last-Translator: Danishka Navin <danishka@gmail.com>\n"
+"Language-Team: Sinhala <danishka@gmail.com>\n"
+"Language: si\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+" \n"
+" \n"
+"X-Generator: Lokalize 1.2\n"
+
+#: kdeinit/kinit.cpp:512
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"නව ක්‍රියාවක් සෑදීමට නොහැකි විය.\n"
+"පද්ධතිය තිබිය හැකි උපරිම විවෘත ගොනු ප්‍රමාණයට ළඟා වී ඇත හෝ ඔබ භාවිතා කිරීමට අවසර දී ඇති උපරිම "
+"විවෘත ගොනු ප්‍රමාණයට ළඟා වී ඇත."
+
+#: kdeinit/kinit.cpp:534
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"නව ක්‍රියාවක් සෑදීමට නොහැකි විය.\n"
+"පද්ධතිය තිබිය හැකි උපරිම ක්‍රියා ප්‍රමාණයට ළඟා වී ඇත හෝ ඔබ භාවිතා කිරීමට අවසර දී ඇති උපරිම ක්‍"
+"රියා ප්‍රමාණයට ළඟා වී ඇත."
+
+#: kdeinit/kinit.cpp:617
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "'%1' ක්‍රියාත්මකකරණය සොයාගැනීමට නොහැකි විය."
+
+#: kdeinit/kinit.cpp:650
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"'%1' පුස්තකාලය විවෘත කිරීමට නොහැකි විය.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:687
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"'%1' හි 'kdemain' සොයාගැනීමට නොහැක විය.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:431
+#, fuzzy, kde-format
+#| msgid "KDEInit could not launch '%1'."
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit හට '%1' ඇරඹිය නොහැක."
+
+#: klauncher/klauncher.cpp:612 klauncher/klauncher.cpp:626
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "'%1' සේවාව සොයාගත නොහැක."
+
+#: klauncher/klauncher.cpp:644
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr ""
+
+#: klauncher/klauncher.cpp:646 klauncher/klauncher.cpp:707
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "'%1' සේවා සංයුතිය දුර්වලයි."
+
+#: klauncher/klauncher.cpp:802
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 අරඹමින්"
+
+#: klauncher/klauncher.cpp:983
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "නොදන්නා '%1' ප්‍රොටොකොලයක්.\n"
+
+#: klauncher/klauncher.cpp:989
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "'%1' සේවාව සොයාගත නොහැක."
+
+#: klauncher/klauncher.cpp:1062
+#, fuzzy, kde-format
+#| msgid "Error loading '%1'.\n"
+msgid "Error loading '%1'."
+msgstr "'%1' පූරණය දෝෂ සහිතයි.\n"
+
+#: klauncher/klauncher_main.cpp:148
+#, fuzzy, kde-format
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit4.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: මෙම වැඩසටහන අතින් ආරම්භ කිරීමට අදහස් කරන්නේ නැත.\n"
+"klauncher: මෙය kdeinit4 මඟින් ස්වයංක්‍රීයව ආරම්භ කරයි.\n"
