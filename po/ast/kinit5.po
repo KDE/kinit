@@ -1,0 +1,112 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kinit package.
+#
+# enolp <enolp@softastur.org>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: kinit\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-08-09 02:05+0200\n"
+"PO-Revision-Date: 2020-02-15 01:58+0100\n"
+"Last-Translator: enolp <enolp@softastur.org>\n"
+"Language-Team: Asturian <alministradores@softastur.org>\n"
+"Language: ast\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 19.12.2\n"
+
+#: kdeinit/kinit.cpp:500
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Nun pue aniciase'l procesu nuevu.\n"
+"El sistema pudo algamar el númberu máximu de ficheros abiertos o'l númberu "
+"de ficheros abiertos que tienes permisu pa usar."
+
+#: kdeinit/kinit.cpp:522
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Nun pue crease'l procesu nuevu.\n"
+"El sistema pudo algamar el númberu máximu de procesos posibles o'l númberu "
+"de procesos que tienes permisu pa usar."
+
+#: kdeinit/kinit.cpp:605
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Nun pudo alcontrase l'executable «%1»."
+
+#: kdeinit/kinit.cpp:638
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Nun pudo abrise la biblioteca «%1».\n"
+"%2"
+
+#: kdeinit/kinit.cpp:675
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Nun pudo alcontrase «kdemain» en «%1».\n"
+"%2"
+
+#: klauncher/klauncher.cpp:419
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit nun pudo llanzar «%1»"
+
+#: klauncher/klauncher.cpp:600 klauncher/klauncher.cpp:614
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Nun pudo alcontrase'l ficheru «%1»."
+
+#: klauncher/klauncher.cpp:632
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "El serviciu «%1» ha ser executable pa executase."
+
+#: klauncher/klauncher.cpp:634 klauncher/klauncher.cpp:695
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "El serviciu «%1» tien un formatu malu."
+
+#: klauncher/klauncher.cpp:790
+#, kde-format
+msgid "Launching %1"
+msgstr "Llanzando %1"
+
+#: klauncher/klauncher.cpp:971
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Desconozse'l protocolu «%1».\n"
+
+#: klauncher/klauncher.cpp:977
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Nun pudo alcontrase'l plugin «%1».\n"
+
+#: klauncher/klauncher.cpp:1050
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "Fallu al cargar «%1»."
+
+#: klauncher/klauncher_main.cpp:136
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Esti programa nun ta pensáu p'anicialu a mano.\n"
+"klauncher: Anicióse automáticamente por kdeinit5.\n"

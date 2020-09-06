@@ -1,0 +1,120 @@
+# translation of kdelibs4.po to Punjabi
+# Punjabi translation of kdelibs.
+# Copyright (C) 2004, 2005, 2007, 2008, 2009 Free Software Foundation, Inc.
+#
+# Amanpreet Singh Alam <amanlinux@netscape.net>, 2004.
+# Amanpreet Singh Alam <amanlinux@netscpe.net>, 2004.
+# A S Alam <aalam@users.sf.net>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012.
+# ASB <aalam@users.sf.net>, 2007.
+# Amanpreet Singh Alam <apreet.alam@gmail.com>, 2008.
+# Amanpreet Singh <aalam@users.sf.net>, 2008.
+# Amanpreet Singh Alam <aalam@users.sf.net>, 2008, 2009, 2013, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-08-09 02:05+0200\n"
+"PO-Revision-Date: 2014-07-08 14:30-0500\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:500
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"ਨਵਾਂ ਐਪਲੀਕੇਸ਼ਨ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਅਸਫ਼ਲ ਹੈ।\n"
+"ਸਿਸਟਮ ਵੱਧ ਤੋਂ ਵੱਧ ਖੋਲੀਆਂ ਜਾ ਸਕਣ ਵਾਲੀਆਂ ਫਾਈਲਾਂ ਦੀ ਗਿਣਤੀ ਤੱਕ ਅੱਪੜ ਗਿਆ ਹੈ ਜਾਂ ਵੱਧ ਤੋਂ ਵੱਧ ਫਾਈਲਾਂ "
+"ਦੀ ਗਿਣਤੀ ਆ ਗਈ ਹੈ, ਜਿੰਨਾਂ ਦੀ ਤੁਹਾਨੂੰ ਖੋਲ੍ਹਣ ਦੀ ਮਨਜ਼ੂਰੀ ਹੈ।"
+
+#: kdeinit/kinit.cpp:522
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"ਨਵਾਂ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣ ਲਈ ਅਸਫ਼ਲ ਹੈ।\n"
+"ਸਿਸਟਮ ਵੱਧ ਤੋਂ ਵੱਧ ਸੰਭਵ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀ ਗਿਣਤੀ ਤੱਕ ਅੱਪੜ ਗਿਆ ਹੈ ਜਾਂ ਵੱਧ ਤੋਂ ਵੱਧ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀ "
+"ਗਿਣਤੀ ਆ ਗਈ ਹੈ, ਜਿੰਨਾਂ ਦੀ ਤੁਹਾਨੂੰ ਵਰਤਣ ਦੀ ਮਨਜ਼ੂਰੀ ਹੈ।"
+
+#: kdeinit/kinit.cpp:605
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "'%1' ਚੱਲਣਯੋਗ ਨਹੀ ਹੈ।"
+
+#: kdeinit/kinit.cpp:638
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"ਲਾਇਬਰੇਰੀ '%1' ਖੋਲ੍ਹੀ ਨਹੀ ਜਾ ਸਕੀ ਹੈ।\n"
+"%2"
+
+#: kdeinit/kinit.cpp:675
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"'%1' ਵਿੱਚ 'kdemain' ਨਹੀ ਲੱਭਾ ਹੈ।\n"
+"%2"
+
+#: klauncher/klauncher.cpp:419
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit '%1' ਨੂੰ ਲਾਂਚ ਨਹੀ ਕਰ ਸਕਿਆ ਹੈ"
+
+#: klauncher/klauncher.cpp:600 klauncher/klauncher.cpp:614
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "ਸਰਵਿਸ '%1' ਸ਼ੁਰੂ ਨਹੀ ਜਾ ਸਕੀ ਹੈ।"
+
+#: klauncher/klauncher.cpp:632
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "ਸਰਵਿਸ '%1' ਚਲਾਉਣ ਲਈ ਚੱਲਣਯੋਗ ਹੋਣੀ ਲਾਜ਼ਮੀ ਹੈ।"
+
+#: klauncher/klauncher.cpp:634 klauncher/klauncher.cpp:695
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "ਸਰਵਿਸ '%1' ਬੇਢੰਗੀ ਹੈ।"
+
+#: klauncher/klauncher.cpp:790
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 ਨੂੰ ਚਾਲੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+
+#: klauncher/klauncher.cpp:971
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "ਅਣਜਾਣਾ ਪ੍ਰੋਟੋਕਾਲ '%1' ਹੈ\n"
+
+#: klauncher/klauncher.cpp:977
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "'%1' ਪਲੱਗਇਨ ਲੱਭੀ ਨਹੀਂ ਜਾ ਸਕੀ।\n"
+
+#: klauncher/klauncher.cpp:1050
+#, fuzzy, kde-format
+#| msgid "Error loading '%1'.\n"
+msgid "Error loading '%1'."
+msgstr "'%1' ਦੀ ਲੋਡਿੰਗ ਦੌਰਾਨ ਗਲਤੀ ਹੈ।\n"
+
+#: klauncher/klauncher_main.cpp:136
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਦਸਤੀ ਨਹੀਂ ਚਲਾਇਆ ਜਾ ਸਕਦਾ ਹੈ।\n"
+"klauncher: ਇਸ ਨੂੰ kdeinit5 ਰਾਹੀਂ ਆਟੋਮੈਟਿਕ ਹੀ ਚਲਾਇਆ ਜਾਂਦਾ ਹੈ।\n"
