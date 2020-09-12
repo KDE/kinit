@@ -20,7 +20,7 @@ include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
 
-set(KF5_VERSION "5.74.0") # handled by release scripts
+set(KF5_VERSION "5.75.0") # handled by release scripts
 set(KF5_DEP_VERSION "5.74.0") # handled by release scripts
 
 ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KINIT
