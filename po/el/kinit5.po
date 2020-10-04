@@ -1,0 +1,126 @@
+# translation of kdelibs4.po to Greek
+# translation of kdelibs4.po to
+# Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+# Last MAJOR revision (whole file) (29-03-2003 - Stergios Dramis).
+#
+# Dimitris Kamenopoulos <d.kamenopoulos@mail.ntua.gr>, 2000-2002.
+# Stergios Dramis <sdramis@egnatia.ee.auth.gr>, 2002-2004.
+# Κώστας Μπουκουβάλας <quantis@hellug.gr>, 2005.
+# Spiros Georgaras <sngeorgaras@otenet.gr>, 2005, 2006, 2007, 2008.
+# Toussis Manolis <manolis@koppermind.homelinux.org>, 2006, 2007, 2008, 2009.
+# Spiros Georgaras <sng@hellug.gr>, 2007, 2008.
+# Σπύρος Γεωργαράς <sngeorgaras@otenet.gr>, 2008.
+# Petros <pvidalis@gmail.com>, 2009.
+# Petros Vidalis <p_vidalis@hotmail.com>, 2010, 2011.
+# Dimitrios Glentadakis <dglent@gmail.com>, 2010, 2011, 2012, 2013, 2014.
+# nikos, 2011.
+# Stelios <sstavra@gmail.com>, 2012, 2013, 2020.
+# Dimitris Kardarakos <dimkard@gmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-08-09 02:05+0200\n"
+"PO-Revision-Date: 2020-09-11 12:50+0300\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.04.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:500
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Αδυναμία εκκίνησης μιας νέας διεργασίας.\n"
+"Το σύστημα έφτασε το μέγιστο επιτρεπόμενο αριθμό ανοικτών αρχείων ή "
+"ξεπεράσατε το μέγιστο αριθμό ανοικτών αρχείων που σας επιτρέπεται."
+
+#: kdeinit/kinit.cpp:522
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Αδυναμία δημιουργίας μιας νέας διεργασίας.\n"
+"Το σύστημα έφτασε το μέγιστο επιτρεπόμενο αριθμό ανοικτών αρχείων ή "
+"ξεπεράσατε το μέγιστο αριθμό ανοικτών αρχείων που σας επιτρέπεται."
+
+#: kdeinit/kinit.cpp:605
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Αδυναμία εύρεσης του εκτελέσιμου '%1'."
+
+#: kdeinit/kinit.cpp:638
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Αδυναμία ανοίγματος της βιβλιοθήκης '%1'.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:675
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Αδυναμία εύρεσης του 'kdemain' στο '%1'.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:419
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "Το KDEInit δεν μπόρεσε να εκτελέσει το '%1'."
+
+#: klauncher/klauncher.cpp:600 klauncher/klauncher.cpp:614
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Αδυναμία εύρεσης της υπηρεσίας '%1'."
+
+#: klauncher/klauncher.cpp:632
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Η υπηρεσία '%1' πρέπει να είναι εκτελέσιμη για την έναρξή της."
+
+#: klauncher/klauncher.cpp:634 klauncher/klauncher.cpp:695
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Η υπηρεσία '%1' είναι κακοδιατυπωμένη."
+
+#: klauncher/klauncher.cpp:790
+#, kde-format
+msgid "Launching %1"
+msgstr "Εκκίνηση %1"
+
+#: klauncher/klauncher.cpp:971
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Άγνωστο πρωτόκολλο '%1'.\n"
+
+#: klauncher/klauncher.cpp:977
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Αδυναμία εύρεσης του προσθέτου '%1'.\n"
+
+#: klauncher/klauncher.cpp:1050
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "Σφάλμα φόρτωσης του '%1'."
+
+#: klauncher/klauncher_main.cpp:136
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Αυτό το πρόγραμμα κανονικά δεν πρέπει να ξεκινάει χειροκίνητα.\n"
+"klauncher: Εκκινείται αυτόματα από το kdeinit5.\n"
