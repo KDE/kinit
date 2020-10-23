@@ -30,7 +30,6 @@
 #endif
 
 #include <QDBusConnectionInterface>
-#include <QDBusMessage>
 #include <QFile>
 #include <QFileInfo>
 #include <QUrl>
