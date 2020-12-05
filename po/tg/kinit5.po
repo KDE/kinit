@@ -1,0 +1,118 @@
+# translation of kdelibs4.po to Tajik Language
+# 2004, 2005, 2006, 2007 infoDev, a World Bank organization.
+# 2004, 2005, 2006, 2007 Khujand Computer Technologies, Inc.
+# 2004, 2005, 2006, 2007 Youth Opportunities, NGO, 2005.
+# Roger Kovacs <rkovacs@khujand.org>, 2003.
+# Thomas Diehl <thd@kde.org>, 2003.
+# Victor Ibragimov <victor.ibragimov@gmail.com>, 2003, 2004, 2005, 2006, 2007, 2008, 2019.
+# Copyright (C) 2004, 2002, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-10-24 02:12+0200\n"
+"PO-Revision-Date: 2019-08-15 18:03+0500\n"
+"Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
+"Language-Team: Tajik Language\n"
+"Language: tg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:500
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Раванди нав оғоз карда намешавад.\n"
+"Эҳтимол аст, ки низом бо шумораи имконпазири файлҳои кушодашуда дучор шуд ё "
+"ин ки низом мувофиқи иҷозатҳои шумо бо меъёри зиёда аз шумораи имконпазири "
+"файлҳои кушодашуда дучор шуд."
+
+#: kdeinit/kinit.cpp:522
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Раванди нав эҷод карда намешавад.\n"
+"Эҳтимол аст, ки низом бо шумораи имконпазири равандҳои ҷорӣ дучор шуд ё ин "
+"ки низом мувофиқи иҷозатҳои шумо бо меъёри зиёда аз шумораи имконпазири "
+"равандҳои ҷорӣ дучор шуд."
+
+#: kdeinit/kinit.cpp:605
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Раванди иҷрошавандаи '%1' ёфт нашуд."
+
+#: kdeinit/kinit.cpp:638
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Китобхонаи '%1' кушода нашуд.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:675
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Раванди 'kdemain' дар '%1' ёфт нашуд.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:418
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit раванди '%1'-ро оғоз карда натавонист"
+
+#: klauncher/klauncher.cpp:599 klauncher/klauncher.cpp:613
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Хидмати '%1' ёфт нашуд."
+
+#: klauncher/klauncher.cpp:631
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Хидмати '%1' барои ба кор бурдан иҷрошаванда аст."
+
+#: klauncher/klauncher.cpp:633 klauncher/klauncher.cpp:694
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Хидмати '%1' дар шакли нодуруст аст."
+
+#: klauncher/klauncher.cpp:789
+#, kde-format
+msgid "Launching %1"
+msgstr "Оғозкунии %1"
+
+#: klauncher/klauncher.cpp:970
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Протоколи номаълум: '%1'.\n"
+
+#: klauncher/klauncher.cpp:976
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Васлаки '%1' ёфт нашуд.\n"
+
+#: klauncher/klauncher.cpp:1049
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "Хатои боркунии '%1'."
+
+#: klauncher/klauncher_main.cpp:136
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Ин барнома бояд ба таври дастӣ оғоз карда нашавад.\n"
+"klauncher: Он ба таври худкор аз ҷониби kdeinit5 оғоз карда мешавад.\n"
