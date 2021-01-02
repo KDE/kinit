@@ -1,0 +1,108 @@
+# translation of kdelibs4.po to
+# Malayalam translation of kdelibs4.
+# Copyright (C) 2007-2010 This_file_is_part_of_KDE
+# This file is distributed under the same license as the kdelibs package.
+# Anoop | അനൂപ് Panavalappil | പനവളപ്പില്‍ <gnuanu@gmail.com>, 2008.
+# ANI PETER|അനി പീറ്റര്‍ <peter.ani@gmail.com>, 2008.
+# Maxin B. John <maxinbjohn@gmail.com>, 2007.
+# Manu S Madhav | മനു എസ് മാധവ് <manusmad@gmail.com>, 2008.
+# Praveen Arimbrathodiyil <pravi.a@gmail.com>, 2007, 2008, 2009, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-10-24 02:12+0200\n"
+"PO-Revision-Date: 2010-12-29 15:32+0530\n"
+"Last-Translator: \n"
+"Language-Team: SMC <smc.org.in>\n"
+"Language: ml\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kdeinit/kinit.cpp:500
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:522
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:605
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "'%1' എന്ന എക്സിക്യൂട്ടബിള്‍ കണ്ടുപിടിയ്ക്കാന്‍ സാധിച്ചില്ല."
+
+#: kdeinit/kinit.cpp:638
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"'%1' ലൈബ്രറി തുറക്കുവാന്‍ സാധ്യമായില്ല.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:675
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"'%1'-ല്‍ 'kdemain' ലഭ്യമാക്കുവാന്‍ സാധ്യമായില്ല.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:418
+#, fuzzy, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit-നു് '%1' ലഭ്യമാക്കുവാന്‍ സാധ്യമായില്ല."
+
+#: klauncher/klauncher.cpp:599 klauncher/klauncher.cpp:613
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "'%1' സേവനം ലഭ്യമാക്കുവാന്‍ സാധ്യമായില്ല."
+
+#: klauncher/klauncher.cpp:631
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "'%1' എന്ന സേവനം പ്രവര്‍ത്തിപ്പിയ്ക്കാവുന്നതാകണം."
+
+#: klauncher/klauncher.cpp:633 klauncher/klauncher.cpp:694
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "'%1'എന്ന സേവനത്തിന്റെ ഫോര്‍മാറ്റിങ്ങ് ശരിയല്ല."
+
+#: klauncher/klauncher.cpp:789
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 ലഭ്യമാക്കുന്നു"
+
+#: klauncher/klauncher.cpp:970
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "അപരിചിതമായ സമ്പ്രദായം '%1'.\n"
+
+#: klauncher/klauncher.cpp:976
+#, fuzzy, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "'%1' സേവനം ലഭ്യമാക്കുവാന്‍ സാധ്യമായില്ല."
+
+#: klauncher/klauncher.cpp:1049
+#, fuzzy, kde-format
+msgid "Error loading '%1'."
+msgstr "'%1' ലഭ്യമാക്കുന്നതില്‍ പിശകു്.\n"
+
+#: klauncher/klauncher_main.cpp:136
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
