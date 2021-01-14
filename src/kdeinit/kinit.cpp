@@ -345,11 +345,7 @@ QByteArray execpath_avoid_loops(const QByteArray &exec, int envc, const char *en
             paths = QFile::decodeName(path).split(pathSepRegExp);
         }
     } else {
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-        paths = QString::fromLocal8Bit(qgetenv("PATH")).split(pathSepRegExp, QString::KeepEmptyParts);
-#else
         paths = QString::fromLocal8Bit(qgetenv("PATH")).split(pathSepRegExp, Qt::KeepEmptyParts);
-#endif
         paths.prepend(QFile::decodeName(CMAKE_INSTALL_FULL_LIBEXECDIR_KF5));
     }
     QString execpath = QStandardPaths::findExecutable(QFile::decodeName(exec), paths);
