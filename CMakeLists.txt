@@ -20,10 +20,10 @@ include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
 
-set(KF5_VERSION "5.79.0") # handled by release scripts
-set(KF5_DEP_VERSION "5.79.0") # handled by release scripts
+set(KF_VERSION "5.79.0") # handled by release scripts
+set(KF_DEP_VERSION "5.79.0") # handled by release scripts
 
-ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KINIT
+ecm_setup_version(${KF_VERSION} VARIABLE_PREFIX KINIT
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kinit_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5InitConfigVersion.cmake"
                         SOVERSION 5)
@@ -48,17 +48,17 @@ else()
   set(KINIT_SOCKET_LIBRARY)
 endif()
 
-find_package(KF5Service ${KF5_DEP_VERSION} REQUIRED)
-find_package(KF5KIO ${KF5_DEP_VERSION} REQUIRED)
-find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
-find_package(KF5WindowSystem ${KF5_DEP_VERSION} REQUIRED)
-find_package(KF5Crash ${KF5_DEP_VERSION} REQUIRED)
-find_package(KF5Config ${KF5_DEP_VERSION} REQUIRED)
-find_package(KF5DocTools ${KF5_DEP_VERSION})
+find_package(KF5Service ${KF_DEP_VERSION} REQUIRED)
+find_package(KF5KIO ${KF_DEP_VERSION} REQUIRED)
+find_package(KF5I18n ${KF_DEP_VERSION} REQUIRED)
+find_package(KF5WindowSystem ${KF_DEP_VERSION} REQUIRED)
+find_package(KF5Crash ${KF_DEP_VERSION} REQUIRED)
+find_package(KF5Config ${KF_DEP_VERSION} REQUIRED)
+find_package(KF5DocTools ${KF_DEP_VERSION})
 
 if (NOT WIN32)
 find_package(Libcap)
-find_package(KF5DBusAddons ${KF5_DEP_VERSION} REQUIRED)
+find_package(KF5DBusAddons ${KF_DEP_VERSION} REQUIRED)
 set_package_properties(Libcap PROPERTIES
                        TYPE OPTIONAL
                        PURPOSE "KInit needs setcap in order to install start_kdeinit with CAP_SYS_RESOURCE capabilities"
