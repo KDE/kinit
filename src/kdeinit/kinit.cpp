@@ -346,7 +346,7 @@ QByteArray execpath_avoid_loops(const QByteArray &exec, int envc, const char *en
         }
     } else {
         paths = QString::fromLocal8Bit(qgetenv("PATH")).split(pathSepRegExp, Qt::KeepEmptyParts);
-        paths.prepend(QFile::decodeName(CMAKE_INSTALL_FULL_LIBEXECDIR_KF5));
+        paths.prepend(QFile::decodeName(KDE_INSTALL_FULL_LIBEXECDIR_KF5));
     }
     QString execpath = QStandardPaths::findExecutable(QFile::decodeName(exec), paths);
     if (avoid_loops && !execpath.isEmpty()) {
@@ -464,16 +464,16 @@ static pid_t launch(int argc, const char *_name, const char *args,
             // Try to match an absolute path to an executable binary (either in
             // bin/ or in libexec/) to a kdeinit module in the same prefix.
             //
-            // Note that these *_INSTALL_DIR values should normally relative to
+            // Note that these *_INSTALL_*DIR values should normally relative to
             // the install prefix, although this may not be the case if the user
             // has overridden them, and so this search is inherently fragile in
             // the face of unusual installation layouts.
-            if (lib.contains(QLatin1String(KF5_LIBEXEC_INSTALL_DIR))) {
-                libpath = QString(lib).replace(QLatin1String(KF5_LIBEXEC_INSTALL_DIR),
-                                               QLatin1String(LIB_INSTALL_DIR "/libkdeinit5_")) + QLatin1String(".so");
+            if (lib.contains(QLatin1String(KDE_INSTALL_FULL_LIBEXECDIR_KF5))) {
+                libpath = QString(lib).replace(QLatin1String(KDE_INSTALL_FULL_LIBEXECDIR_KF5),
+                                               QLatin1String(KDE_INSTALL_LIBDIR "/libkdeinit5_")) + QLatin1String(".so");
             } else if (lib.contains(QLatin1String("/bin/"))) {
                 libpath = QString(lib).replace(QLatin1String("/bin/"),
-                                               QLatin1String(LIB_INSTALL_DIR "/libkdeinit5_")) + QLatin1String(".so");
+                                               QLatin1String(KDE_INSTALL_LIBDIR "/libkdeinit5_")) + QLatin1String(".so");
             }
             // Don't confuse the user with "Could not load libkdeinit5_foo.so" if it doesn't exist
             // (and check for empty string to avoid warning message in QFileInfo::exists)
@@ -615,7 +615,7 @@ static pid_t launch(int argc, const char *_name, const char *args,
                 //     https://sourceware.org/bugzilla/show_bug.cgi?id=13945
                 //     - so we try hacking it in ourselves
                 QString install_lib_dir = QFile::decodeName(
-                        CMAKE_INSTALL_PREFIX "/" LIB_INSTALL_DIR "/");
+                        CMAKE_INSTALL_PREFIX "/" KDE_INSTALL_LIBDIR "/");
                 QString orig_libpath = libpath;
                 libpath = install_lib_dir + libpath;
                 l.setFileName(libpath);
@@ -976,7 +976,7 @@ static void start_klauncher()
     char args[32];
     strcpy(args, "--fd=");
     sprintf(args + 5, "%d", d.launcher[1]);
-    d.launcher_pid = launch(2, CMAKE_INSTALL_FULL_LIBEXECDIR_KF5 "/klauncher", args);
+    d.launcher_pid = launch(2, KDE_INSTALL_FULL_LIBEXECDIR_KF5 "/klauncher", args);
     close(d.launcher[1]);
 #ifndef NDEBUG
     fprintf(stderr, "kdeinit5: Launched KLauncher, pid = %ld, result = %d\n",
@@ -1521,7 +1521,7 @@ static int initXconnection()
 // Completely unrelated to plugins.
 static QString findSharedLib(const QString &lib)
 {
-    QString path = QFile::decodeName(CMAKE_INSTALL_PREFIX "/" LIB_INSTALL_DIR "/") + lib;
+    QString path = QFile::decodeName(CMAKE_INSTALL_PREFIX "/" KDE_INSTALL_LIBDIR "/") + lib;
     if (QFile::exists(path)) {
         return path;
     }

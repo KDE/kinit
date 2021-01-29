@@ -21,7 +21,7 @@
 #include <sys/capability.h>
 #endif
 
-#define EXECUTE CMAKE_INSTALL_FULL_BINDIR "/kdeinit5"
+#define EXECUTE KDE_INSTALL_FULL_BINDIR "/kdeinit5"
 
 #if KDEINIT_OOM_PROTECT
 

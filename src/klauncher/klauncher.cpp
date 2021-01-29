@@ -986,7 +986,7 @@ KLauncher::requestSlave(const QString &protocol,
 #ifdef Q_OS_WIN
     QString name = QLatin1String("kioslave");
 #else
-    QString name = QFile::decodeName(CMAKE_INSTALL_FULL_LIBEXECDIR_KF5 "/kioslave");
+    QString name = QFile::decodeName(KDE_INSTALL_FULL_LIBEXECDIR_KF5 "/kioslave");
 #endif
 #else
     QString arg1 = protocol;
@@ -1016,7 +1016,7 @@ KLauncher::requestSlave(const QString &protocol,
 #ifdef Q_OS_WIN
         arg_list.prepend(QLatin1String("kioslave"));
 #else
-        arg_list.prepend(QFile::decodeName(CMAKE_INSTALL_FULL_LIBEXECDIR_KF5 "/kioslave"));
+        arg_list.prepend(QFile::decodeName(KDE_INSTALL_FULL_LIBEXECDIR_KF5 "/kioslave"));
 #endif
 #endif
         name = QStringLiteral("valgrind");
