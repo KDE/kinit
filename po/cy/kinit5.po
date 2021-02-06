@@ -1,0 +1,125 @@
+# Cyfieithiad o kdelibs4.po i Cymraeg
+# translation of kdelibs4.po to Cymraeg
+# Translation of kdelibs4.po to Cymraeg
+# Translation of clearfuzzytest.po to Cymraeg
+# translation of clearfuzzytest.po to Cymraeg
+# translation of clearfuzzy.po to Cymraeg
+# KDE yn Gymraeg.
+# Copyright (C) 2003, 2004, 2005 Free Software Foundation, Inc.
+# www.kyfieithu.co.uk <kyfieithu@dotmon.com>, 2003.
+# Kgyfieithu <kyfieithu@dotmon.com>, 2003.
+# KGyfieithu <kyfieithu@dotmon.com>, 2003.
+# KD at KGyfieithu <kyfieithu@dotmon.com>, 2003, 2004.
+# Kyfieithu <kyfieithu@dotmon.com>, 2004.
+# Kevin Donnelly <kevin@dotmon.com>, 2005.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-01-15 02:31+0100\n"
+"PO-Revision-Date: 2005-01-28 17:54+0000\n"
+"Last-Translator: Kevin Donnelly <kevin@dotmon.com>\n"
+"Language-Team: Cymraeg\n"
+"Language: cy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9\n"
+"\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kdeinit/kinit.cpp:496
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:518
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+
+#: kdeinit/kinit.cpp:601
+#, kde-format
+msgid "Could not find '%1' executable."
+msgstr "Methu canfod gweithredadwyn '%1'"
+
+#: kdeinit/kinit.cpp:634
+#, kde-format
+msgid ""
+"Could not open library '%1'.\n"
+"%2"
+msgstr ""
+"Methu agor rhaglengell '%1'.\n"
+"%2"
+
+#: kdeinit/kinit.cpp:671
+#, kde-format
+msgid ""
+"Could not find 'kdemain' in '%1'.\n"
+"%2"
+msgstr ""
+"Methu canfod 'kdemain' yn '%1'.\n"
+"%2"
+
+#: klauncher/klauncher.cpp:418
+#, fuzzy, kde-format
+#| msgid "KDEInit could not launch '%1'."
+msgid "KDEInit could not launch '%1'"
+msgstr "Ni allodd KDEInit gychwyn '%1'."
+
+#: klauncher/klauncher.cpp:599 klauncher/klauncher.cpp:613
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Methu canfod gwasanaeth '%1'."
+
+#: klauncher/klauncher.cpp:631
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr ""
+
+#: klauncher/klauncher.cpp:633 klauncher/klauncher.cpp:694
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Mae gwasanaeth '%1' wedi'i gam-fformatio."
+
+#: klauncher/klauncher.cpp:789
+#, kde-format
+msgid "Launching %1"
+msgstr "Ymgychwyn %1"
+
+#: klauncher/klauncher.cpp:970
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Protocol anhysbys '%1'. \n"
+
+#: klauncher/klauncher.cpp:976
+#, fuzzy, kde-format
+#| msgid "Could not find service '%1'."
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Methu canfod gwasanaeth '%1'."
+
+#: klauncher/klauncher.cpp:1049
+#, fuzzy, kde-format
+#| msgid "Error loading '%1'.\n"
+msgid "Error loading '%1'."
+msgstr "Gwall wrth lwytho '%1'. \n"
+
+#: klauncher/klauncher_main.cpp:136
+#, fuzzy, kde-format
+#| msgid ""
+#| "klauncher: This program is not supposed to be started manually.\n"
+#| "klauncher: It is started automatically by kdeinit.\n"
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Ni ddylir cychwyn y rhaglen yma â llaw.\n"
+"klauncher: Cychwynnir yn ymysgogol gan kdeinit.\n"
