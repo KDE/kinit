@@ -375,7 +375,7 @@ bool ProcessList::terminateProcess(const QString &name)
 int launch(const QString &cmd)
 {
     QProcess *proc = new QProcess();
-    proc->start(cmd);
+    proc->start(cmd, QStringList());
     proc->waitForStarted();
     startedProcesses << proc;
     _PROCESS_INFORMATION *_pid = proc->pid();
