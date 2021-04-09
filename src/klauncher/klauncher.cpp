@@ -496,11 +496,7 @@ KLauncher::requestStart(KLaunchRequest *request)
     if (!process->waitForStarted()) {
         processRequestReturn(LAUNCHER_ERROR, "");
     } else {
-#ifndef Q_OS_WIN
-        request->pid = process->pid();
-#else
-        request->pid = process->pid()->dwProcessId;
-#endif
+        request->pid = process->processId();
         QByteArray data((char *)&request->pid, sizeof(int));
         processRequestReturn(LAUNCHER_OK, data);
     }

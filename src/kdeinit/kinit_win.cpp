@@ -40,7 +40,7 @@
 typedef unsigned int pid_t;
 #else
 #include <sys/types.h>
-#endif 
+#endif
 
 //#define ENABLE_SUICIDE
 //#define ENABLE_EXIT
@@ -378,8 +378,7 @@ int launch(const QString &cmd)
     proc->start(cmd, QStringList());
     proc->waitForStarted();
     startedProcesses << proc;
-    _PROCESS_INFORMATION *_pid = proc->pid();
-    int pid = _pid ? _pid->dwProcessId : 0;
+    int pid = proc->processId();
     if (verbose) {
         fprintf(stderr, "%s", proc->readAllStandardError().constData());
         fprintf(stderr, "%s", proc->readAllStandardOutput().constData());
