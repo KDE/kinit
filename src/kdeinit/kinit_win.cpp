@@ -12,7 +12,7 @@
 // Get this to compile... TODO: fix properly
 #undef QT_NO_CAST_FROM_ASCII
 
-#include <errno.h>
+#include <cerrno>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

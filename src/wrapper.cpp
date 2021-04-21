@@ -20,7 +20,7 @@
 #include <sys/stat.h>
 #include <sys/un.h>
 
-#include <errno.h>
+#include <cerrno>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
