@@ -17,10 +17,10 @@ ecm_qt_declare_logging_category(klauncher_SRCS
 )
 
 # Use org.kde.KSlaveLauncher.xml installed by kio
-qt5_add_dbus_adaptor(klauncher_SRCS ${KSlaveLauncher_DBUS_INTERFACE} klauncher.h KLauncher)
+qt_add_dbus_adaptor(klauncher_SRCS ${KSlaveLauncher_DBUS_INTERFACE} klauncher.h KLauncher)
 
 # The adaptor is manually edited, generate the xml from it.
-qt5_generate_dbus_interface(klauncher_adaptor.h org.kde.KLauncher.xml)
+qt_generate_dbus_interface(klauncher_adaptor.h org.kde.KLauncher.xml)
 
 kf5_add_kdeinit_executable(klauncher NOGUI ${klauncher_SRCS})
 set_target_properties(kdeinit_klauncher PROPERTIES DEFINE_SYMBOL MAKE_KLAUNCHER)
