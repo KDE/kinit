@@ -78,7 +78,6 @@ ki18n_install(po)
 if (KF5DocTools_FOUND)
     kdoctools_install(po)
 endif()
-add_definitions(-DQT_NO_FOREACH)
 add_subdirectory(src)
 
 if (KF5DocTools_FOUND)
