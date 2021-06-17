@@ -1,22 +1,21 @@
-if (WIN32)
-  set(kdeinit_SRCS kinit_win.cpp ../klauncher_cmds.cpp )
-  set(kdeinit_LIBS psapi)
-elseif (APPLE)
-  set(kdeinit_SRCS kinit.cpp kinit_mac.mm proctitle.cpp ../klauncher_cmds.cpp )
-  set(kdeinit_LIBS "")
-else ()
-  set(kdeinit_SRCS kinit.cpp proctitle.cpp ../klauncher_cmds.cpp )
-  set(kdeinit_LIBS "")
-endif ()
-
-include_directories(${KInit_BINARY_DIR}) # for kinit_version.h
-
 # on win32 kdeinit5 has to be a console application
 # to be able to catch stderr based --verbose output
-add_executable(kdeinit5 ${kdeinit_SRCS})
+add_executable(kdeinit5)
 ecm_mark_nongui_executable(kdeinit5)
 
-target_link_libraries(kdeinit5 ${kdeinit_LIBS} ${KINIT_SOCKET_LIBRARY}
+if (WIN32)
+    target_sources(kdeinit5 PRIVATE kinit_win.cpp ../klauncher_cmds.cpp)
+    target_link_libraries(kdeinit5 psapi)
+elseif (APPLE)
+    target_sources(kdeinit5 PRIVATE kinit.cpp kinit_mac.mm proctitle.cpp ../klauncher_cmds.cpp)
+else ()
+    target_sources(kdeinit5 PRIVATE kinit.cpp proctitle.cpp ../klauncher_cmds.cpp)
+endif ()
+
+target_include_directories(kdeinit5 PRIVATE ${KInit_BINARY_DIR}) # for kinit_version.h
+
+target_link_libraries(kdeinit5
+    ${KINIT_SOCKET_LIBRARY}
     Qt5::Gui #QFont::initialize
     KF5::WindowSystem # KStartupInfo
     KF5::Crash # KCrash::loadedByKdeinit
