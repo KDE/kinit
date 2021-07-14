@@ -17,7 +17,7 @@
 
 [1] recent kde cmake buildsystem on win32 installs shared libraries
     into lib instead of bin. This requires to have the lib directory
-    in the PATH environment variable too (required for all pathes in KDEDIRS)
+    in the PATH environment variable too (required for all paths in KDEDIRS)
 
  TODO: There is an prelimary concept of setting KDEDIRS environment variable
        from a cache file located on a well known path relative from the requested
@@ -49,8 +49,8 @@ int main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
 
-    QStringList envPath; /// pathes for using in environment of started process
-    QStringList searchPath; /// pathes for using to find executable
+    QStringList envPath; /// paths for using in environment of started process
+    QStringList searchPath; /// paths for using to find executable
     QString exeToStart;
     QString myAppName = QStringLiteral("kwrapper5:");
     QStringList exeParams;
@@ -75,9 +75,9 @@ int main(int argc, char **argv)
     QString path = QString::fromLocal8Bit(qgetenv("PATH")).toLower()
         .replace(QLatin1Char('\\'), QLatin1Char('/'));
 
-    /** add pathes from PATH environment
+    /** add paths from PATH environment
         - all to client path environment
-        - pathes not ending with lib to application search path
+        - paths not ending with lib to application search path
     */
     const auto lst = path.split(QLatin1Char(';'));
     for (const QString &a : lst) {
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
     }
 
     /**
-      add bin and lib pathes from KDEDIRS
+      add bin and lib paths from KDEDIRS
         - bin/lib to client path environment
         - bin to application search path
     */
@@ -149,7 +149,7 @@ int main(int argc, char **argv)
         if (!found) {
             /*
                         f.open(QIODevice::WriteOnly);
-                        // search all pathes one level above for a directory share/apps
+                        // search all paths one level above for a directory share/apps
                         // write entries into a cache
                         f.write(kdedirs.join(";").toLatin1());
                         f.close();
@@ -210,7 +210,7 @@ int main(int argc, char **argv)
             << "and PATH environment\n\t" << envPath.join(QStringLiteral("\n\t"));
     }
 
-    // setup client process envirionment
+    // setup client process environment
     QStringList env = QProcess::systemEnvironment();
     env.replaceInStrings(QRegExp(QStringLiteral("^PATH=(.*)"), Qt::CaseInsensitive),
         QLatin1String("PATH=") + envPath.join(QLatin1Char(';')));
