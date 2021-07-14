@@ -1127,7 +1127,7 @@ KLauncher::idleTimeout()
             keepOneFileSlave = false;
         } else if (slave->age(now) > SLAVE_MAX_IDLE) {
             // killing idle slave
-            delete slave;
+            slave->deleteLater();
         }
     }
 }
