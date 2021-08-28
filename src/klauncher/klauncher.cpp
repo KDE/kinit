@@ -304,7 +304,7 @@ void
 KLauncher::processDied(pid_t pid, long exitStatus)
 {
     qCDebug(KLAUNCHER) << pid << "exitStatus=" << exitStatus;
-    for (KLaunchRequest *request : qAsConst(requestList)) {
+    for (KLaunchRequest *request : std::as_const(requestList)) {
         qCDebug(KLAUNCHER) << "  had pending request" << request->pid;
         if (request->pid == pid) {
             if ((request->dbus_startup_type == KService::DBusUnique)
@@ -367,7 +367,7 @@ KLauncher::slotNameOwnerChanged(const QString &appId, const QString &oldOwner,
     }
 
     qCDebug(KLAUNCHER) << "new app" << appId;
-    for (KLaunchRequest *request : qAsConst(requestList)) {
+    for (KLaunchRequest *request : std::as_const(requestList)) {
         if (request->status != KLaunchRequest::Launching) {
             continue;
         }
@@ -471,7 +471,7 @@ KLauncher::requestStart(KLaunchRequest *request)
     request->process = process;
 
     QProcessEnvironment environment = QProcessEnvironment::systemEnvironment();
-    for (const QString &env : qAsConst(request->envs)) {
+    for (const QString &env : std::as_const(request->envs)) {
         const int pos = env.indexOf(QLatin1Char('='));
         const QString envVariable = env.left(pos);
         const QString envValue = env.mid(pos + 1);
@@ -480,7 +480,7 @@ KLauncher::requestStart(KLaunchRequest *request)
     process->setProcessEnvironment(environment);
 
     QStringList args;
-    for (const QString &arg : qAsConst(request->arg_list)) {
+    for (const QString &arg : std::as_const(request->arg_list)) {
         args << arg;
     }
 
@@ -512,11 +512,11 @@ KLauncher::requestStart(KLaunchRequest *request)
     appendLong(requestData, request->arg_list.count() + 1);
     requestData.append(request->name.toLocal8Bit());
     requestData.append('\0');
-    for (const QString &arg : qAsConst(request->arg_list)) {
+    for (const QString &arg : std::as_const(request->arg_list)) {
         requestData.append(arg.toLocal8Bit()).append('\0');
     }
     appendLong(requestData, request->envs.count());
-    for (const QString &env : qAsConst(request->envs)) {
+    for (const QString &env : std::as_const(request->envs)) {
         requestData.append(env.toLocal8Bit()).append('\0');
     }
     appendLong(requestData, 0); // avoid_loops, always false here
@@ -912,7 +912,7 @@ KLauncher::requestHoldSlave(const QString &urlStr, const QString &app_socket)
 {
     const QUrl url(urlStr);
     IdleSlave *slave = nullptr;
-    for (IdleSlave *p : qAsConst(mSlaveList)) {
+    for (IdleSlave *p : std::as_const(mSlaveList)) {
         if (p->onHold(url)) {
             slave = p;
             break;
@@ -933,14 +933,14 @@ KLauncher::requestSlave(const QString &protocol,
                         QString &error)
 {
     IdleSlave *slave = nullptr;
-    for (IdleSlave *p : qAsConst(mSlaveList)) {
+    for (IdleSlave *p : std::as_const(mSlaveList)) {
         if (p->match(protocol, host, true)) {
             slave = p;
             break;
         }
     }
     if (!slave) {
-        for (IdleSlave *p : qAsConst(mSlaveList)) {
+        for (IdleSlave *p : std::as_const(mSlaveList)) {
             if (p->match(protocol, host, false)) {
                 slave = p;
                 break;
@@ -948,7 +948,7 @@ KLauncher::requestSlave(const QString &protocol,
         }
     }
     if (!slave) {
-        for (IdleSlave *p : qAsConst(mSlaveList)) {
+        for (IdleSlave *p : std::as_const(mSlaveList)) {
             if (p->match(protocol, QString(), false)) {
                 slave = p;
                 break;
@@ -1050,7 +1050,7 @@ KLauncher::requestSlave(const QString &protocol,
 bool KLauncher::checkForHeldSlave(const QString &urlStr)
 {
     QUrl url(urlStr);
-    for (const IdleSlave *p : qAsConst(mSlaveList)) {
+    for (const IdleSlave *p : std::as_const(mSlaveList)) {
         if (p->onHold(url)) {
             return true;
         }
@@ -1062,7 +1062,7 @@ void
 KLauncher::waitForSlave(int pid)
 {
     Q_ASSERT(calledFromDBus());
-    for (IdleSlave *slave : qAsConst(mSlaveList)) {
+    for (IdleSlave *slave : std::as_const(mSlaveList)) {
         if (slave->pid() == static_cast<pid_t>(pid)) {
             return;    // Already here.
         }
@@ -1122,7 +1122,7 @@ KLauncher::idleTimeout()
 {
     bool keepOneFileSlave = true;
     QDateTime now = QDateTime::currentDateTime();
-    for (IdleSlave *slave : qAsConst(mSlaveList)) {
+    for (IdleSlave *slave : std::as_const(mSlaveList)) {
         if ((slave->protocol() == QLatin1String("file")) && (keepOneFileSlave)) {
             keepOneFileSlave = false;
         } else if (slave->age(now) > SLAVE_MAX_IDLE) {
@@ -1135,7 +1135,7 @@ KLauncher::idleTimeout()
 void KLauncher::reparseConfiguration()
 {
     KProtocolManager::reparseConfiguration();
-    for (IdleSlave *slave : qAsConst(mSlaveList)) {
+    for (IdleSlave *slave : std::as_const(mSlaveList)) {
         slave->reparseConfiguration();
     }
 }
@@ -1157,7 +1157,7 @@ KLauncher::slotFinished(int exitCode, QProcess::ExitStatus exitStatus)
     QProcess *p = static_cast<QProcess *>(sender());
     qCDebug(KLAUNCHER) << "process finished exitcode=" << exitCode << "exitStatus=" << exitStatus;
 
-    for (KLaunchRequest *request : qAsConst(requestList)) {
+    for (KLaunchRequest *request : std::as_const(requestList)) {
         if (request->process == p) {
             qCDebug(KLAUNCHER) << "found KProcess, request done";
             if (exitCode == 0  && exitStatus == QProcess::NormalExit) {

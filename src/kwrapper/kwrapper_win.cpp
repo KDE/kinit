@@ -132,7 +132,7 @@ int main(int argc, char **argv)
         kdedirsCacheList << rootPath + QStringLiteral("/kdedirs.cache");
 
         bool found = false;
-        for (const QString &kdedirsCachePath : qAsConst(kdedirsCacheList)) {
+        for (const QString &kdedirsCachePath : std::as_const(kdedirsCacheList)) {
             QFile f(kdedirsCachePath);
             if (f.exists()) {
                 f.open(QIODevice::ReadOnly);
@@ -161,7 +161,7 @@ int main(int argc, char **argv)
         qDebug() << "found KDEDIRS\n\t" << kdedirs.join(QStringLiteral("\n\t"));
     }
 
-    for (const QString &a : qAsConst(kdedirs)) {
+    for (const QString &a : std::as_const(kdedirs)) {
         if (!envPath.contains(a + QStringLiteral("/bin"))) {
             envPath << a + QStringLiteral("/bin");
         }
@@ -181,7 +181,7 @@ int main(int argc, char **argv)
     }
 
     bool found = false;
-    for (const QString &a : qAsConst(searchPath)) {
+    for (const QString &a : std::as_const(searchPath)) {
         if (verbose) {
             qDebug() << "\t" << a;
         }

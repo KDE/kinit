@@ -329,7 +329,7 @@ void ProcessList::init()
 
 ProcessListEntry *ProcessList::find(const QString &name)
 {
-    for (ProcessListEntry *ple : qAsConst(m_processes)) {
+    for (ProcessListEntry *ple : std::as_const(m_processes)) {
         if (ple->pid < 0) {
             qDebug() << "negative pid!";
             continue;
@@ -654,7 +654,7 @@ int main(int argc, char **argv, char **envp)
         QProcess *proc;
         int can_exit = 1;
         do {
-            for (proc : qAsConst(startedProcesses)) {
+            for (proc : std::as_const(startedProcesses)) {
                 if (proc->state() != QProcess::NotRunning) {
                     can_exit = 0;
                 }
