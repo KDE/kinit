@@ -1,0 +1,13 @@
+Dependencies:
+- 'on': ['Linux', 'FreeBSD', 'Windows', 'macOS']
+  'require':
+    'frameworks/extra-cmake-modules': '@same'
+    'frameworks/kservice' : '@same'
+    'frameworks/kio' : '@same'
+    'frameworks/ki18n' : '@same'
+    'frameworks/kwindowsystem' : '@same'
+    'frameworks/kcrash' : '@same'
+    'frameworks/kdoctools' : '@same'
+
+Options:
+  test-before-installing: True
