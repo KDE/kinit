@@ -419,18 +419,6 @@ void reset_oom_protect()
 #endif
 
 #ifndef Q_OS_OSX
-static void exitWithErrorMsg(const QString &errorMsg)
-{
-    fprintf(stderr, "%s\n", errorMsg.toLocal8Bit().data());
-    QByteArray utf8ErrorMsg = errorMsg.toUtf8();
-    d.result = 3; // Error with msg
-    write(d.fd[1], &d.result, 1);
-    int l = utf8ErrorMsg.length();
-    write(d.fd[1], &l, sizeof(int));
-    write(d.fd[1], utf8ErrorMsg.data(), l);
-    close(d.fd[1]);
-    exit(255);
-}
 
 static pid_t launch(int argc, const char *_name, const char *args,
                     const char *cwd = nullptr, int envc = 0, const char *envs = nullptr,
@@ -438,53 +426,17 @@ static pid_t launch(int argc, const char *_name, const char *args,
                     const char *tty = nullptr, bool avoid_loops = false,
                     const char *startup_id_str = "0")  // krazy:exclude=doublequote_chars
 {
-    QString lib;
-    QByteArray name;
-    QString libpath;
+    QByteArray name = _name;
     QByteArray execpath;
-    bool libpath_relative = false;
 
-    if (_name[0] != '/') {
-        name = _name;
-        lib = QFile::decodeName(name);
-        libpath = QLatin1String("libkdeinit5_") + lib;
-        libpath_relative = true;
+    if (name[0] != '/') {
         execpath = execpath_avoid_loops(name, envc, envs, avoid_loops);
     } else {
-        name = _name;
-        lib = QFile::decodeName(name);
         name = name.mid(name.lastIndexOf('/') + 1);
-
-        // FIXME: this .so extension stuff is very Linux-specific
-        if (lib.endsWith(QLatin1String(".so"))) {
-            libpath = lib;
-        } else {
-            execpath = _name;
-
-            // Try to match an absolute path to an executable binary (either in
-            // bin/ or in libexec/) to a kdeinit module in the same prefix.
-            //
-            // Note that these *_INSTALL_*DIR values should normally relative to
-            // the install prefix, although this may not be the case if the user
-            // has overridden them, and so this search is inherently fragile in
-            // the face of unusual installation layouts.
-            if (lib.contains(QLatin1String(KDE_INSTALL_FULL_LIBEXECDIR_KF5))) {
-                libpath = QString(lib).replace(QLatin1String(KDE_INSTALL_FULL_LIBEXECDIR_KF5),
-                                               QLatin1String(KDE_INSTALL_LIBDIR "/libkdeinit5_")) + QLatin1String(".so");
-            } else if (lib.contains(QLatin1String("/bin/"))) {
-                libpath = QString(lib).replace(QLatin1String("/bin/"),
-                                               QLatin1String(KDE_INSTALL_LIBDIR "/libkdeinit5_")) + QLatin1String(".so");
-            }
-            // Don't confuse the user with "Could not load libkdeinit5_foo.so" if it doesn't exist
-            // (and check for empty string to avoid warning message in QFileInfo::exists)
-            if (libpath.isEmpty() || !QFileInfo::exists(libpath)) {
-                libpath.clear();
-            }
-        }
+        execpath = _name;
     }
 #ifndef NDEBUG
-    fprintf(stderr, "kdeinit5: preparing to launch '%s'\n", libpath.isEmpty()
-            ? execpath.constData() : libpath.toUtf8().constData());
+    fprintf(stderr, "kdeinit5: preparing to launch '%s'\n", execpath.constData());
 #endif
     if (!args) {
         argc = 1;
@@ -597,100 +549,24 @@ static pid_t launch(int argc, const char *_name, const char *args,
 #endif
         }
 
-        if (libpath.isEmpty() && execpath.isEmpty()) {
-            QString errorMsg = i18n("Could not find '%1' executable.", QFile::decodeName(_name));
-            exitWithErrorMsg(errorMsg);
+        d.result = 2; // Try execing
+        write(d.fd[1], &d.result, 1);
+
+        // We set the close on exec flag.
+        // Closing of d.fd[1] indicates that the execvp succeeded!
+        fcntl(d.fd[1], F_SETFD, FD_CLOEXEC);
+
+        setup_tty(tty);
+
+        QByteArray executable = execpath;
+        if (!executable.isEmpty()) {
+            execvp(executable.constData(), d.argv);
         }
 
-        if (!qEnvironmentVariableIsEmpty("KDE_IS_PRELINKED") && !execpath.isEmpty()) {
-            libpath.truncate(0);
-        }
-
-        QLibrary l(libpath);
-
-        if (!libpath.isEmpty()) {
-            if (libpath_relative) {
-                // NB: Because Qt makes the actual dlopen() call, the
-                //     RUNPATH of kdeinit is *not* respected - see
-                //     https://sourceware.org/bugzilla/show_bug.cgi?id=13945
-                //     - so we try hacking it in ourselves
-                QString install_lib_dir = QFile::decodeName(
-                        CMAKE_INSTALL_PREFIX "/" KDE_INSTALL_LIBDIR "/");
-                QString orig_libpath = libpath;
-                libpath = install_lib_dir + libpath;
-                l.setFileName(libpath);
-                if (!l.load()) {
-                    libpath = orig_libpath;
-                    l.setFileName(libpath);
-                    l.load();
-                }
-            } else {
-                l.load();
-            }
-            if (!l.isLoaded()) {
-                QString ltdlError(l.errorString());
-                if (execpath.isEmpty()) {
-                    // Error
-                    QString errorMsg = i18n("Could not open library '%1'.\n%2", libpath, ltdlError);
-                    exitWithErrorMsg(errorMsg);
-                } else {
-                    // Print warning
-                    fprintf(stderr, "Could not open %s using a library: %s\n", qPrintable(lib),
-                            qPrintable(ltdlError));
-                }
-            }
-        }
-        if (!l.isLoaded()) {
-            d.result = 2; // Try execing
-            write(d.fd[1], &d.result, 1);
-
-            // We set the close on exec flag.
-            // Closing of d.fd[1] indicates that the execvp succeeded!
-            fcntl(d.fd[1], F_SETFD, FD_CLOEXEC);
-
-            setup_tty(tty);
-
-            QByteArray executable = execpath;
-
-            if (!executable.isEmpty()) {
-                execvp(executable.constData(), d.argv);
-            }
-
-            d.result = 1; // Error
-            write(d.fd[1], &d.result, 1);
-            close(d.fd[1]);
-            exit(255);
-        }
-
-        QFunctionPointer sym = l.resolve("kdeinitmain");
-        if (!sym) {
-            sym = l.resolve("kdemain");
-            if (!sym) {
-                QString ltdlError = l.errorString();
-                fprintf(stderr, "Could not find kdemain: %s\n", qPrintable(ltdlError));
-                QString errorMsg = i18n("Could not find 'kdemain' in '%1'.\n%2",
-                                        libpath, ltdlError);
-                exitWithErrorMsg(errorMsg);
-            }
-        }
-
-        d.result = 0; // Success
+        d.result = 1; // Error
         write(d.fd[1], &d.result, 1);
         close(d.fd[1]);
-
-        d.func = (int (*)(int, char *[])) sym;
-        if (d.debug_wait) {
-            fprintf(stderr, "kdeinit5: Suspending process\n"
-                    "kdeinit5: 'gdb kdeinit5 %d' to debug\n"
-                    "kdeinit5: 'kill -SIGCONT %d' to continue\n",
-                    getpid(), getpid());
-            kill(getpid(), SIGSTOP);
-        } else {
-            setup_tty(tty);
-        }
-
-        exit(d.func(argc, d.argv));  // Launch!
-
+        exit(255);
         break;
     }
     default:
