@@ -280,6 +280,28 @@ int main(int argc, char **argv)
     }
     start = p;
 
+    /*
+     * Place it here before the call to ensureKdeinitRunning(), because we shouldn't be trying to
+     * start kdeinit during the process of shutdown.
+     */
+    if (strcmp(start, "kdeinit5_shutdown") == 0) {
+	    if (argc > 1) {
+		    fprintf(stderr, "Usage: %s\n\n", start);
+		    fprintf(stderr, "Shuts down kdeinit5 master process and terminates all processes spawned from it.\n");
+		    exit(255);
+	    }
+	    sock = openSocket();
+	    if (sock < 0) {
+		    fprintf(stderr, "Error: Can not contact kdeinit5!\n");
+		    exit(255);
+	    }
+	    header.cmd = LAUNCHER_TERMINATE_KDE;
+	    header.arg_length = 0;
+	    write_socket(sock, (char *) &header, sizeof(header));
+	    read_socket(sock, (char *) &header, 1); /* wait for the socket to close */
+	    return 0;
+    }
+
 #ifdef QT_DBUS_LIB
     KDEInitInterface::ensureKdeinitRunning();
 #endif
@@ -290,22 +312,6 @@ int main(int argc, char **argv)
         ext_wrapper = 1;
     } else if (strcmp(start, "kwrapper5") == 0) {
         kwrapper = 1;
-    } else if (strcmp(start, "kdeinit5_shutdown") == 0) {
-        if (argc > 1) {
-            fprintf(stderr, "Usage: %s\n\n", start);
-            fprintf(stderr, "Shuts down kdeinit5 master process and terminates all processes spawned from it.\n");
-            exit(255);
-        }
-        sock = openSocket();
-        if (sock < 0) {
-            fprintf(stderr, "Error: Can not contact kdeinit5!\n");
-            exit(255);
-        }
-        header.cmd = LAUNCHER_TERMINATE_KDE;
-        header.arg_length = 0;
-        write_socket(sock, (char *) &header, sizeof(header));
-        read_socket(sock, (char *) &header, 1); /* wait for the socket to close */
-        return 0;
     }
 
     if (wrapper || ext_wrapper || kwrapper) {
