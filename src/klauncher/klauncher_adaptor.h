@@ -26,7 +26,7 @@ class KLauncherAdaptor: public QDBusAbstractAdaptor
     Q_CLASSINFO("D-Bus Interface", "org.kde.KLauncher")
 public:
     KLauncherAdaptor(QObject *parent);
-    virtual ~KLauncherAdaptor();
+    ~KLauncherAdaptor() override;
 
 public: // PROPERTIES
 public Q_SLOTS: // METHODS

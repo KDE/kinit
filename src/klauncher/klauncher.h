@@ -93,7 +93,7 @@ public:
     KLauncher();
 #endif
 
-    ~KLauncher();
+    ~KLauncher() override;
 
     void close();
 
