@@ -1,0 +1,94 @@
+# translation of kdelibs4.po to Hindi
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Ravishankar Shrivastava <raviratlami@yahoo.com>, 2007.
+# Ravishankar Shrivastava <raviratlami@aol.in>, 2008.
+# G Karunakar <karunakar@indlinux.org>, 2009, 2010, 2012, 2020.
+# Sameer Singh <lumarzeli30@gmail.com>, 2021.
+# Raghavendra Kamath <raghu@raghukamath.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-10-10 00:14+0000\n"
+"PO-Revision-Date: 2021-06-29 20:38+0530\n"
+"Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
+"Language-Team: kde-hindi\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 21.04.2\n"
+
+#: kdeinit/kinit.cpp:448
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"नई प्रक्रिया का प्रारंभ नहीं हो सका।\n"
+"तंत्र में या तो अधिकतम संख्या में फ़ाइल खुल चुके हैं या तो जितने अभिलेखों की संख्या खोलने की "
+"आपको अनुमति मिली है उतनी खुल चुकीं हैं।"
+
+#: kdeinit/kinit.cpp:470
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"नई प्रक्रिया का सृजन नहीं हो सका।\n"
+"तंत्र में या तो अधिकतम संख्या में प्रक्रियाएँ हैं या तो जितनी प्रक्रियाओं के उपयोग की आपको "
+"अनुमति मिली है आप उतनों का उपयोगकर रहे हैं।"
+
+#: klauncher/klauncher.cpp:418
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "केडीई-इनिट '%1' को चालू नहीं कर सका।"
+
+#: klauncher/klauncher.cpp:595 klauncher/klauncher.cpp:609
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "सेवा '%1' नहीं मिला।"
+
+#: klauncher/klauncher.cpp:627
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "सेवा '%1' चलाने योग्य होना चाहिए।"
+
+#: klauncher/klauncher.cpp:629 klauncher/klauncher.cpp:690
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "सेवा '%1' विकृत है।"
+
+#: klauncher/klauncher.cpp:785
+#, kde-format
+msgid "Launching %1"
+msgstr "%1 चालू किया जा रहा है"
+
+#: klauncher/klauncher.cpp:966
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "अज्ञात प्रोटोकॉल '%1'।\n"
+
+#: klauncher/klauncher.cpp:972
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "प्लगइन '%1' नहीं मिला।\n"
+
+#: klauncher/klauncher.cpp:1045
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "%1 को लोड करने में त्रुटि।"
+
+#: klauncher/klauncher_main.cpp:136
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"के-लाँचर: यह प्रोग्राम हस्तचालित तरीके से प्रारंभ करने के लिए नही है।\n"
+"के-लाँचर: यह kdeinit5 द्वारा स्वचलित तरीके से प्रारंभ होता है।\n"
