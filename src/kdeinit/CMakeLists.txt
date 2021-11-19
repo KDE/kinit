@@ -7,9 +7,9 @@ if (WIN32)
     target_sources(kdeinit5 PRIVATE kinit_win.cpp ../klauncher_cmds.cpp)
     target_link_libraries(kdeinit5 psapi)
 elseif (APPLE)
-    target_sources(kdeinit5 PRIVATE kinit.cpp kinit_mac.mm proctitle.cpp ../klauncher_cmds.cpp)
+    target_sources(kdeinit5 PRIVATE kinit.cpp kinit.h kinit_mac.mm proctitle.cpp ../klauncher_cmds.cpp)
 else ()
-    target_sources(kdeinit5 PRIVATE kinit.cpp proctitle.cpp ../klauncher_cmds.cpp)
+    target_sources(kdeinit5 PRIVATE kinit.cpp kinit.h proctitle.cpp ../klauncher_cmds.cpp)
 endif ()
 
 target_include_directories(kdeinit5 PRIVATE ${KInit_BINARY_DIR}) # for kinit_version.h
