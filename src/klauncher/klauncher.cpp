@@ -484,13 +484,12 @@ KLauncher::requestStart(KLaunchRequest *request)
         args << arg;
     }
 
-    QString executable = request->name;
-#ifdef Q_OS_OSX
-    const QString bundlepath = QStandardPaths::findExecutable(executable);
-    if (!bundlepath.isEmpty()) {
-        executable = bundlepath;
+    const QString executable = QStandardPaths::findExecutable(request->name);
+    if (executable.isEmpty()) {
+        qCDebug(KLAUNCHER) << "KLauncher couldn't find" << request->name << "executable.";
+        return;
     }
-#endif
+
     process->start(executable, args);
 
     if (!process->waitForStarted()) {
