@@ -17,7 +17,7 @@ include(KDECMakeSettings)
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
 
-set(KF_VERSION "5.91.0") # handled by release scripts
+set(KF_VERSION "5.92.0") # handled by release scripts
 set(KF_DEP_VERSION "5.91.0") # handled by release scripts
 
 ecm_setup_version(${KF_VERSION} VARIABLE_PREFIX KINIT
