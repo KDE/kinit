@@ -1,0 +1,91 @@
+# Indonesian translations for kdelibs4 package.
+# Copyright (C) 2010 This_file_is_part_of_KDE
+# This file is distributed under the same license as the kdelibs4 package.
+# Andhika Padmawan <andhika.padmawan@gmail.com>, 2010-2014.
+# Wantoyo <wantoyek@gmail.com>, 2018, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"PO-Revision-Date: 2019-11-05 20:06+0700\n"
+"Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 19.08.1\n"
+
+#: kdeinit/kinit.cpp:448
+#, kde-format
+msgid ""
+"Unable to start new process.\n"
+"The system may have reached the maximum number of open files possible or the "
+"maximum number of open files that you are allowed to use has been reached."
+msgstr ""
+"Tak dapat memulai proses baru.\n"
+"Sistem mungkin telah mencapai jumlah maksimum file yang mungkin dibuka atau "
+"jumlah maksimum file dibuka yang dapat anda gunakan telah tercapai."
+
+#: kdeinit/kinit.cpp:470
+#, kde-format
+msgid ""
+"Unable to create new process.\n"
+"The system may have reached the maximum number of processes possible or the "
+"maximum number of processes that you are allowed to use has been reached."
+msgstr ""
+"Tak dapat memulai proses baru.\n"
+"Sistem mungkin telah mencapai jumlah maksimum proses yang mungkin dijalankan "
+"atau jumlah proses maksimum yang dapat ada gunakan telah tercapai."
+
+#: klauncher/klauncher.cpp:418
+#, kde-format
+msgid "KDEInit could not launch '%1'"
+msgstr "KDEInit tidak dapat menjalankan '%1'"
+
+#: klauncher/klauncher.cpp:594 klauncher/klauncher.cpp:608
+#, kde-format
+msgid "Could not find service '%1'."
+msgstr "Tak dapat menemukan layanan '%1'."
+
+#: klauncher/klauncher.cpp:626
+#, kde-format
+msgid "Service '%1' must be executable to run."
+msgstr "Layanan '%1' harus dapat dieksekusi agar berjalan."
+
+#: klauncher/klauncher.cpp:628 klauncher/klauncher.cpp:689
+#, kde-format
+msgid "Service '%1' is malformatted."
+msgstr "Layanan '%1' salah format."
+
+#: klauncher/klauncher.cpp:784
+#, kde-format
+msgid "Launching %1"
+msgstr "Menjalankan %1"
+
+#: klauncher/klauncher.cpp:965
+#, kde-format
+msgid "Unknown protocol '%1'.\n"
+msgstr "Protokol '%1' tak diketahui.\n"
+
+#: klauncher/klauncher.cpp:971
+#, kde-format
+msgid "Could not find the '%1' plugin.\n"
+msgstr "Tak dapat menemukan plugin '%1'.\n"
+
+#: klauncher/klauncher.cpp:1044
+#, kde-format
+msgid "Error loading '%1'."
+msgstr "Error memuat '%1'."
+
+#: klauncher/klauncher_main.cpp:136
+#, kde-format
+msgid ""
+"klauncher: This program is not supposed to be started manually.\n"
+"klauncher: It is started automatically by kdeinit5.\n"
+msgstr ""
+"klauncher: Program ini tidak seharusnya dijalankan secara manual.\n"
+"klauncher: Program dijalankan secara otomatis oleh kdeinit5.\n"
