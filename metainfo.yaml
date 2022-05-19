@@ -8,7 +8,7 @@ platforms:
     - name: Windows
     - name: macOS
 portingAid: false
-deprecated: false
+deprecated: true
 release: true
 cmakename: KF5Init
 
