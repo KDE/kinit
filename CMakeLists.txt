@@ -17,6 +17,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
+include(ECMDeprecationSettings)
 include(ConfigureChecks.cmake)
 
 set(REQUIRED_QT_VERSION 5.15.2)
@@ -69,9 +70,15 @@ configure_package_config_file(
   PATH_VARS KDE_INSTALL_DBUSINTERFACEDIR
   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
 )
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055100)
+
 add_definitions(-DTRANSLATION_DOMAIN=\"kinit5\")
+
+ecm_set_disabled_deprecation_versions(
+    QT 5.15.2
+    KF 5.95
+    KCOREADDONS 5.85 # KPluginLoader::fileName
+)
+
 ki18n_install(po)
 
 if (KF5DocTools_FOUND)
