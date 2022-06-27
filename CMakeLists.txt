@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(KInit)
+set(KF_VERSION "5.96.0") # handled by release scripts
+set(KF_DEP_VERSION "5.95.0") # handled by release scripts
+project(KInit VERSION ${KF_VERSION})
 
 include(FeatureSummary)
 find_package(ECM 5.95.0  NO_MODULE)
@@ -20,10 +22,7 @@ include(ConfigureChecks.cmake)
 set(REQUIRED_QT_VERSION 5.15.2)
 find_package(Qt5 "${REQUIRED_QT_VERSION}" CONFIG REQUIRED Core Gui DBus)
 
-set(KF_VERSION "5.96.0") # handled by release scripts
-set(KF_DEP_VERSION "5.95.0") # handled by release scripts
-
-ecm_setup_version(${KF_VERSION} VARIABLE_PREFIX KINIT
+ecm_setup_version(PROJECT VARIABLE_PREFIX KINIT
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kinit_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5InitConfigVersion.cmake"
                         SOVERSION 5)
