@@ -9,13 +9,16 @@ feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND FATAL_ON_MISSING_REQUIRED_PACKA
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-set(REQUIRED_QT_VERSION 5.15.2)
-find_package(Qt5 "${REQUIRED_QT_VERSION}" CONFIG REQUIRED Core Gui DBus)
 include(KDEInstallDirs)
-include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
+include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
+
 include(ECMSetupVersion)
 include(ECMQtDeclareLoggingCategory)
+include(ConfigureChecks.cmake)
+
+set(REQUIRED_QT_VERSION 5.15.2)
+find_package(Qt5 "${REQUIRED_QT_VERSION}" CONFIG REQUIRED Core Gui DBus)
 
 set(KF_VERSION "5.96.0") # handled by release scripts
 set(KF_DEP_VERSION "5.95.0") # handled by release scripts
@@ -24,9 +27,6 @@ ecm_setup_version(${KF_VERSION} VARIABLE_PREFIX KINIT
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kinit_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5InitConfigVersion.cmake"
                         SOVERSION 5)
-
-########### Configuring (mainly for proctitle) ###########
-include(ConfigureChecks.cmake)
 
 #optional features
 if (NOT APPLE)
