@@ -38,7 +38,7 @@ target_compile_definitions(kdeinit5 PRIVATE
     KDE_INSTALL_FULL_LIBEXECDIR_KF5="${KDE_INSTALL_FULL_LIBEXECDIR_KF5}"
 )
 
-if (X11_FOUND)
+if (HAVE_X11)
   target_link_libraries(kdeinit5 ${X11_X11_LIB})
 endif()
 
@@ -63,7 +63,7 @@ if (NOT WIN32)
 
   target_link_libraries(kdeinit5_wrapper  ${KINIT_SOCKET_LIBRARY} Qt5::Core KF5::DBusAddons)
 
-  if (NOT X11_FOUND)
+  if (NOT HAVE_X11)
     target_compile_definitions(kdeinit5_wrapper PRIVATE -DNO_DISPLAY)
   endif ()
 

@@ -30,13 +30,16 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KINIT
 
 #optional features
 if (NOT APPLE)
-    find_package(X11)
-endif()
-set(HAVE_X11 ${X11_FOUND})
+    option(WITH_X11 "Build with X11 integration" ON)
+    if(WITH_X11)
+        find_package(X11 REQUIRED)
+        set(HAVE_X11 1)
 
-find_package(XCB MODULE COMPONENTS XCB)
-set_package_properties(XCB PROPERTIES TYPE OPTIONAL)
-set(HAVE_XCB ${XCB_XCB_FOUND})
+        find_package(XCB MODULE COMPONENTS XCB)
+        set_package_properties(XCB PROPERTIES TYPE OPTIONAL)
+        set(HAVE_XCB ${XCB_XCB_FOUND})
+    endif()
+endif()
 
 # used by 4 executables in this module
 if(HAVE_SOCKET_LIBRARY)
