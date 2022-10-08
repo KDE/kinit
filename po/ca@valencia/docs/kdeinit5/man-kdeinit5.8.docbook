@@ -114,7 +114,7 @@
 >L'ús de kdeinit5 per a iniciar les aplicacions &kde;, fa que el temps d'inici d'una aplicació &kde; típica, siga dues vegades més ràpid i reduïx el consum de memòria de manera substancial.</para>
 
 <para
->kdeinit5 està enllaçat contra totes les biblioteques que necessita una aplicació &kde; estàndard. Mitjançant esta tècnica, l'inici d'una aplicació és molt més ràpid perquè només necessita enllaçar amb l'aplicació mateixa, mentre que d'altra manera necessita enllaçar tant amb l'aplicació com a les biblioteques que utilitza. </para>
+>kdeinit5 està enllaçat contra totes les biblioteques que necessita una aplicació &kde; estàndard. Mitjançant esta tècnica, l'inici d'una aplicació és molt més ràpid perquè només necessita enllaçar amb l'aplicació mateixa, mentre que d'altra manera necessita enllaçar tant amb l'aplicació com amb les biblioteques que utilitza. </para>
 
 </refsect1>
 
