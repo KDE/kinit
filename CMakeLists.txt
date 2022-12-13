@@ -29,7 +29,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KINIT
                         SOVERSION 5)
 
 #optional features
-if (NOT APPLE)
+if (NOT APPLE AND NOT WIN32)
     option(WITH_X11 "Build with X11 integration" ON)
     if(WITH_X11)
         find_package(X11 REQUIRED)
