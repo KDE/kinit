@@ -135,9 +135,7 @@ extern "C" {
 }
 #endif
 
-#if KDEINIT_OOM_PROTECT
 static int oom_pipe = -1;
-#endif
 
 /*
  * Clean up the file descriptor table by closing all file descriptors
@@ -148,17 +146,26 @@ static int oom_pipe = -1;
  */
 static void cleanup_fds()
 {
+#if HAVE_CLOSE_RANGE
+    if (oom_pipe >= 3) {
+        if (oom_pipe > 3) {
+            close_range(3, oom_pipe - 1, 0);
+        }
+        close_range(oom_pipe + 1, ~0, 0);
+    } else {
+        close_range(3, ~0, 0);
+    }
+#else
     int maxfd = FD_SETSIZE;
     struct rlimit rl;
     if (getrlimit(RLIMIT_NOFILE, &rl) == 0) {
         maxfd = rl.rlim_cur;
     }
     for (int fd = 3; fd < maxfd; ++fd) {
-#if KDEINIT_OOM_PROTECT
         if (fd != oom_pipe)
-#endif
             close(fd);
     }
+#endif
 }
 
 /*

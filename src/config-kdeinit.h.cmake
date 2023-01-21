@@ -16,6 +16,7 @@
 #cmakedefine01 HAVE_XCB
 #cmakedefine01 HAVE_CAPABILITIES
 #cmakedefine01 HAVE_SYS_SELECT_H
+#cmakedefine01 HAVE_CLOSE_RANGE
 
 /* for start_kdeinit */
 #cmakedefine01 KDEINIT_OOM_PROTECT
