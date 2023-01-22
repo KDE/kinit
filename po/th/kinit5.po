@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2010-12-31 22:47+0700\n"
 "Last-Translator: Phuwanat Sakornsakolpat <narachai@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -32,7 +32,7 @@ msgstr ""
 "อาจจะเนื่องมาจากมีการเปิดแฟ้มเป็นจำนวนสูงสุดตามที่ระบบได้จำกัดไว้แล้ว "
 "หรืออาจจะเนื่องมาจากมีการเปิดแฟ้มเป็นจำนวนสูงสุดตามที่คุณอนุญาตให้เปิดได้แล้ว"
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, kde-format
 msgid ""
 "Unable to create new process.\n"

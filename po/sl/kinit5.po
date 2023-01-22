@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2017-02-12 18:38+0100\n"
 "Last-Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -40,7 +40,7 @@ msgstr ""
 "bilo doseženo najvišje število datotek, ki jih še lahko imate odprte za "
 "uporabo."
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, kde-format
 msgid ""
 "Unable to create new process.\n"

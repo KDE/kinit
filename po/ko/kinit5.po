@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2020-04-04 01:24+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 19.04.3\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -29,7 +29,7 @@ msgstr ""
 "시스템에서 열 수 있는 최대 파일 개수에 도달했거나 사용자에게 허가된 열린 파일"
 "의 개수를 넘었습니다."
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, kde-format
 msgid ""
 "Unable to create new process.\n"

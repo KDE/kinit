@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kinit5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2015-11-04 15:13+0000\n"
 "Last-Translator: Michael Bauer <fios@akerbeltz.org>\n"
 "Language-Team: Fòram na Gàidhlig\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 "X-Project-Style: kde\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -30,7 +30,7 @@ msgstr ""
 "'S dòcha gun do dh'fhosgail an siostam nas urrainn dha de dh'fhaidhlichean "
 "no gun do ràinig e na cheadaich thu de dh'fhaidhlichean fosgailte."
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, kde-format
 msgid ""
 "Unable to create new process.\n"

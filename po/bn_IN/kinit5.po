@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2009-12-28 14:35+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bengali INDIA <anubad@lists.ankur.org.in>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -31,7 +31,7 @@ msgstr ""
 "সম্ভবত, সিস্টেমের ক্ষেত্রে অনুমোদিত সর্বাধিক সংখ্যক ফাইল খোলা অবস্থায় রয়েছে অথবা "
 "আপনার ব্যবহারের জন্য অনুমোদিত ফাইলের সংখ্যা হয়েছে।"
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, kde-format
 msgid ""
 "Unable to create new process.\n"

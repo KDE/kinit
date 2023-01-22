@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2010-06-24 18:32+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: kn_IN <kde-i18n-doc@kde.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -32,7 +32,7 @@ msgstr ""
 "ನೀನು ಬಳಸಬಹುದಾದ ಗರಿಷ್ಟ ತೆರೆದ ಕಡತಗಳ ಸಂಖ್ಯೆಯನ್ನು ಮುಟ್ಟಲಾಗಿದೆ ಇಲ್ಲವೇ ವ್ಯವಸ್ಥೆಯು "
 "ಸಮರ್ಥಿಸಬಹುದಾದ ಗರಿಷ್ಟ ತೆರೆದ ಕಡತಗಳ ಸಂಖ್ಯೆಯನ್ನು ಮುಟ್ಟಲಾಗಿದೆ."
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, kde-format
 msgid ""
 "Unable to create new process.\n"

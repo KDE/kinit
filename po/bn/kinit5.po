@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2012-07-16 14:27+0530\n"
 "Last-Translator: Deepayan Sarkar <deepayan.sarkar@gmail.com>\n"
 "Language-Team: American English <kde-translation@bengalinux.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.4\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, fuzzy, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -32,7 +32,7 @@ msgstr ""
 "সিস্টেম মুক্ত ফাইল সম্ভবের সর্বোচ্চ সংখ্যা পৌঁছতে পারে অথবা মুক্ত ফাইলের সর্বোচ্চ সংখ্যা "
 "যে আপনাকে ব্যবহার কর রাখ হ পৌঁছতে অনুমোদন করা হয়।"
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, fuzzy, kde-format
 msgid ""
 "Unable to create new process.\n"

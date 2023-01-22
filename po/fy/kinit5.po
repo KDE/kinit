@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2010-07-22 09:48+0100\n"
 "Last-Translator: Berend Ytsma <berendy@gmail.com>\n"
 "Language-Team: nl <kde-i18n-doc@lists.kde.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-Generator: KAider 0.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -37,7 +37,7 @@ msgstr ""
 "It systeem hat mooglik it maksimum oantal triemmen dat iepene kin wurde "
 "berikt of it maksimum oantal iepene triemmen dat jo brûke meie is berikt."
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, kde-format
 msgid ""
 "Unable to create new process.\n"

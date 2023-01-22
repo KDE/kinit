@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2011-07-06 12:57+0300\n"
 "Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
 "Language-Team: Latvian\n"
@@ -25,7 +25,7 @@ msgstr ""
 "X-Launchpad-Export-Date: 2007-11-22 17:44+0000\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -36,7 +36,7 @@ msgstr ""
 "Sistēma varētu būt sasniegusi maksimālo atvērto failu skaitu vai arī "
 "maksimālo atvērto failu skaitu, ko jums ir atļauts sasniegt."
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, kde-format
 msgid ""
 "Unable to create new process.\n"

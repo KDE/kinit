@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-10 00:41+0000\n"
+"POT-Creation-Date: 2023-01-22 00:53+0000\n"
 "PO-Revision-Date: 2012-03-25 21:39+0530\n"
 "Last-Translator: Sri Ramadoss M <amachu@yavarkkum.org>\n"
 "Language-Team: Tamil <podhu@madaladal.yavarkkum.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.2\n"
 
-#: kdeinit/kinit.cpp:448
+#: kdeinit/kinit.cpp:455
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -30,7 +30,7 @@ msgstr ""
 "துவக்கத்தக்க அதிகபட்ச திறந்த கோப்புகள் அடையப்ட்டிருக்கலாம் அ தாங்கள் பயன்படுத்தக் தக்க "
 "அதிகபட்ச திறந்த கோப்புகள் அடையப்பட்டிருக்கலாம்."
 
-#: kdeinit/kinit.cpp:470
+#: kdeinit/kinit.cpp:477
 #, kde-format
 msgid ""
 "Unable to create new process.\n"
