@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kinit5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-05-31 17:58+0200\n"
+"POT-Creation-Date: 2023-03-01 21:29+0000\n"
 "PO-Revision-Date: 2017-09-28 17:58+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Wrapping: fine\n"
 
-#: kdeinit/kinit.cpp:512
+#: kdeinit/kinit.cpp:448
 #, kde-format
 msgid ""
 "Unable to start new process.\n"
@@ -33,7 +33,7 @@ msgstr ""
 "Систем је можда достигао максималан могућ број отворених фајлова или "
 "максималан број фајлова вама дозвољен да отворите."
 
-#: kdeinit/kinit.cpp:534
+#: kdeinit/kinit.cpp:470
 #, kde-format
 msgid ""
 "Unable to create new process.\n"
@@ -44,70 +44,47 @@ msgstr ""
 "Систем је можда достигао максималан могућ број процеса или максималан број "
 "процеса вама дозвољен да покренете."
 
-#: kdeinit/kinit.cpp:617
-#, kde-format
-msgid "Could not find '%1' executable."
-msgstr "Не могу да нађем извршни „%1“."
-
-#: kdeinit/kinit.cpp:650
-#, kde-format
-msgid ""
-"Could not open library '%1'.\n"
-"%2"
-msgstr ""
-"Не могу да отворим библиотеку „%1“.\n"
-"%2"
-
-#: kdeinit/kinit.cpp:687
-#, kde-format
-msgid ""
-"Could not find 'kdemain' in '%1'.\n"
-"%2"
-msgstr ""
-"Не могу да нађем kdemain у ‘%1’.\n"
-"%2"
-
-#: klauncher/klauncher.cpp:436
+#: klauncher/klauncher.cpp:418
 #, kde-format
 msgid "KDEInit could not launch '%1'"
 msgstr "kdeinit не може да покрене „%1“"
 
-#: klauncher/klauncher.cpp:617 klauncher/klauncher.cpp:631
+#: klauncher/klauncher.cpp:594 klauncher/klauncher.cpp:608
 #, kde-format
 msgid "Could not find service '%1'."
 msgstr "Не могу да пронађем сервис „%1“."
 
-#: klauncher/klauncher.cpp:649
+#: klauncher/klauncher.cpp:626
 #, kde-format
 msgid "Service '%1' must be executable to run."
 msgstr "Сервис „%1“ мора бити извршни да би се покренуо."
 
-#: klauncher/klauncher.cpp:651 klauncher/klauncher.cpp:712
+#: klauncher/klauncher.cpp:628 klauncher/klauncher.cpp:689
 #, kde-format
 msgid "Service '%1' is malformatted."
 msgstr "Сервис „%1“ је лоше форматиран."
 
-#: klauncher/klauncher.cpp:807
+#: klauncher/klauncher.cpp:784
 #, kde-format
 msgid "Launching %1"
 msgstr "Покрећем %1"
 
-#: klauncher/klauncher.cpp:988
+#: klauncher/klauncher.cpp:965
 #, kde-format
 msgid "Unknown protocol '%1'.\n"
 msgstr "Непознат протокол „%1“.\n"
 
-#: klauncher/klauncher.cpp:994
+#: klauncher/klauncher.cpp:971
 #, kde-format
 msgid "Could not find the '%1' plugin.\n"
 msgstr "Не могу да нађем прикључак „%1“.\n"
 
-#: klauncher/klauncher.cpp:1067
+#: klauncher/klauncher.cpp:1044
 #, kde-format
 msgid "Error loading '%1'."
 msgstr "Грешка при учитавању „%1“."
 
-#: klauncher/klauncher_main.cpp:146
+#: klauncher/klauncher_main.cpp:136
 #, kde-format
 msgid ""
 "klauncher: This program is not supposed to be started manually.\n"
@@ -115,3 +92,20 @@ msgid ""
 msgstr ""
 "klauncher: Овај програм није предвиђен за ручно покретање.\n"
 "klauncher: Уместо тога га аутоматски покреће kdeinit5.\n"
+
+#~ msgid "Could not find '%1' executable."
+#~ msgstr "Не могу да нађем извршни „%1“."
+
+#~ msgid ""
+#~ "Could not open library '%1'.\n"
+#~ "%2"
+#~ msgstr ""
+#~ "Не могу да отворим библиотеку „%1“.\n"
+#~ "%2"
+
+#~ msgid ""
+#~ "Could not find 'kdemain' in '%1'.\n"
+#~ "%2"
+#~ msgstr ""
+#~ "Не могу да нађем kdemain у ‘%1’.\n"
+#~ "%2"
