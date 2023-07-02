@@ -1219,3 +1219,5 @@ KLauncher::XCBConnection KLauncher::getXCBConnection(const QByteArray &_displayN
     return conn;
 }
 #endif
+
+#include "moc_klauncher.cpp"
