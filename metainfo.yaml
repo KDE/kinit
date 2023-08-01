@@ -1,4 +1,4 @@
-maintainer: dfaure
+maintainer:
 description: Process launcher to speed up launching KDE applications
 tier: 3
 type: solution
