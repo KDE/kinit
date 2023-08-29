@@ -9,7 +9,7 @@ platforms:
     - name: macOS
 portingAid: false
 deprecated: true
-release: true
+release: false
 cmakename: KF5Init
 
 public_lib: true
