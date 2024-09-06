@@ -11,7 +11,7 @@
 # Rolf Eike Beer <kde@opensource.sf-tec.de>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: kdelibs4\n"
+"Project-Id-Version: kinit5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:25+0000\n"
 "PO-Revision-Date: 2016-12-19 15:31+0100\n"
