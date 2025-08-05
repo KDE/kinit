@@ -101,7 +101,7 @@ msgid ""
 "klauncher: It is started automatically by kdeinit5.\n"
 msgstr ""
 "«مُطلقك»: يجب ألا يُشغّل هذا البرنامج يدويًا.\n"
-"«مُطلقك»: kdeinit5 يُشغّل البرنامج هذا تلقائيًا.\n"
+"«مُطلقك»: kdeinit5 يُشغّل البرنامج هذا آليًّا.\n"
 
 #~ msgid "Could not find '%1' executable."
 #~ msgstr "تعذر العثور على التنفيذي ”%1“."
