@@ -2,23 +2,24 @@
 # Translation of kdelibs4.po to Irish
 # Copyright (C) 1999,2003,2004 Free Software Foundation, Inc.
 # Sean V. Kelley <s_oceallaigh@yahoo.com>, 1999
-# Séamus Ó Ciardhuáin <seoc at iolfree.ie>, 2003,2004
 # Kevin Scannell <kscanne@gmail.com>, 2004-2009
+# SPDX-FileCopyrightText: 2025 Charlotte <altronic25@protonmail.com>
+# Séamus Ó Ciardhuáin <seoc at iolfree.ie>, 2003,2004
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 09:00+0000\n"
-"PO-Revision-Date: 2004-12-14 09:11-0600\n"
-"Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
-"Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2025-12-23 23:13+0000\n"
+"Last-Translator: Charlotte <altronic25@protonmail.com>\n"
+"Language-Team: Irish\n"
 "Language: ga\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
 "3 : 4\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #: kdeinit/kinit.cpp:455
 #, kde-format
@@ -73,28 +74,23 @@ msgid "Unknown protocol '%1'.\n"
 msgstr "Prótacal anaithnid '%1'.\n"
 
 #: klauncher/klauncher.cpp:971
-#, fuzzy, kde-format
-#| msgid "Could not find service '%1'."
+#, kde-format
 msgid "Could not find the '%1' plugin.\n"
-msgstr "Ní bhfuarthas seirbhís '%1'."
+msgstr "Ní bhfuarthas an breiseán '%1'.\n"
 
 #: klauncher/klauncher.cpp:1044
-#, fuzzy, kde-format
-#| msgid "Error loading '%1'.\n"
+#, kde-format
 msgid "Error loading '%1'."
-msgstr "Earráid ag luchtú '%1'.\n"
+msgstr "Earráid ag luchtú '%1'."
 
 #: klauncher/klauncher_main.cpp:136
-#, fuzzy, kde-format
-#| msgid ""
-#| "klauncher: This program is not supposed to be started manually.\n"
-#| "klauncher: It is started automatically by kdeinit4.\n"
+#, kde-format
 msgid ""
 "klauncher: This program is not supposed to be started manually.\n"
 "klauncher: It is started automatically by kdeinit5.\n"
 msgstr ""
 "klauncher: Ní ceart duit an clár seo a thosú tú féin.\n"
-"klauncher: Tosaíonn kdeinit4 é go huathoibríoch.\n"
+"klauncher: Tosaíonn kdeinit5 é go huathoibríoch.\n"
 
 #~ msgid "Could not find '%1' executable."
 #~ msgstr "Níorbh fhéidir comhad inrite '%1' a fhail."
